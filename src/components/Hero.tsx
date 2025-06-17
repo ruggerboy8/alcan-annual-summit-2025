@@ -21,6 +21,15 @@ const Hero = () => {
       
       {/* Content */}
       <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+        {/* ALCAN Logo */}
+        <div className="mb-8">
+          <img 
+            src="/lovable-uploads/16f3af94-62a6-4cf8-9394-b4b3117966be.png" 
+            alt="ALCAN Dental Cooperative Logo" 
+            className="h-20 md:h-24 mx-auto filter brightness-0 invert"
+          />
+        </div>
+        
         <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
           ALCAN Annual Meeting 2025
         </h1>
