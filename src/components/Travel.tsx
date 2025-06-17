@@ -33,8 +33,11 @@ const Travel = () => {
                 </p>
               </div>
 
-              <Button className="w-full bg-teal hover:bg-teal/90 text-white">
-                Book Hotel
+              <Button 
+                className="w-full bg-teal hover:bg-teal/90 text-white"
+                onClick={() => window.open('https://www.marriott.com/event-reservations/reservation-link.mi?id=1733945462114&key=CORP&guestreslink2=true&app=resvlink', '_blank')}
+              >
+                Book Hotel Room Block
               </Button>
             </CardContent>
           </Card>

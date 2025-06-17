@@ -40,16 +40,31 @@ const Register = () => {
                 </ul>
               </div>
 
-              {/* Registration Embed Space */}
-              <div className="bg-gray-100 p-8 rounded-lg text-center">
-                <p className="text-gray-600 mb-4">Registration form will be embedded here</p>
-                <div className="h-40 bg-white rounded border-2 border-dashed border-gray-300 flex items-center justify-center">
-                  <span className="text-gray-500">Embed Code Placeholder</span>
-                </div>
+              {/* Registration Form */}
+              <div className="bg-gray-100 p-4 rounded-lg">
+                <iframe
+                  id="JotFormIFrame-251667175047159"
+                  title="ALCAN Annual Meeting 2025 Registration"
+                  onLoad={() => window.parent.scrollTo(0,0)}
+                  allowtransparency="true"
+                  allow="geolocation; microphone; camera; fullscreen"
+                  src="https://form.jotform.com/251667175047159"
+                  frameBorder="0"
+                  style={{
+                    minWidth: '100%',
+                    maxWidth: '100%',
+                    height: '539px',
+                    border: 'none'
+                  }}
+                  scrolling="no"
+                />
               </div>
 
               <div className="text-center">
-                <Button className="bg-teal hover:bg-teal/90 text-white px-12 py-4 text-xl rounded-full transition-all duration-300 hover:scale-105">
+                <Button 
+                  onClick={() => document.getElementById('JotFormIFrame-251667175047159')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="bg-teal hover:bg-teal/90 text-white px-12 py-4 text-xl rounded-full transition-all duration-300 hover:scale-105"
+                >
                   Grab My Ticket
                 </Button>
               </div>
