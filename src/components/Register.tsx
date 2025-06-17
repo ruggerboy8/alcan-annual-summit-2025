@@ -46,7 +46,7 @@ const Register = () => {
                   id="JotFormIFrame-251667175047159"
                   title="ALCAN Annual Meeting 2025 Registration"
                   onLoad={() => window.parent.scrollTo(0,0)}
-                  allowtransparency="true"
+                  allowTransparency="true"
                   allow="geolocation; microphone; camera; fullscreen"
                   src="https://form.jotform.com/251667175047159"
                   frameBorder="0"
