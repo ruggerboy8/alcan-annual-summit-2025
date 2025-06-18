@@ -61,16 +61,16 @@ const Travel = () => {
             {/* Right Column - Map */}
             <div className="flex justify-center">
               <div className="w-full overflow-hidden rounded-lg">
-             <iframe
-  src="https://maps.google.com/maps?q=1205%20Roland%20Ln%2C%20Kyle%2C%20TX%2078640&output=embed"
-  title="Texas Old Town Location"
-  width="100%"
-  height="300"
-  loading="lazy"
-  referrerPolicy="no-referrer-when-downgrade"
-  className="w-full md:h-96 rounded-lg shadow-lg"
-  style={{ border: 0 }}
-/>
+                <iframe
+                  src="https://maps.google.com/maps?q=29.969447961809706,-97.8886213490766&output=embed&z=15"
+                  title="Texas Old Town Location"
+                  width="100%"
+                  height="300"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full md:h-96 rounded-lg shadow-lg"
+                  style={{ border: 0 }}
+                />
               </div>
             </div>
           </div>
