@@ -36,7 +36,7 @@ const Agenda = () => {
                   <div className="space-y-4">
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <h4 className="font-semibold text-primary mb-2 font-biondi">CE Sessions</h4>
-                      <p className="text-gray-700 text-lg">Continuing education sessions led by Alcan doctors and guest speakers</p>
+                      <p className="text-gray-700 text-lg">Educational sessions led by the Alcan team and exciting guest speakers</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <h4 className="font-semibold text-primary mb-2 font-biondi">Sunset Cocktail Hour</h4>
@@ -44,7 +44,7 @@ const Agenda = () => {
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <h4 className="font-semibent text-primary mb-2 font-biondi">Headshot Lounge</h4>
-                      <p className="text-gray-700 text-lg">Professional headshot sessions for your practice needs</p>
+                      <p className="text-gray-700 text-lg">Professional headshot sessions, so glam up!</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <h4 className="font-semibold text-primary mb-2 font-biondi">Free Evening in Austin</h4>
@@ -78,7 +78,7 @@ const Agenda = () => {
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <h4 className="font-semibold text-primary mb-2 font-biondi">Team Dinner Celebration</h4>
-                      <p className="text-gray-700 text-lg">Celebrate our achievements and connections with a memorable dinner</p>
+                      <p className="text-gray-700 text-lg">Celebrate this year's achievements and connections with a memorable dinner</p>
                     </div>
                   </div>
                 </CardContent>
