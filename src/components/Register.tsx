@@ -50,7 +50,7 @@ const Register = () => {
             </button>
             <div className="p-0 h-full">
               <iframe
-                src="https://form.jotform.com/243667816995167"
+                src="https://form.jotform.com/251667175047159"
                 className="w-full h-[80vh] min-h-[600px]"
                 style={{ 
                   border: 'none'
