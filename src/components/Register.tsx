@@ -31,8 +31,6 @@ const Register = () => {
             >
               Grab My Ticket
             </Button>
-          
-            </Button>
           </div>
         </div>
       </section>
