@@ -13,7 +13,11 @@ export default {
 	theme: {
 		container: {
 			center: true,
-			padding: '2rem',
+			padding: {
+				DEFAULT: '1rem',
+				sm: '1.5rem',
+				lg: '2rem'
+			},
 			screens: {
 				'2xl': '1400px'
 			}
@@ -26,8 +30,8 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
-					DEFAULT: '#002F5F',
-					foreground: '#ffffff'
+					DEFAULT: 'var(--clr-primary)',
+					foreground: 'var(--clr-white)'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -42,8 +46,8 @@ export default {
 					foreground: 'hsl(var(--muted-foreground))'
 				},
 				accent: {
-					DEFAULT: '#0094A7',
-					foreground: '#ffffff'
+					DEFAULT: 'var(--clr-accent)',
+					foreground: 'var(--clr-white)'
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
@@ -63,13 +67,28 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				navy: '#002F5F',
-				teal: '#0094A7'
+				// Design system colors
+				navy: 'var(--clr-primary)',
+				teal: 'var(--clr-accent)',
+				surface: 'var(--clr-surface)',
+				text: 'var(--clr-text)',
+				white: 'var(--clr-white)'
+			},
+			fontFamily: {
+				'biondi': ['Biondi', 'serif'],
+				'sans': ['Open Sans', 'system-ui', 'sans-serif'],
+			},
+			spacing: {
+				'2': '8px',
+				'4': '16px',
+				'6': '24px',
+				'12': '48px',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+				sm: 'calc(var(--radius) - 4px)',
+				'xl': '12px'
 			},
 			keyframes: {
 				'accordion-down': {

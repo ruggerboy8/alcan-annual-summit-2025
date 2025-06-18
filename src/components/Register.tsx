@@ -1,78 +1,67 @@
 
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { X } from 'lucide-react';
 
 const Register = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
+
+  const handleFallbackClick = () => {
+    window.open('https://form.jotform.com/243667816995167', '_blank');
+  };
+
   return (
-    <section id="register" className="py-20 bg-navy text-white">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Secure Your Spot
-          </h2>
-          <p className="text-xl opacity-90">Don't miss out on this incredible two-day experience</p>
+    <>
+      <section id="register" className="py-12 bg-primary text-white">
+        <div className="container">
+          <div className="text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-biondi font-bold mb-6 leading-tight">
+              Reserve Your Spot
+            </h2>
+            <p className="text-lg sm:text-xl mb-8 max-w-2xl mx-auto">
+              Don't miss out on this incredible opportunity to learn, network, and celebrate with the Alcan community.
+            </p>
+            
+            <div className="space-y-4">
+              <Button 
+                onClick={openModal}
+                className="bg-white text-primary hover:bg-white/90 px-8 sm:px-12 py-4 text-lg sm:text-xl rounded-full transition-all duration-300 hover:scale-105 shadow-lg font-biondi"
+              >
+                Register Now
+              </Button>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div className="max-w-2xl mx-auto">
-          <Card className="bg-white text-navy">
-            <CardHeader>
-              <CardTitle className="text-3xl text-center">ALCAN Annual Meeting 2025</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-8">
-              <div className="text-center space-y-4">
-                <div className="text-lg">
-                  <strong>December 11-12, 2025</strong>
-                </div>
-                <div className="text-lg">
-                  Texas Old Town, Kyle, TX
-                </div>
-              </div>
-
-              <div className="bg-gray-50 p-6 rounded-lg space-y-4">
-                <h3 className="text-xl font-semibold text-center mb-4">What's Included:</h3>
-                <ul className="space-y-2 text-gray-700">
-                  <li>✓ Two days of CE sessions</li>
-                  <li>✓ Networking cocktail hour</li>
-                  <li>✓ Professional headshots</li>
-                  <li>✓ Culture and leadership sessions</li>
-                  <li>✓ Team celebration dinner</li>
-                  <li>✓ All meals and refreshments</li>
-                </ul>
-              </div>
-
-              {/* Registration Form */}
-              <div className="bg-gray-100 p-4 rounded-lg">
-                <iframe
-                  id="JotFormIFrame-251667175047159"
-                  title="ALCAN Annual Meeting 2025 Registration"
-                  onLoad={() => window.parent.scrollTo(0,0)}
-                  allowTransparency={true}
-                  allow="geolocation; microphone; camera; fullscreen"
-                  src="https://form.jotform.com/251667175047159"
-                  frameBorder="0"
-                  style={{
-                    minWidth: '100%',
-                    maxWidth: '100%',
-                    height: '539px',
-                    border: 'none'
-                  }}
-                  scrolling="no"
-                />
-              </div>
-
-              <div className="text-center">
-                <Button 
-                  onClick={() => document.getElementById('JotFormIFrame-251667175047159')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="bg-teal hover:bg-teal/90 text-white px-12 py-4 text-xl rounded-full transition-all duration-300 hover:scale-105"
-                >
-                  Grab My Ticket
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+      {/* Modal */}
+      {showModal && (
+        <div className="modal-backdrop p-4" onClick={closeModal}>
+          <div className="modal-content w-full max-w-4xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <button 
+              onClick={closeModal}
+              className="modal-close"
+              aria-label="Close modal"
+            >
+              <X size={16} />
+            </button>
+            <div className="p-0 h-full">
+              <iframe
+                src="https://form.jotform.com/251667175047159"
+                className="w-full h-[80vh] min-h-[600px]"
+                style={{ 
+                  border: 'none'
+                }}
+                title="Event Registration Form"
+              />
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      )}
+    </>
   );
 };
 
