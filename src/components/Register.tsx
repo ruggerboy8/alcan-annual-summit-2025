@@ -30,7 +30,7 @@ const Register = () => {
                 onClick={openModal}
                 className="bg-white text-primary hover:bg-white/90 px-8 sm:px-12 py-4 text-lg sm:text-xl rounded-full transition-all duration-300 hover:scale-105 shadow-lg font-biondi"
               >
-                Grab My Ticket
+                Register Now
               </Button>
             </div>
           </div>
