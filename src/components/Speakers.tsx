@@ -42,16 +42,16 @@ const Speakers = () => {
 
   return (
     <section id="speakers" className="py-12 bg-gray-50">
-      <div className="container mx-auto px-4 sm:px-6">
+      <div className="container">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-biondi font-bold text-primary mb-4 leading-tight">
             Featured Speakers
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 px-2">Learn from industry leaders and Alcan experts</p>
+          <p className="text-lg sm:text-xl text-gray-600">Learn from industry leaders and Alcan experts</p>
         </div>
 
         <div className="flex justify-center">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 max-w-6xl w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl w-full">
             {speakers.map((speaker, index) => (
               <Card key={speaker.name} className="text-center transition-all duration-300 hover:shadow-[0_6px_12px_rgba(0,0,0,0.08)] rounded-xl bg-white border border-solid border-black/[0.04] mx-auto max-w-xs">
                 <CardContent className="p-4 sm:p-6">
@@ -60,7 +60,7 @@ const Speakers = () => {
                       src={speaker.image} 
                       alt={speaker.name}
                       loading="lazy"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover rounded-full"
                     />
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-primary mb-2 font-biondi leading-tight">{speaker.name}</h3>

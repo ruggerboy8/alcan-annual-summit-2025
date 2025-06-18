@@ -26,7 +26,7 @@ const ImageCarousel = () => {
           src={image}
           alt={`Team meeting ${index + 1}`}
           loading="lazy"
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-400 ease-in-out ${
+          className={`absolute inset-0 w-full h-full object-cover rounded-lg transition-opacity duration-400 ease-in-out ${
             index === currentImage ? 'opacity-100' : 'opacity-0'
           }`}
         />

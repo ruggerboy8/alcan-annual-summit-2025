@@ -2,14 +2,14 @@
 const Footer = () => {
   return (
     <footer className="bg-accent text-white py-12">
-      <div className="container mx-auto px-4 sm:px-6">
+      <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
           {/* Logo Column */}
           <div className="flex justify-center md:justify-start">
             <img 
               src="/lovable-uploads/16f3af94-62a6-4cf8-9394-b4b3117966be.png" 
               alt="ALCAN Dental Cooperative Logo" 
-              className="h-12 filter brightness-0 invert"
+              className="h-12 filter brightness-0 invert w-full object-contain max-w-[200px]"
             />
           </div>
 

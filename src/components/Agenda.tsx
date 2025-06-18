@@ -13,12 +13,12 @@ const Agenda = () => {
 
   return (
     <section id="agenda" className="py-12 bg-white">
-      <div className="container mx-auto px-4 sm:px-6">
+      <div className="container">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-biondi font-bold text-primary mb-4 leading-tight">
             Event Agenda
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 px-2">Two days packed with learning, networking, and celebration</p>
+          <p className="text-lg sm:text-xl text-gray-600">Two days packed with learning, networking, and celebration</p>
         </div>
 
         <div className="max-w-4xl mx-auto space-y-6">
