@@ -45,9 +45,9 @@ const CountdownTimer = () => {
           ].map((item) => (
             <div key={item.label} className="text-center">
               <div className="bg-primary text-white rounded-lg p-6 min-w-[80px]">
-                <div className="text-[32px] font-biondi font-bold text-accent">{item.value.toString().padStart(2, '0')}</div>
+                <div className="text-[32px] font-biondi font-bold text-white">{item.value.toString().padStart(2, '0')}</div>
               </div>
-              <p className="text-primary font-semibold mt-2 text-[14px] font-biondi">{item.label}</p>
+              <p className="text-accent font-semibold mt-2 text-[14px] font-biondi">{item.label}</p>
             </div>
           ))}
         </div>

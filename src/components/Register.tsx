@@ -48,13 +48,24 @@ const Register = () => {
                   </ul>
                 </div>
 
-                <div className="text-center">
+                <div className="text-center space-y-4">
                   <Button 
                     onClick={openModal}
-                    className="bg-primary hover:bg-primary/90 text-white px-12 py-4 text-xl rounded-full transition-all duration-300 hover:scale-105 font-biondi"
+                    className="bg-primary hover:bg-primary/92 text-white px-12 py-4 text-xl rounded-full transition-all duration-300 hover:scale-105 font-biondi"
                   >
                     Grab My Ticket
                   </Button>
+                  
+                  <div>
+                    <a 
+                      href="https://form.jotform.com/251667175047159" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-block border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-white px-8 py-3 text-lg rounded-full transition-all duration-300 font-biondi"
+                    >
+                      Open Registration Form
+                    </a>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -80,7 +91,7 @@ const Register = () => {
               style={{
                 minWidth: '100%',
                 maxWidth: '100%',
-                height: '600px',
+                height: '100%',
                 border: 'none'
               }}
               scrolling="no"

@@ -15,7 +15,7 @@ const Hero = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `linear-gradient(rgba(18, 69, 112, 0.65), rgba(18, 69, 112, 0.65)), url('https://images.unsplash.com/photo-1531218150217-54595bc2b934?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')`
+          backgroundImage: `linear-gradient(rgba(18, 69, 112, 0.55), rgba(18, 69, 112, 0.55)), url('https://images.unsplash.com/photo-1531218150217-54595bc2b934?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')`
         }}
       />
       
@@ -30,7 +30,7 @@ const Hero = () => {
           />
         </div>
         
-        <h1 className="text-5xl md:text-7xl font-biondi font-bold mb-6 animate-fade-in">
+        <h1 className="text-5xl md:text-7xl font-biondi font-bold mb-6 animate-fade-in" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.25)' }}>
           ALCAN Annual Meeting 2025
         </h1>
         
@@ -39,7 +39,7 @@ const Hero = () => {
         </p>
         
         {/* Date Badge */}
-        <div className="inline-block bg-accent text-white px-6 py-2 rounded-full text-xl font-semibold mb-12 font-biondi">
+        <div className="inline-block border-2 border-primary text-primary bg-transparent px-6 py-2 rounded cursor-default text-xl font-semibold mb-12 font-biondi">
           December 11–12
         </div>
         
@@ -47,7 +47,7 @@ const Hero = () => {
         <div className="mb-12">
           <Button 
             onClick={scrollToRegister}
-            className="bg-primary hover:bg-primary/90 text-white px-12 py-4 text-xl rounded-full transition-all duration-300 hover:scale-105 shadow-lg font-biondi"
+            className="bg-primary hover:bg-primary/92 text-white px-12 py-4 text-xl rounded-full transition-all duration-300 hover:scale-105 shadow-lg font-biondi"
           >
             Register Now
           </Button>

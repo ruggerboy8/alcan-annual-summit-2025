@@ -52,12 +52,13 @@ const Speakers = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {speakers.map((speaker, index) => (
-            <Card key={speaker.name} className="text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 rounded-xl">
+            <Card key={speaker.name} className="text-center transition-all duration-300 hover:shadow-[0_6px_12px_rgba(0,0,0,0.08)] rounded-xl bg-white border border-solid border-black/[0.04]">
               <CardContent className="p-6">
                 <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
                   <img 
                     src={speaker.image} 
                     alt={speaker.name}
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
                 </div>

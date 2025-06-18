@@ -1,67 +1,76 @@
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-
 const Travel = () => {
   return (
     <section id="travel" className="py-12 bg-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-biondi font-bold text-primary mb-4">
-            Travel & Accommodation
+            Travel & Accommodations
           </h2>
-          <p className="text-xl text-gray-600">Everything you need to plan your stay in Kyle, TX</p>
+          <p className="text-xl text-gray-600">Everything you need to know for your trip to Kyle, TX</p>
         </div>
 
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Hotel Information */}
-          <Card className="border-2 border-primary/10 rounded-xl">
-            <CardHeader>
-              <CardTitle className="text-2xl text-primary font-biondi">Hotel Accommodations</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <p className="text-gray-700">
-                We've secured a special room block for ALCAN attendees with preferred rates 
-                and convenient access to the venue.
-              </p>
-              
-              <div className="bg-primary/10 p-4 rounded-lg">
-                <h4 className="font-semibold text-primary mb-2 font-biondi">Venue Address</h4>
-                <p className="text-gray-700">
-                  Texas Old Town<br />
-                  Kyle, TX 78640
-                </p>
+          {/* Venue Info */}
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-2xl font-biondi font-bold text-primary mb-4">Venue</h3>
+              <div className="space-y-2">
+                <p className="font-semibold">Texas Old Town</p>
+                <p>Kyle, TX 78640</p>
+                <p className="text-gray-600">A historic venue perfect for our annual gathering</p>
               </div>
+            </div>
 
-              <Button 
-                className="w-full bg-primary hover:bg-primary/90 text-white font-biondi"
-                onClick={() => window.open('https://www.marriott.com/event-reservations/reservation-link.mi?id=1733945462114&key=CORP&guestreslink2=true&app=resvlink', '_blank')}
-              >
-                Book Hotel Room Block
-              </Button>
-            </CardContent>
-          </Card>
+            <div>
+              <h3 className="text-2xl font-biondi font-bold text-primary mb-4">Hotel Accommodations</h3>
+              <div className="bg-gray-50 p-6 rounded-lg">
+                <p className="font-semibold mb-2">Hampton Inn & Suites Austin South/Buda</p>
+                <p className="text-gray-600 mb-4">15 minutes from the venue</p>
+                <a 
+                  href="https://www.hilton.com/en/book/reservation/deeplink/?ctyhocn=AUSBDHX&groupCode=CHHAMS&arrivaldate=2025-12-10&departuredate=2025-12-13&cid=OM,WW,HILTONLINK,EN,DirectLink&fromId=HILTONLINKDIRECT" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors font-biondi"
+                >
+                  Book Your Room
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-2xl font-biondi font-bold text-primary mb-4">Getting There</h3>
+              <div className="space-y-4">
+                <div>
+                  <p className="font-semibold">✈️ Fly into Austin-Bergstrom (AUS)</p>
+                  <p className="text-gray-600">30 minutes to Kyle, TX</p>
+                </div>
+                <div>
+                  <p className="font-semibold">🚗 Driving</p>
+                  <p className="text-gray-600">Free parking available at venue</p>
+                </div>
+                <div>
+                  <p className="font-semibold">🚕 Rideshare</p>
+                  <p className="text-gray-600">Uber/Lyft readily available</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* Map */}
-          <Card className="border-2 border-primary/10 rounded-xl">
-            <CardHeader>
-              <CardTitle className="text-2xl text-primary font-biondi">Location Map</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="w-full h-[400px] md:h-[300px] bg-gray-200 rounded-lg overflow-hidden">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3464.6!2d-97.8!3d30.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAwJzAwLjAiTiA5N8KwNDgnMDAuMCJX!5e0!3m2!1sen!2sus!4v1629000000000!5m2!1sen!2sus"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="rounded-lg"
-                ></iframe>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="flex justify-center">
+            <div className="w-full">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3445.8472813354847!2d-97.8730!3d30.1986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644d5e6e1234567%3A0x1234567890abcdef!2sKyle%2C%20TX%2078640!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+                className="w-full h-[400px] md:h-[400px] sm:h-[300px] rounded-lg"
+                style={{ border: 0, borderRadius: '8px' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Texas Old Town Kyle Location"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

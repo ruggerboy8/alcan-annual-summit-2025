@@ -27,28 +27,28 @@ const Agenda = () => {
             <Card className="border-2 border-primary/10 hover:border-primary/30 transition-colors">
               <CollapsibleTrigger className="w-full">
                 <CardHeader className={`flex flex-row items-center justify-between ${openDay === 'day1' ? 'bg-primary text-white' : 'bg-white text-primary'} transition-colors`}>
-                  <CardTitle className="text-2xl font-biondi">Day 1 – Thursday, December 11</CardTitle>
+                  <CardTitle className="text-2xl font-biondi font-semibold">Day 1 – Thursday, December 11</CardTitle>
                   <ChevronDown className={`h-6 w-6 transition-transform ${openDay === 'day1' ? 'rotate-180 text-white' : 'text-primary'}`} />
                 </CardHeader>
               </CollapsibleTrigger>
               <CollapsibleContent>
-                <CardContent className="bg-white">
+                <CardContent className="bg-white py-6">
                   <div className="space-y-4">
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <h4 className="font-semibold text-primary mb-2 font-biondi">CE Sessions</h4>
-                      <p className="text-gray-700">Continuing education sessions led by Alcan doctors and guest speakers</p>
+                      <p className="text-gray-700 text-lg">Continuing education sessions led by Alcan doctors and guest speakers</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <h4 className="font-semibold text-primary mb-2 font-biondi">Sunset Cocktail Hour</h4>
-                      <p className="text-gray-700">Network and unwind with colleagues as the sun sets over Austin</p>
+                      <p className="text-gray-700 text-lg">Network and unwind with colleagues as the sun sets over Austin</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
-                      <h4 className="font-semibold text-primary mb-2 font-biondi">Headshot Lounge</h4>
-                      <p className="text-gray-700">Professional headshot sessions for your practice needs</p>
+                      <h4 className="font-semibent text-primary mb-2 font-biondi">Headshot Lounge</h4>
+                      <p className="text-gray-700 text-lg">Professional headshot sessions for your practice needs</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <h4 className="font-semibold text-primary mb-2 font-biondi">Free Evening in Austin</h4>
-                      <p className="text-gray-700">Explore the vibrant Austin scene at your own pace</p>
+                      <p className="text-gray-700 text-lg">Explore the vibrant Austin scene at your own pace</p>
                     </div>
                   </div>
                 </CardContent>
@@ -61,24 +61,24 @@ const Agenda = () => {
             <Card className="border-2 border-primary/10 hover:border-primary/30 transition-colors">
               <CollapsibleTrigger className="w-full">
                 <CardHeader className={`flex flex-row items-center justify-between ${openDay === 'day2' ? 'bg-primary text-white' : 'bg-white text-primary'} transition-colors`}>
-                  <CardTitle className="text-2xl font-biondi">Day 2 – Friday, December 12</CardTitle>
+                  <CardTitle className="text-2xl font-biondi font-semibold">Day 2 – Friday, December 12</CardTitle>
                   <ChevronDown className={`h-6 w-6 transition-transform ${openDay === 'day2' ? 'rotate-180 text-white' : 'text-primary'}`} />
                 </CardHeader>
               </CollapsibleTrigger>
               <CollapsibleContent>
-                <CardContent className="bg-white">
+                <CardContent className="bg-white py-6">
                   <div className="space-y-4">
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <h4 className="font-semibold text-primary mb-2 font-biondi">Culture-Focused Sessions</h4>
-                      <p className="text-gray-700">Deep dive into building and maintaining exceptional practice culture</p>
+                      <p className="text-gray-700 text-lg">Deep dive into building and maintaining exceptional practice culture</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <h4 className="font-semibold text-primary mb-2 font-biondi">Energizing Keynotes</h4>
-                      <p className="text-gray-700">Inspiring presentations to motivate and energize your team</p>
+                      <p className="text-gray-700 text-lg">Inspiring presentations to motivate and energize your team</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <h4 className="font-semibold text-primary mb-2 font-biondi">Team Dinner Celebration</h4>
-                      <p className="text-gray-700">Celebrate our achievements and connections with a memorable dinner</p>
+                      <p className="text-gray-700 text-lg">Celebrate our achievements and connections with a memorable dinner</p>
                     </div>
                   </div>
                 </CardContent>

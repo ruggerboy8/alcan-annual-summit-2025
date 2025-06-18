@@ -22,7 +22,7 @@ const Navigation = () => {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/85 backdrop-blur-sm shadow-[0_2px_6px_rgba(0,0,0,0.05)]' : 'bg-transparent'
+      isScrolled ? 'bg-white/90 backdrop-blur-sm shadow-[0_2px_6px_rgba(0,0,0,0.05)]' : 'bg-white/90 backdrop-blur-sm'
     }`}>
       <div className="container mx-auto px-6 py-4">
         <div className="flex justify-center space-x-6">
@@ -37,9 +37,8 @@ const Navigation = () => {
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`font-biondi font-medium transition-colors duration-200 ${
-                isScrolled ? 'text-primary hover:text-accent' : 'text-white hover:text-accent'
-              }`}
+              className="font-biondi font-medium text-primary hover:text-accent transition-colors duration-200 text-lg tracking-wide"
+              style={{ letterSpacing: '0.5px', fontSize: '18px' }}
             >
               {item.label}
             </button>
