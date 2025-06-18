@@ -31,7 +31,7 @@ const Hero = () => {
         </div>
         
         <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-          ALCAN Annual Meeting 2025
+          ALCAN Annual Meeting 2025 TEST
         </h1>
         
         <p className="text-2xl md:text-3xl mb-8 font-light">
