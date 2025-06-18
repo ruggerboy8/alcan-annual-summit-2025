@@ -32,7 +32,7 @@ const Hero = () => {
           </div>
           
           <h1 className="text-3xl sm:text-5xl md:text-7xl font-biondi font-bold mb-6 animate-fade-in leading-tight" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.25)' }}>
-            ALCAN Annual Meeting 2025 TEST
+            ALCAN Annual Meeting 2025
           </h1>
           
           <p className="text-xl sm:text-2xl md:text-3xl mb-6 font-light text-white">
