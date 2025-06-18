@@ -23,11 +23,11 @@ const Hero = () => {
       <div className="container">
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto">
           {/* ALCAN Logo */}
-          <div className="mb-6">
+          <div className="mb-6 flex justify-center">
             <img 
               src="/lovable-uploads/16f3af94-62a6-4cf8-9394-b4b3117966be.png" 
               alt="ALCAN Dental Cooperative Logo" 
-              className="h-16 sm:h-20 md:h-24 mx-auto filter brightness-0 invert w-full object-contain"
+              className="h-16 sm:h-20 md:h-24 max-w-sm w-auto filter brightness-0 invert object-contain"
             />
           </div>
           

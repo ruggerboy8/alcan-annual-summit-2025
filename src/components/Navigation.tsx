@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';   // tiny icon set; already part of shadcn ui
 
@@ -39,18 +40,18 @@ const Navigation = () => {
         {/* Logo (left) */}
         <button
           onClick={() => scrollTo('hero')}
-          className="font-biondi text-primary text-xl tracking-wide"
+          className="font-biondi text-primary text-lg sm:text-xl tracking-wide"
         >
           ALCAN 2025
         </button>
 
         {/* ───────── Desktop Links ───────── */}
-        <div className="hidden sm:flex gap-x-4 lg:gap-x-6">
+        <div className="hidden md:flex gap-x-6 lg:gap-x-8">
           {links.map(l => (
             <button
               key={l.id}
               onClick={() => scrollTo(l.id)}
-              className="font-biondi text-primary/90 hover:text-accent transition-colors"
+              className="font-biondi text-primary/90 hover:text-accent transition-colors text-base"
             >
               {l.label}
             </button>
@@ -60,7 +61,7 @@ const Navigation = () => {
         {/* ───────── Hamburger (mobile) ───────── */}
         <button
           onClick={() => setOpen(!open)}
-          className="sm:hidden text-primary"
+          className="md:hidden text-primary"
           aria-label="Toggle menu"
         >
           {open ? <X size={28} /> : <Menu size={28} />}
@@ -69,7 +70,7 @@ const Navigation = () => {
 
       {/* ───────── Mobile dropdown ───────── */}
       {open && (
-        <div className="sm:hidden bg-white border-t border-gray-100 shadow-lg">
+        <div className="md:hidden bg-white border-t border-gray-100 shadow-lg">
           {links.map(l => (
             <button
               key={l.id}
