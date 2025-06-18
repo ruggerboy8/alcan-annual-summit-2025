@@ -75,26 +75,28 @@ const Register = () => {
 
       {/* Modal */}
       {showModal && (
-        <div className="modal-backdrop" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button onClick={closeModal} className="modal-close">
-              <X size={16} />
+        <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4" style={{ background: 'rgba(0, 0, 0, 0.6)' }}>
+          <div className="relative bg-white rounded-xl w-full max-w-4xl" style={{ maxHeight: '90vh', height: '90vh' }}>
+            <button 
+              onClick={closeModal} 
+              className="absolute top-4 right-4 z-10 bg-black/10 hover:bg-black/20 rounded-full p-2 transition-colors"
+            >
+              <X size={20} />
             </button>
             <iframe
               id="JotFormIFrame-251667175047159"
               title="ALCAN Annual Meeting 2025 Registration"
-              onLoad={() => window.parent.scrollTo(0,0)}
               allowTransparency={true}
               allow="geolocation; microphone; camera; fullscreen"
               src="https://form.jotform.com/251667175047159"
               frameBorder="0"
               style={{
-                minWidth: '100%',
-                maxWidth: '100%',
+                width: '100%',
                 height: '100%',
-                border: 'none'
+                border: 'none',
+                borderRadius: '12px'
               }}
-              scrolling="no"
+              scrolling="yes"
             />
           </div>
         </div>

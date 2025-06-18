@@ -22,7 +22,7 @@ const Navigation = () => {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/90 backdrop-blur-sm shadow-[0_2px_6px_rgba(0,0,0,0.05)]' : 'bg-white/90 backdrop-blur-sm'
+      isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-[0_2px_6px_rgba(0,0,0,0.05)]' : 'bg-white/95 backdrop-blur-sm'
     }`}>
       <div className="container mx-auto px-6 py-4">
         <div className="flex justify-center space-x-6">

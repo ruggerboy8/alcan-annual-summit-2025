@@ -11,16 +11,21 @@ const About = () => {
               <h2 className="text-4xl md:text-5xl font-biondi font-bold text-primary mb-6">
                 About the Meeting
               </h2>
+              <p className="text-xl text-text leading-relaxed mb-6">
+                We're thrilled to officially invite you to the 2025 Alcan Annual Event
+                —a two-day experience designed to sharpen our skills, strengthen
+                our teams, and celebrate the incredible work happening across
+                our practices. From high-impact CE sessions to unforgettable
+                team celebrations, this year's event in Austin will be our biggest
+                and best yet.
+              </p>
               <p className="text-xl text-text leading-relaxed">
-                Join us for an incredible two-day experience designed for all Alcan practice roles. 
-                Our annual meeting brings together learning opportunities, meaningful connections, 
-                and plenty of fun in the heart of Texas. Whether you're looking to expand your 
-                knowledge, network with peers, or simply enjoy great company, this event promises 
-                to deliver an unforgettable experience for everyone in the Alcan family.
+                Get ready to learn, connect, and have some serious fun—we can't
+                wait to see you there!
               </p>
             </div>
             <div className="flex justify-center lg:justify-end order-1 lg:order-2">
-              <div className="w-full max-w-md lg:max-w-none lg:w-[40%]">
+              <div className="w-full max-w-md lg:max-w-none lg:w-[60%]">
                 <ImageCarousel />
               </div>
             </div>
