@@ -1,4 +1,6 @@
 
+import { Button } from '@/components/ui/button';
+
 const Travel = () => {
   return (
     <section id="travel" className="py-12 bg-white">
@@ -44,8 +46,14 @@ const Travel = () => {
                   Hotel Accommodations
                 </h3>
                 <div className="text-lg text-text leading-relaxed">
-                  <p>We have arranged a special rate for event guests at nearby hotels.</p>
-                  <p className="mt-2">Details will be provided upon registration.</p>
+                  <p className="font-semibold">Fairfield Inn & Suites Austin Buda</p>
+                  <p className="mt-2 mb-4">We have arranged a special rate for event guests.</p>
+                  <Button 
+                    onClick={() => window.open('https://www.marriott.com/event-reservations/reservation-link.mi?id=1733945462114&key=CORP&guestreslink2=true&app=resvlink', '_blank')}
+                    className="bg-primary text-white hover:bg-primary/90 px-6 py-3 text-base rounded-lg transition-all duration-300 hover:scale-105 shadow-lg font-biondi"
+                  >
+                    Book Hotel Room
+                  </Button>
                 </div>
               </div>
             </div>
