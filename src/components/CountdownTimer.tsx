@@ -35,8 +35,8 @@ const CountdownTimer = () => {
   return (
     <div className="bg-white py-12">
       <div className="container mx-auto px-6 text-center">
-        <h3 className="text-2xl font-bold text-navy mb-8">Event Starts In</h3>
-        <div className="flex justify-center space-x-8">
+        <h3 className="text-2xl font-bold text-primary mb-6 font-biondi">Event Starts In</h3>
+        <div className="flex justify-center space-x-6">
           {[
             { label: 'Days', value: timeLeft.days },
             { label: 'Hours', value: timeLeft.hours },
@@ -44,10 +44,10 @@ const CountdownTimer = () => {
             { label: 'Seconds', value: timeLeft.seconds }
           ].map((item) => (
             <div key={item.label} className="text-center">
-              <div className="bg-navy text-white rounded-lg p-6 min-w-[80px]">
-                <div className="text-3xl font-bold">{item.value.toString().padStart(2, '0')}</div>
+              <div className="bg-primary text-white rounded-lg p-6 min-w-[80px]">
+                <div className="text-[32px] font-biondi font-bold text-accent">{item.value.toString().padStart(2, '0')}</div>
               </div>
-              <p className="text-navy font-semibold mt-2">{item.label}</p>
+              <p className="text-primary font-semibold mt-2 text-[14px] font-biondi">{item.label}</p>
             </div>
           ))}
         </div>

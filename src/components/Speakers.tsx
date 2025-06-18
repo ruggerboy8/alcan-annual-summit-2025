@@ -41,27 +41,27 @@ const Speakers = () => {
   ];
 
   return (
-    <section id="speakers" className="py-20 bg-gray-50">
+    <section id="speakers" className="py-12 bg-gray-50">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-navy mb-4">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-biondi font-bold text-primary mb-4">
             Featured Speakers
           </h2>
           <p className="text-xl text-gray-600">Learn from industry leaders and Alcan experts</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {speakers.map((speaker, index) => (
-            <Card key={speaker.name} className="text-center hover:shadow-lg transition-shadow group">
+            <Card key={speaker.name} className="text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 rounded-xl">
               <CardContent className="p-6">
-                <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden group-hover:scale-105 transition-transform">
+                <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
                   <img 
                     src={speaker.image} 
                     alt={speaker.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h3 className="text-xl font-bold text-navy mb-2">{speaker.name}</h3>
+                <h3 className="text-xl font-bold text-primary mb-2 font-biondi">{speaker.name}</h3>
                 <p className="text-gray-600">{speaker.title}</p>
               </CardContent>
             </Card>
