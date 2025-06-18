@@ -31,13 +31,7 @@ const Register = () => {
             >
               Grab My Ticket
             </Button>
-            
-            <Button 
-              onClick={handleFallbackClick}
-              variant="ghost"
-              className="block mx-auto text-white hover:bg-white/10 px-4 py-2 text-sm"
-            >
-              Open in New Tab
+          
             </Button>
           </div>
         </div>
