@@ -32,14 +32,6 @@ const Register = () => {
               Grab My Ticket
             </Button>
             
-            {/* Fallback Link */}
-            <div>
-              <Button 
-                onClick={handleFallbackClick}
-                variant="outline"
-                className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-primary px-6 sm:px-8 py-3 text-base sm:text-lg rounded-full transition-all duration-300 font-biondi"
-              >
-                Open Registration Form
               </Button>
             </div>
           </div>
