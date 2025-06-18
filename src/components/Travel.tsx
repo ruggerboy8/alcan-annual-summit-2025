@@ -47,7 +47,7 @@ const Travel = () => {
                 </h3>
                 <div className="text-lg text-text leading-relaxed">
                   <p className="font-semibold">Fairfield Inn & Suites Austin Buda</p>
-                  <p className="mt-2 mb-4">We have arranged a special rate for event guests.</p>
+                  <p className="mt-2 mb-4">We have arranged a special rate for event guests, about 15 minutes from the venue.</p>
                   <Button 
                     onClick={() => window.open('https://www.marriott.com/event-reservations/reservation-link.mi?id=1733945462114&key=CORP&guestreslink2=true&app=resvlink', '_blank')}
                     className="bg-primary text-white hover:bg-primary/90 px-6 py-3 text-base rounded-lg transition-all duration-300 hover:scale-105 shadow-lg font-biondi"
