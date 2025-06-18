@@ -34,13 +34,13 @@ const Hero = () => {
           ALCAN Annual Meeting 2025
         </h1>
         
-        <p className="text-2xl md:text-3xl mb-6 font-light">
-          Texas Old Town · Kyle, TX
+        <p className="text-2xl md:text-3xl mb-6 font-light text-white">
+          Kyle, TX
         </p>
         
         {/* Date Badge */}
-        <div className="inline-block border-2 border-primary text-primary bg-transparent px-6 py-2 rounded cursor-default text-xl font-semibold mb-12 font-biondi">
-          December 11–12
+        <div className="inline-block border-2 border-white text-white bg-transparent px-8 py-3 rounded text-3xl font-semibold mb-12 font-biondi tracking-wide">
+          December&nbsp; 11–12
         </div>
         
         {/* CTA Button */}
