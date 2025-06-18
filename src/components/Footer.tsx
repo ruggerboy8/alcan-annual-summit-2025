@@ -2,7 +2,7 @@
 const Footer = () => {
   return (
     <footer className="bg-accent text-white py-12">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
           {/* Logo Column */}
           <div className="flex justify-center md:justify-start">
@@ -26,8 +26,8 @@ const Footer = () => {
 
           {/* Contact Column */}
           <div className="text-center md:text-right">
-            <div className="inline-block bg-white/10 rounded-full px-4 py-2">
-              <a href="mailto:info@alcandentalcooperative.com" className="text-white hover:underline">
+            <div className="inline-block bg-white/10 rounded-full px-4 py-2 break-all">
+              <a href="mailto:info@alcandentalcooperative.com" className="text-white hover:underline text-sm sm:text-base">
                 info@alcandentalcooperative.com
               </a>
             </div>
