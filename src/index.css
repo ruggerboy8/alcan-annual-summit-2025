@@ -117,11 +117,11 @@
 @keyframes summit-logo {
   0% {
     opacity: 0;
-    transform: scale(0.8);
+    transform: translateY(20px) scale(0.9);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -137,7 +137,7 @@
 }
 
 .animate-summit-logo {
-  animation: summit-logo 1s ease-out forwards;
+  animation: summit-logo 1.2s ease-out forwards;
 }
 
 .animate-fade-in {

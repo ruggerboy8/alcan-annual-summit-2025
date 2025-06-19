@@ -5,21 +5,16 @@ import SummitLogo from '@/components/SummitLogo';
 const Hero = () => {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Video Background */}
-      <video 
-        className="absolute inset-0 w-full h-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster="/lovable-uploads/7aa55f44-b908-4912-a30e-fc99897616cd.png"
-      >
-        <source src="/lovable-uploads/HeroVideo.mp4" type="video/mp4" />
-        <source src="/lovable-uploads/HeroVideo.webm" type="video/webm" />
-      </video>
+      {/* Background Image (fallback for video) */}
+      <div 
+        className="absolute inset-0 w-full h-full bg-cover bg-center"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80')"
+        }}
+      />
       
       {/* Dark Overlay for text readability */}
-      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 bg-black/50" />
       
       {/* Content */}
       <div className="container">
