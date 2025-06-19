@@ -40,9 +40,13 @@ const Navigation = () => {
         {/* Logo (left) */}
         <button
           onClick={() => scrollTo('hero')}
-          className="font-biondi text-primary text-lg sm:text-xl tracking-wide"
+          className="flex items-center"
         >
-          The Summit
+          <img 
+            src="/lovable-uploads/b03b3869-2bb8-4e4a-9e0b-db7f04c5d946.png" 
+            alt="Alcan Dental Cooperative" 
+            className="h-8 w-auto"
+          />
         </button>
 
         {/* ───────── Desktop Links ───────── */}

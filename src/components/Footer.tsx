@@ -1,6 +1,4 @@
 
-import SummitLogo from '@/components/SummitLogo';
-
 const Footer = () => {
   return (
     <footer className="bg-accent text-white py-12">
@@ -8,7 +6,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
           {/* Logo Column */}
           <div className="flex justify-center md:justify-start">
-            <SummitLogo className="h-12 w-auto text-white" animate={false} />
+            <img 
+              src="/lovable-uploads/b03b3869-2bb8-4e4a-9e0b-db7f04c5d946.png" 
+              alt="Alcan Dental Cooperative" 
+              className="h-12 w-auto brightness-0 invert"
+            />
           </div>
 
           {/* Quick Links Column */}
