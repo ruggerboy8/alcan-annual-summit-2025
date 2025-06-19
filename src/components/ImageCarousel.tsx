@@ -7,7 +7,6 @@ const ImageCarousel = () => {
   const images = [
     '/lovable-uploads/a5e0d31f-6652-4ac3-bf68-f4e3f5fb83f4.png',
     '/lovable-uploads/16149e13-26c1-464e-be7d-7b954163e027.png',
-    '/lovable-uploads/adbe7475-58e8-42b5-9f84-35725435030d.png',
     '/lovable-uploads/cfb630e2-411f-4efd-bd9a-3d12c4c96d8d.png',
     '/lovable-uploads/eea2bad8-1521-4f21-974b-a1f5aa772b87.png'
   ];
