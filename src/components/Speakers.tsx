@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from '@/components/ui/card';
 
 const Speakers = () => {
@@ -40,7 +41,7 @@ const Speakers = () => {
                 "
               >
                 <CardContent className="flex flex-col items-center text-center p-6">
-                  <div className="w-28 h-28 sm:w-32 sm:h-32 mb-4 rounded-full overflow-hidden">
+                  <div className="w-32 h-32 sm:w-36 sm:h-36 mb-4 rounded-full overflow-hidden">
                     <img
                       src={sp.image}
                       alt={sp.name}
