@@ -3,7 +3,6 @@ import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import CountdownTimer from '@/components/CountdownTimer';
 import About from '@/components/About';
-import SeeYouInAustin from '@/components/SeeYouInAustin';
 import Agenda from '@/components/Agenda';
 import Speakers from '@/components/Speakers';
 import Travel from '@/components/Travel';
@@ -17,7 +16,6 @@ const Index = () => {
       <Hero />
       <CountdownTimer />
       <About />
-      <SeeYouInAustin />
       <Agenda />
       <Speakers />
       <Travel />
