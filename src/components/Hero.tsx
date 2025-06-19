@@ -1,3 +1,4 @@
+
 /* -------------------------------------------------------------------------- */
 /*  Hero                                                                     */
 /* -------------------------------------------------------------------------- */
@@ -5,11 +6,10 @@ import { motion, useReducedMotion } from 'framer-motion';
 import RegisterModal           from '@/components/RegisterModal';
 import SummitLogo              from '@/components/SummitLogo';
 
-const bgPoster =
-  'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=2400&q=80';
+const bgPoster = '/lovable-uploads/246de050-106d-48c5-b1b9-e68886c9e482.png';
 
 export default function Hero() {
-  /* honor the user’s “reduced motion” setting */
+  /* honor the user's "reduced motion" setting */
   const prefersReducedMotion = useReducedMotion();
 
   /* animation variants ----------------------------------------------------- */
