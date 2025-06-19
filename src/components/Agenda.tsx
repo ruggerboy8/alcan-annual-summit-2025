@@ -4,6 +4,63 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { ChevronDown } from 'lucide-react';
 
+interface Activity {
+  title: string;
+  description: string;
+}
+
+interface AgendaDay {
+  id: string;
+  title: string;
+  date: string;
+  activities: Activity[];
+}
+
+const agendaData: AgendaDay[] = [
+  {
+    id: 'day1',
+    title: 'Day 1',
+    date: 'Thursday, December 11',
+    activities: [
+      {
+        title: 'CE Sessions',
+        description: 'Educational sessions led by the Alcan team and exciting guest speakers'
+      },
+      {
+        title: 'Sunset Cocktail Hour',
+        description: 'Network and unwind with colleagues as the sun sets over Austin'
+      },
+      {
+        title: 'Headshot Lounge',
+        description: 'Professional headshot sessions, so glam up!'
+      },
+      {
+        title: 'Free Evening in Austin',
+        description: 'Explore the vibrant Austin scene at your own pace'
+      }
+    ]
+  },
+  {
+    id: 'day2',
+    title: 'Day 2',
+    date: 'Friday, December 12',
+    activities: [
+      {
+        title: 'Culture-Focused Sessions',
+        description: 'Deep dive into building and maintaining exceptional practice culture'
+      },
+      {
+        title: 'Energizing Keynotes',
+        description: 'Inspiring presentations to motivate and energize your team'
+      },
+      {
+        title: 'Team Dinner Celebration',
+        description: 'Celebrate this year\'s achievements and connections with a memorable dinner'
+      }
+    ]
+  }
+];
+
 const Agenda = () => {
   const [openDay, setOpenDay] = useState<string | null>(null);
 
@@ -22,69 +79,32 @@ const Agenda = () => {
         </div>
 
         <div className="max-w-4xl mx-auto space-y-6">
-          {/* Day 1 */}
-          <Collapsible open={openDay === 'day1'} onOpenChange={() => toggleDay('day1')}>
-            <Card className="border-2 border-primary/10 hover:border-primary/30 transition-colors">
-              <CollapsibleTrigger className="w-full">
-                <CardHeader className={`flex flex-row items-center justify-between ${openDay === 'day1' ? 'bg-primary text-white' : 'bg-white text-primary'} transition-colors px-4 sm:px-6`}>
-                  <CardTitle className="text-lg sm:text-2xl font-biondi font-semibold">Day 1 – Thursday, December 11</CardTitle>
-                  <ChevronDown className={`h-6 w-6 transition-transform duration-300 flex-shrink-0 ml-2 ${openDay === 'day1' ? 'rotate-180 text-white' : 'text-primary'}`} />
-                </CardHeader>
-              </CollapsibleTrigger>
-              <CollapsibleContent className="transition-all duration-300 ease-in-out overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
-                <CardContent className="bg-white py-6 px-4 sm:px-6">
-                  <div className="space-y-4">
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <h4 className="font-semibold text-primary mb-2 font-biondi">CE Sessions</h4>
-                      <p className="text-gray-700 text-lg">Educational sessions led by the Alcan team and exciting guest speakers</p>
+          {agendaData.map((day) => (
+            <Collapsible key={day.id} open={openDay === day.id} onOpenChange={() => toggleDay(day.id)}>
+              <Card className="border-2 border-primary/10 hover:border-primary/30 transition-colors">
+                <CollapsibleTrigger className="w-full">
+                  <CardHeader className={`flex flex-row items-center justify-between ${openDay === day.id ? 'bg-primary text-white' : 'bg-white text-primary'} transition-colors px-4 sm:px-6`}>
+                    <CardTitle className="text-lg sm:text-2xl font-biondi font-semibold">
+                      {day.title} – {day.date}
+                    </CardTitle>
+                    <ChevronDown className={`h-6 w-6 transition-transform duration-300 flex-shrink-0 ml-2 ${openDay === day.id ? 'rotate-180 text-white' : 'text-primary'}`} />
+                  </CardHeader>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="transition-all duration-300 ease-in-out overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+                  <CardContent className="bg-white py-6 px-4 sm:px-6">
+                    <div className="space-y-4">
+                      {day.activities.map((activity, index) => (
+                        <div key={index} className="bg-gray-50 p-4 rounded-lg">
+                          <h4 className="font-semibold text-primary mb-2 font-biondi">{activity.title}</h4>
+                          <p className="text-gray-700 text-lg">{activity.description}</p>
+                        </div>
+                      ))}
                     </div>
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <h4 className="font-semibold text-primary mb-2 font-biondi">Sunset Cocktail Hour</h4>
-                      <p className="text-gray-700 text-lg">Network and unwind with colleagues as the sun sets over Austin</p>
-                    </div>
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <h4 className="font-semibold text-primary mb-2 font-biondi">Headshot Lounge</h4>
-                      <p className="text-gray-700 text-lg">Professional headshot sessions, so glam up!</p>
-                    </div>
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <h4 className="font-semibold text-primary mb-2 font-biondi">Free Evening in Austin</h4>
-                      <p className="text-gray-700 text-lg">Explore the vibrant Austin scene at your own pace</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </CollapsibleContent>
-            </Card>
-          </Collapsible>
-
-          {/* Day 2 */}
-          <Collapsible open={openDay === 'day2'} onOpenChange={() => toggleDay('day2')}>
-            <Card className="border-2 border-primary/10 hover:border-primary/30 transition-colors">
-              <CollapsibleTrigger className="w-full">
-                <CardHeader className={`flex flex-row items-center justify-between ${openDay === 'day2' ? 'bg-primary text-white' : 'bg-white text-primary'} transition-colors px-4 sm:px-6`}>
-                  <CardTitle className="text-lg sm:text-2xl font-biondi font-semibold">Day 2 – Friday, December 12</CardTitle>
-                  <ChevronDown className={`h-6 w-6 transition-transform duration-300 flex-shrink-0 ml-2 ${openDay === 'day2' ? 'rotate-180 text-white' : 'text-primary'}`} />
-                </CardHeader>
-              </CollapsibleTrigger>
-              <CollapsibleContent className="transition-all duration-300 ease-in-out overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
-                <CardContent className="bg-white py-6 px-4 sm:px-6">
-                  <div className="space-y-4">
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <h4 className="font-semibold text-primary mb-2 font-biondi">Culture-Focused Sessions</h4>
-                      <p className="text-gray-700 text-lg">Deep dive into building and maintaining exceptional practice culture</p>
-                    </div>
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <h4 className="font-semibold text-primary mb-2 font-biondi">Energizing Keynotes</h4>
-                      <p className="text-gray-700 text-lg">Inspiring presentations to motivate and energize your team</p>
-                    </div>
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <h4 className="font-semibold text-primary mb-2 font-biondi">Team Dinner Celebration</h4>
-                      <p className="text-gray-700 text-lg">Celebrate this year's achievements and connections with a memorable dinner</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </CollapsibleContent>
-            </Card>
-          </Collapsible>
+                  </CardContent>
+                </CollapsibleContent>
+              </Card>
+            </Collapsible>
+          ))}
         </div>
       </div>
     </section>
