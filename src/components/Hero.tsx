@@ -41,7 +41,7 @@ const Hero = () => {
           
           {/* Date Badge */}
           <div className="inline-block border-2 border-white text-white bg-transparent px-4 sm:px-8 py-3 rounded text-xl sm:text-2xl md:text-3xl font-semibold mb-12 font-biondi tracking-wide cursor-default">
-            December&nbsp; 11–12
+            December&nbsp; 11–13
           </div>
           
           {/* CTA Button */}
