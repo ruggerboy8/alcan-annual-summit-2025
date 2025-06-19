@@ -5,9 +5,11 @@ const ImageCarousel = () => {
   const [currentImage, setCurrentImage] = useState(0);
   
   const images = [
-    'https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1721322800607-8c38375eef04?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    '/lovable-uploads/a5e0d31f-6652-4ac3-bf68-f4e3f5fb83f4.png',
+    '/lovable-uploads/16149e13-26c1-464e-be7d-7b954163e027.png',
+    '/lovable-uploads/adbe7475-58e8-42b5-9f84-35725435030d.png',
+    '/lovable-uploads/cfb630e2-411f-4efd-bd9a-3d12c4c96d8d.png',
+    '/lovable-uploads/eea2bad8-1521-4f21-974b-a1f5aa772b87.png'
   ];
 
   useEffect(() => {
@@ -24,9 +26,9 @@ const ImageCarousel = () => {
         <img
           key={index}
           src={image}
-          alt={`Team meeting ${index + 1}`}
+          alt={`Team photo ${index + 1}`}
           loading="lazy"
-          className={`absolute inset-0 w-full h-full object-cover rounded-lg transition-opacity duration-400 ease-in-out ${
+          className={`absolute inset-0 w-full h-full object-cover object-top rounded-lg transition-opacity duration-400 ease-in-out ${
             index === currentImage ? 'opacity-100' : 'opacity-0'
           }`}
         />
