@@ -1,4 +1,5 @@
 
+
 import { Button } from '@/components/ui/button';
 
 const Hero = () => {
@@ -48,7 +49,7 @@ const Hero = () => {
           <div className="mb-12">
             <Button 
               onClick={scrollToRegister}
-              className="bg-primary hover:bg-primary/92 text-white px-8 sm:px-12 py-4 text-lg sm:text-xl rounded-full transition-all duration-300 hover:scale-105 shadow-lg font-biondi"
+              className="bg-primary hover:bg-primary/92 text-white px-12 sm:px-16 py-6 text-xl sm:text-2xl rounded-lg transition-all duration-300 hover:scale-105 shadow-lg font-biondi font-bold min-w-[280px] sm:min-w-[320px]"
             >
               Register Now
             </Button>
@@ -60,3 +61,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
