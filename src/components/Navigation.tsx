@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';   // tiny icon set; already part of shadcn ui
+import { Menu, X } from 'lucide-react';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,7 +25,7 @@ const Navigation = () => {
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
-    setOpen(false);                       // close menu after tap
+    setOpen(false);
   };
 
   return (
@@ -42,7 +42,7 @@ const Navigation = () => {
           onClick={() => scrollTo('hero')}
           className="font-biondi text-primary text-lg sm:text-xl tracking-wide"
         >
-          ALCAN 2025
+          The Summit
         </button>
 
         {/* ───────── Desktop Links ───────── */}

@@ -1,5 +1,6 @@
 
 import RegisterModal from '@/components/RegisterModal';
+import SummitLogo from '@/components/SummitLogo';
 
 const Hero = () => {
   const scrollToRegister = () => {
@@ -22,16 +23,12 @@ const Hero = () => {
       {/* Content */}
       <div className="container">
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto">
-          {/* ALCAN Logo */}
-          <div className="mb-6 flex justify-center">
-            <img 
-              src="/lovable-uploads/16f3af94-62a6-4cf8-9394-b4b3117966be.png" 
-              alt="ALCAN Dental Cooperative Logo" 
-              className="h-16 sm:h-20 md:h-24 max-w-sm w-auto filter brightness-0 invert object-contain"
-            />
+          {/* The Summit Logo */}
+          <div className="mb-8 flex justify-center">
+            <SummitLogo className="h-32 sm:h-40 md:h-48 w-auto text-white" />
           </div>
           
-          <h1 className="text-3xl sm:text-5xl md:text-7xl font-biondi font-bold mb-6 animate-fade-in leading-tight" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.25)' }}>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-biondi font-light mb-6 animate-fade-in leading-tight" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.25)' }}>
             ALCAN Annual Meeting 2025
           </h1>
           

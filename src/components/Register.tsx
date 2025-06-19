@@ -7,7 +7,7 @@ const Register = () => {
       <div className="container">
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-biondi font-bold mb-6 leading-tight">
-            Reserve Your Spot
+            Reserve Your Spot at The Summit
           </h2>
           <p className="text-lg sm:text-xl mb-8 max-w-2xl mx-auto text-white">
             Don't miss out on this incredible opportunity to learn, network, and celebrate with the Alcan community.
