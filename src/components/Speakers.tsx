@@ -1,4 +1,5 @@
 
+
 import { Card, CardContent } from '@/components/ui/card';
 
 const Speakers = () => {
@@ -46,7 +47,7 @@ const Speakers = () => {
                       src={sp.image}
                       alt={sp.name}
                       loading="lazy"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover object-top"
                     />
                   </div>
                   <h3 className="text-xl font-biondi text-primary mb-2 leading-tight">
@@ -66,3 +67,4 @@ const Speakers = () => {
 };
 
 export default Speakers;
+
