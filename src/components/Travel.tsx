@@ -47,7 +47,7 @@ const Travel = () => {
                 </h3>
                 <div className="text-lg text-text leading-relaxed">
                   <p className="font-semibold">Fairfield Inn & Suites Austin Buda</p>
-                  <p className="mt-2 mb-4">We have arranged a special rate for event guests.</p>
+                  <p className="mt-2 mb-4">We have arranged a special rate for event guests, about 15 minutes from the venue.</p>
                   <Button 
                     onClick={() => window.open('https://www.marriott.com/event-reservations/reservation-link.mi?id=1733945462114&key=CORP&guestreslink2=true&app=resvlink', '_blank')}
                     className="bg-primary text-white hover:bg-primary/90 px-6 py-3 text-base rounded-lg transition-all duration-300 hover:scale-105 shadow-lg font-biondi"
@@ -62,14 +62,14 @@ const Travel = () => {
             <div className="flex justify-center">
               <div className="w-full overflow-hidden rounded-lg">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3457.123456789!2d-97.8765432!3d29.9876543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjnCsDU5JzE1LjYiTiA5N8KwNTInMzUuNiJX!5e0!3m2!1sen!2sus!4v1234567890"
+                  src="https://maps.google.com/maps?q=29.969447961809706,-97.8886213490766&output=embed&z=15"
+                  title="Texas Old Town Location"
                   width="100%"
                   height="300"
-                  className="w-full rounded-lg shadow-lg md:h-96"
-                  style={{ border: 0 }}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Texas Old Town Location"
+                  className="w-full md:h-96 rounded-lg shadow-lg"
+                  style={{ border: 0 }}
                 />
               </div>
             </div>

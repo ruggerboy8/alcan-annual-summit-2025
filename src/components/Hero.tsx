@@ -1,4 +1,5 @@
 
+
 import { Button } from '@/components/ui/button';
 
 const Hero = () => {
@@ -23,11 +24,11 @@ const Hero = () => {
       <div className="container">
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto">
           {/* ALCAN Logo */}
-          <div className="mb-6">
+          <div className="mb-6 flex justify-center">
             <img 
               src="/lovable-uploads/16f3af94-62a6-4cf8-9394-b4b3117966be.png" 
               alt="ALCAN Dental Cooperative Logo" 
-              className="h-16 sm:h-20 md:h-24 mx-auto filter brightness-0 invert w-full object-contain"
+              className="h-16 sm:h-20 md:h-24 max-w-sm w-auto filter brightness-0 invert object-contain"
             />
           </div>
           
@@ -48,7 +49,7 @@ const Hero = () => {
           <div className="mb-12">
             <Button 
               onClick={scrollToRegister}
-              className="bg-primary hover:bg-primary/92 text-white px-8 sm:px-12 py-4 text-lg sm:text-xl rounded-full transition-all duration-300 hover:scale-105 shadow-lg font-biondi"
+              className="bg-primary hover:bg-primary/92 text-white px-12 sm:px-16 py-6 text-xl sm:text-2xl rounded-lg transition-all duration-300 hover:scale-105 shadow-lg font-biondi font-bold min-w-[280px] sm:min-w-[320px]"
             >
               Register Now
             </Button>
@@ -60,3 +61,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
