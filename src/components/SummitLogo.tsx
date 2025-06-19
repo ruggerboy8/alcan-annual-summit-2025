@@ -7,8 +7,8 @@ interface SummitLogoProps {
 
 const SummitLogo = ({ className = "", animate = true, variant = 'white' }: SummitLogoProps) => {
   const logoSrc = variant === 'white' 
-    ? "/lovable-uploads/ff7a71fa-80bc-48b2-9d7f-d8d9a319d0ca.png"
-    : "/lovable-uploads/65f0bfee-b259-4915-97db-6d52e4cc3b9c.png";
+    ? "/lovable-uploads/TheSummitWhite.png"
+    : "/lovable-uploads/TheSummitBlack.png";
 
   return (
     <img 
