@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -63,11 +62,10 @@ export default {
 					primary: 'hsl(var(--sidebar-primary))',
 					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
 					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+					'accent-foreground: 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Design system colors
 				navy: 'var(--clr-primary)',
 				teal: 'var(--clr-accent)',
 				surface: 'var(--clr-surface)',
@@ -116,12 +114,23 @@ export default {
 						opacity: '1',
 						transform: 'translateY(0)'
 					}
+				},
+				'summit-logo': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(20px) scale(0.9)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0) scale(1)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.3s ease-out',
 				'accordion-up': 'accordion-up 0.3s ease-out',
-				'fade-in': 'fade-in 0.6s ease-out'
+				'fade-in': 'fade-in 0.6s ease-out',
+				'summit-logo': 'summit-logo 1.2s ease-out forwards'
 			}
 		}
 	},
