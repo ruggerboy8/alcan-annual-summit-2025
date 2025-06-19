@@ -130,16 +130,6 @@ export default function Hero() {
           <RegisterModal />
         </motion.div>
       </div>
-
-      {/* ---------- scroll cue ---------- */}
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 3, duration: 0.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 select-none text-white/90"
-      >
-        <span className="animate-bounce text-xl">&#x2193;</span>
-      </motion.div>
     </section>
   );
 }
