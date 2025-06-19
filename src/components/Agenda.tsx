@@ -28,10 +28,10 @@ const Agenda = () => {
               <CollapsibleTrigger className="w-full">
                 <CardHeader className={`flex flex-row items-center justify-between ${openDay === 'day1' ? 'bg-primary text-white' : 'bg-white text-primary'} transition-colors px-4 sm:px-6`}>
                   <CardTitle className="text-lg sm:text-2xl font-biondi font-semibold">Day 1 – Thursday, December 11</CardTitle>
-                  <ChevronDown className={`h-6 w-6 transition-transform flex-shrink-0 ml-2 ${openDay === 'day1' ? 'rotate-180 text-white' : 'text-primary'}`} />
+                  <ChevronDown className={`h-6 w-6 transition-transform duration-300 flex-shrink-0 ml-2 ${openDay === 'day1' ? 'rotate-180 text-white' : 'text-primary'}`} />
                 </CardHeader>
               </CollapsibleTrigger>
-              <CollapsibleContent>
+              <CollapsibleContent className="transition-all duration-300 ease-in-out overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
                 <CardContent className="bg-white py-6 px-4 sm:px-6">
                   <div className="space-y-4">
                     <div className="bg-gray-50 p-4 rounded-lg">
@@ -62,10 +62,10 @@ const Agenda = () => {
               <CollapsibleTrigger className="w-full">
                 <CardHeader className={`flex flex-row items-center justify-between ${openDay === 'day2' ? 'bg-primary text-white' : 'bg-white text-primary'} transition-colors px-4 sm:px-6`}>
                   <CardTitle className="text-lg sm:text-2xl font-biondi font-semibold">Day 2 – Friday, December 12</CardTitle>
-                  <ChevronDown className={`h-6 w-6 transition-transform flex-shrink-0 ml-2 ${openDay === 'day2' ? 'rotate-180 text-white' : 'text-primary'}`} />
+                  <ChevronDown className={`h-6 w-6 transition-transform duration-300 flex-shrink-0 ml-2 ${openDay === 'day2' ? 'rotate-180 text-white' : 'text-primary'}`} />
                 </CardHeader>
               </CollapsibleTrigger>
-              <CollapsibleContent>
+              <CollapsibleContent className="transition-all duration-300 ease-in-out overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
                 <CardContent className="bg-white py-6 px-4 sm:px-6">
                   <div className="space-y-4">
                     <div className="bg-gray-50 p-4 rounded-lg">

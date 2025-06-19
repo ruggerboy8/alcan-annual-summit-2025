@@ -1,5 +1,6 @@
 
 import ImageCarousel from './ImageCarousel';
+import RegisterModal from './RegisterModal';
 
 const About = () => {
   return (
@@ -19,10 +20,17 @@ const About = () => {
                 team celebrations, this year's event in Austin will be our biggest
                 and best yet.
               </p>
-              <p className="text-lg sm:text-xl text-text leading-relaxed">
+              <p className="text-lg sm:text-xl text-text leading-relaxed mb-8">
                 Get ready to learn, connect, and have some serious fun—we can't
                 wait to see you there!
               </p>
+              
+              {/* Register Button */}
+              <div className="flex justify-start">
+                <RegisterModal 
+                  buttonClassName="bg-primary hover:bg-primary/92 text-white px-8 sm:px-12 py-4 text-lg sm:text-xl rounded-lg transition-all duration-300 hover:scale-105 shadow-lg font-biondi font-bold"
+                />
+              </div>
             </div>
             <div className="flex justify-center md:justify-end order-1 md:order-2">
               <div className="w-full max-w-sm sm:max-w-md md:max-w-none md:w-[80%]">
