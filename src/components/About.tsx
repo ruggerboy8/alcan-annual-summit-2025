@@ -10,19 +10,30 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <div className="max-w-[680px] order-2 md:order-1">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-biondi font-bold text-primary mb-6 leading-tight">
-                About the Event
+                Why attend The Summit?
               </h2>
               <p className="text-lg sm:text-xl text-text leading-relaxed mb-6">
-                We're thrilled to officially invite you to the 2025 Alcan Annual Event
-                —a two-day experience designed to sharpen our skills, strengthen
-                our teams, and celebrate the incredible work happening across
-                our practices. From high-impact CE sessions to unforgettable
-                team celebrations, this year's event in Austin will be our biggest
-                and best yet.
+                Every ascent starts with a single step—and with the right partners on the rope.
               </p>
+              <p className="text-lg sm:text-xl text-text leading-relaxed mb-6">
+                Over two powerful days we'll climb together through:
+              </p>
+              <ul className="text-lg sm:text-xl text-text leading-relaxed mb-6 space-y-3">
+                <li className="flex items-start">
+                  <span className="text-primary mr-3 font-bold">•</span>
+                  <span><strong>Skill pitches</strong> – fast-paced CE sessions that add real altitude to your craft.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary mr-3 font-bold">•</span>
+                  <span><strong>Roped-in round-tables</strong> – cross-practice huddles where we solve for tomorrow, today.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary mr-3 font-bold">•</span>
+                  <span><strong>Base-camp celebrations</strong> – nightly socials that refuel relationships (and appetites).</span>
+                </li>
+              </ul>
               <p className="text-lg sm:text-xl text-text leading-relaxed mb-8">
-                Get ready to learn, connect, and have some serious fun—we can't
-                wait to see you there!
+                By the time we plant our flag in Austin's hill country, you'll head home with fresh tools, deeper bonds, and a renewed view from the top.
               </p>
               
               {/* Register Button */}
