@@ -86,13 +86,7 @@ const Agenda = () => {
                 </CollapsibleTrigger>
 
                 {/* Content */}
-                <CollapsibleContent
-                  className="
-                    overflow-hidden
-                    data-[state=open]:animate-accordion-down
-                    data-[state=closed]:animate-accordion-up
-                  "
-                >
+                <CollapsibleContent className="overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
                   <CardContent className="bg-white py-6 px-4 sm:px-6">
                     <div className="space-y-4">
                       {day.activities.map((activity, idx) => (
