@@ -1,4 +1,3 @@
-
 // components/About.tsx
 import ImageCarousel from './ImageCarousel';
 import RegisterModal from './RegisterModal';
@@ -16,34 +15,34 @@ const About = () => (
             </h2>
 
             <p className="text-lg sm:text-xl text-text leading-relaxed mb-5">
-              Every ascent starts with a single step—and with the right partners on the rope.
+              Two days built to sharpen your skills, widen your network, and celebrate the work we’re doing together.
             </p>
 
             <p className="text-lg sm:text-xl text-text leading-relaxed mb-5">
-              Over two powerful days we'll climb together through:
+              You can look forward&nbsp;to:
             </p>
 
             <ul className="space-y-4 text-lg sm:text-xl text-text leading-relaxed mb-8 list-none">
               <li className="flex">
                 <span className="text-primary mr-3 font-bold">•</span>
-                <span><strong>Skill pitches</strong> – fast-paced CE sessions that add real altitude to your craft.</span>
+                <span><strong>Focused CE workshops</strong> led by industry experts.</span>
               </li>
               <li className="flex">
                 <span className="text-primary mr-3 font-bold">•</span>
-                <span><strong>Roped-in round-tables</strong> – cross-practice huddles where we solve for tomorrow, today.</span>
+                <span><strong>Cross-practice round-tables</strong> where ideas move from concept to roadmap.</span>
               </li>
               <li className="flex">
                 <span className="text-primary mr-3 font-bold">•</span>
-                <span><strong>Base-camp celebrations</strong> – nightly socials that refuel relationships (and appetites).</span>
+                <span><strong>Evening gatherings</strong> that build culture and spark new friendships.</span>
               </li>
             </ul>
 
             <p className="text-lg sm:text-xl text-text leading-relaxed mb-10">
-              By the time we plant our flag in Austin's hill country, you'll head home with fresh tools, deeper bonds, and a renewed view from the top.
+              You’ll head home with fresh tools, stronger partnerships, and a clear view of what’s next.
             </p>
 
             {/* CTA */}
-            <div className="flex justify-center">
+            <div className="flex">
               <RegisterModal
                 buttonClassName="bg-primary hover:bg-primary/90 text-white px-8 sm:px-12 py-4 text-lg sm:text-xl rounded-lg shadow-lg transition-transform duration-300 hover:scale-105 font-biondi font-bold"
               />
