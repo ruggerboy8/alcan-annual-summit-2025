@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
@@ -87,10 +86,7 @@ const Agenda = () => {
                 </CollapsibleTrigger>
 
                 {/* Content */}
-                <CollapsibleContent 
-                  forceMount
-                  className="overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up"
-                >
+                <CollapsibleContent className="overflow-hidden transition-all duration-300 data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
                   <CardContent className="bg-white py-6 px-4 sm:px-6">
                     <div className="space-y-4">
                       {day.activities.map((activity, idx) => (
