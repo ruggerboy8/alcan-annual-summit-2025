@@ -24,19 +24,19 @@ const speakers = [
     name: 'Johno Oberly',    
     title: 'Director of Training, Alcan',               
     image: '/lovable-uploads/762fc73a-5c3d-466a-a8ae-71ba61269381.png',
-    bio: 'After fifteen years designing student-centric programs—from classroom pilots to state-level policy initiatives—Johno Oberly pivoted his passion for transformative learning into dentistry. At Alcan he builds training that flexes like a great lesson plan: data-driven, human-focused, and refreshingly jargon-free. Johno believes every team member craves two things—recognition of their innate goodness and a platform to extend that goodness to others—and he structures curricula accordingly. Off hours you\'ll find him tinkering with workflow apps, coaching youth soccer, or hunting the perfect cortado.'
+    bio: 'After fifteen years designing student-centric programs—from classroom pilots to state-level policy initiatives—Johno Oberly pivoted his passion for transformative learning into dentistry. At Alcan he builds training that flexes like a great lesson plan: data-driven, human-focused, and refreshingly jargon-free. Johno believes every team member craves two things—recognition of their innate goodness and a platform to extend that goodness to others—and he structures curricula accordingly. Off hours you\'ll find him tinkering with AI apps, reading sci-fi books, or hunting the perfect cortado.'
   },
   { 
     name: 'Dr. Alex Otto',   
     title: 'Co-Founder, Alcan',                         
     image: '/lovable-uploads/5a2076b1-3dc8-4a01-a5e2-db5b762eb990.png',
-    bio: 'Named one of the ADA\'s "Top 10 Under 10," Dr. Alex Otto mixes clinical talent, legislative savvy and big-hearted activism. A VCU DDS, Denver GPR grad, and Alaska-trained pediatric specialist, she now anchors Kids Tooth Team in Texas while holding leadership seats at the ADA, TDA and Texas Academy of Pediatric Dentistry. Her proudest line item? A nonprofit mobile clinic that has already delivered $200-plus K in free care to underserved kids. From Capitol Hill testimony to cartoon-themed operatories, Dr. Otto keeps one promise: every child deserves a champion in their corner.'
+    bio: 'Named one of the ADA\'s "Top 10 Under 10," Dr. Alex Otto mixes clinical talent, legislative savvy and big-hearted activism. A VCU DDS, Denver GPR grad, and Alaska-trained pediatric specialist, she now anchors Kids Tooth Team in Texas while holding leadership seats at the ADA, TDA and Texas Academy of Pediatric Dentistry. Her proudest line item? A nonprofit mobile clinic that has already delivered $500-plus K in free care to underserved kids. From Capitol Hill testimony to kid-friendly operatories, Dr. Otto keeps one promise: every child deserves a champion in their corner.'
   },
   { 
     name: 'Tim Otto',        
     title: 'Co-Founder, Alcan',                         
     image: '/lovable-uploads/ebfdffb3-51f1-4d6f-8f18-5ae91b2cf50c.png',
-    bio: 'Tim Otto wrote his first business plan before he could legally rent a car, sold his first start-up at 25, and hasn\'t stopped building since. A magna-cum-laude finance grad with an International MBA, Tim spent a decade steering Fortune 500 sales teams before co-founding Alcan alongside wife Dr. Alex. He now architects the cooperative\'s growth strategy—merging Silicon-Valley agility with Main-Street empathy—and still finds time to mentor young entrepreneurs. Ask Tim about EBITDA and he\'ll light up; ask him about Taco Tuesday and you\'ll get a 12-slide deck.'
+    bio: 'Tim Otto wrote his first business plan before he could legally rent a car, sold his first start-up at 25, and hasn\'t stopped building since. A magna-cum-laude finance grad with an International MBA, Tim spent a decade steering Fortune 500 sales teams before co-founding Alcan alongside wife Dr. Alex. He now architects the cooperative\'s growth strategy—merging Wall-Street agility with Main-Street empathy—and still finds time to mentor young entrepreneurs. Ask Tim about EBITDA and he\'ll light up; ask him about Main Street Ice Cream, and you\'ll get a 12-slide deck.'
   },
   { 
     name: 'Ryan Jones',      
