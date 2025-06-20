@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -22,7 +21,7 @@ export default function SpeakerFlipCard({ speaker }: { speaker: Speaker }) {
           flipped ? 'rotate-y-180' : ''
         }`}
       >
-        {/* Front – photo and name */}
+        {/* ───────── FRONT ───────── */}
         <CardContent className="flip-card-face absolute inset-0 flex flex-col items-center justify-center p-6">
           <div className="w-32 h-32 sm:w-36 sm:h-36 mb-4 rounded-full overflow-hidden">
             <img
@@ -40,10 +39,21 @@ export default function SpeakerFlipCard({ speaker }: { speaker: Speaker }) {
           </p>
         </CardContent>
 
-        {/* Back – scrollable bio */}
-        <CardContent className="flip-card-face absolute inset-0 flex flex-col bg-primary text-white p-6 rounded-xl overflow-y-auto rotate-y-180">
+        {/* ───────── BACK ───────── */}
+        <CardContent
+          className="
+            flip-card-face absolute inset-0 flex flex-col items-center justify-start
+            bg-primary text-white p-6 rounded-xl rotate-y-180
+          "
+        >
           <h3 className="text-xl font-biondi mb-4 text-center">{speaker.name}</h3>
-          <p className="text-sm sm:text-base leading-relaxed text-white text-left">{speaker.bio}</p>
+
+          {/* Scrollable bio only */}
+          <div className="overflow-y-auto pr-1 max-h-[65%] w-full">
+            <p className="text-sm sm:text-base leading-relaxed whitespace-pre-line">
+              {speaker.bio}
+            </p>
+          </div>
         </CardContent>
       </div>
     </Card>
