@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 
 interface Speaker {
@@ -10,6 +10,14 @@ interface Speaker {
 
 export default function SpeakerFlipCard({ speaker }: { speaker: Speaker }) {
   const [flipped, setFlipped] = useState(false);
+  const bioRef = useRef<HTMLDivElement>(null);
+
+  // Reset scroll when the card is flipped to its back
+  useEffect(() => {
+    if (flipped && bioRef.current) {
+      bioRef.current.scrollTop = 0;
+    }
+  }, [flipped]);
 
   return (
     <Card
@@ -21,7 +29,7 @@ export default function SpeakerFlipCard({ speaker }: { speaker: Speaker }) {
           flipped ? 'rotate-y-180' : ''
         }`}
       >
-        {/* ─────── FRONT ─────── */}
+        {/* ───── FRONT ───── */}
         <CardContent className="flip-card-face absolute inset-0 flex flex-col items-center justify-center p-6">
           <div className="w-32 h-32 sm:w-36 sm:h-36 mb-4 rounded-full overflow-hidden">
             <img
@@ -39,21 +47,20 @@ export default function SpeakerFlipCard({ speaker }: { speaker: Speaker }) {
           </p>
         </CardContent>
 
-        {/* ─────── BACK ─────── */}
+        {/* ───── BACK ───── */}
         <CardContent
           className="
             flip-card-face absolute inset-0 flex flex-col items-center justify-start
             bg-primary text-white p-6 rounded-xl rotate-y-180
           "
         >
-          {/* Bold / centered heading */}
           <h3 className="text-xl font-biondi font-semibold mb-4 text-center w-full">
             {speaker.name}
           </h3>
 
-          {/* Taller, centered, scrollable bio */}
-          <div className="overflow-y-auto max-h-[78%] w-full">
-            <p className="text-sm sm:text-base leading-relaxed whitespace-pre-line text-center">
+          {/* scrollable bio */}
+          <div ref={bioRef} className="overflow-y-auto max-h-[78%] w-full">
+            <p className="text-sm sm:text-base leading-relaxed whitespace-pre-line text-center text-white">
               {speaker.bio}
             </p>
           </div>
