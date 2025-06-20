@@ -21,7 +21,7 @@ export default function SpeakerFlipCard({ speaker }: { speaker: Speaker }) {
           flipped ? 'rotate-y-180' : ''
         }`}
       >
-        {/* ───────── FRONT ───────── */}
+        {/* ─────── FRONT ─────── */}
         <CardContent className="flip-card-face absolute inset-0 flex flex-col items-center justify-center p-6">
           <div className="w-32 h-32 sm:w-36 sm:h-36 mb-4 rounded-full overflow-hidden">
             <img
@@ -39,18 +39,21 @@ export default function SpeakerFlipCard({ speaker }: { speaker: Speaker }) {
           </p>
         </CardContent>
 
-        {/* ───────── BACK ───────── */}
+        {/* ─────── BACK ─────── */}
         <CardContent
           className="
             flip-card-face absolute inset-0 flex flex-col items-center justify-start
             bg-primary text-white p-6 rounded-xl rotate-y-180
           "
         >
-          <h3 className="text-xl font-biondi mb-4 text-center">{speaker.name}</h3>
+          {/* Bold / centered heading */}
+          <h3 className="text-xl font-biondi font-semibold mb-4 text-center w-full">
+            {speaker.name}
+          </h3>
 
-          {/* Scrollable bio only */}
-          <div className="overflow-y-auto pr-1 max-h-[65%] w-full">
-            <p className="text-sm sm:text-base leading-relaxed whitespace-pre-line">
+          {/* Taller, centered, scrollable bio */}
+          <div className="overflow-y-auto max-h-[78%] w-full">
+            <p className="text-sm sm:text-base leading-relaxed whitespace-pre-line text-center">
               {speaker.bio}
             </p>
           </div>
