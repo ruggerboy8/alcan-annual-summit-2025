@@ -143,17 +143,25 @@
 .animate-fade-in {
   animation: fade-in 1s ease-out 3s forwards;
   opacity: 0;
+}
 
 /* ----------  Flip-card helpers  ---------- */
-.flip-card          { perspective: 1000px; }          /* already added */
-.flip-card-face     { backface-visibility: hidden; }
+.flip-card { 
+  perspective: 1000px; 
+}
 
-.flip-card-inner    {          /* NEW */
+.flip-card-face { 
+  backface-visibility: hidden; 
+}
+
+.flip-card-inner {
   transform-style: preserve-3d;
   transition: transform 0.7s ease;
 }
 
-.rotate-y-180 { transform: rotateY(180deg); }        
+.rotate-y-180 { 
+  transform: rotateY(180deg); 
+}
 
 /* Modal styles */
 .modal-backdrop {
