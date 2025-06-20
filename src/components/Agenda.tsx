@@ -1,6 +1,3 @@
-/* ----------------------------------------------
-   components/Agenda.tsx
----------------------------------------------- */
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
@@ -90,11 +87,11 @@ const Agenda = () => {
 
                 {/* Content */}
                 <CollapsibleContent
-                  forceMount       /* keeps content in DOM so max-height can animate */
-                  className={cn(
-                    'overflow-hidden transition-[max-height] duration-500 ease-in-out',
-                    openDay === day.id ? 'max-h-[500px]' : 'max-h-0'
-                  )}
+                  className="
+                    overflow-hidden
+                    data-[state=open]:animate-accordion-down
+                    data-[state=closed]:animate-accordion-up
+                  "
                 >
                   <CardContent className="bg-white py-6 px-4 sm:px-6">
                     <div className="space-y-4">

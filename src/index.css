@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Biondi:wght@400;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
@@ -136,13 +135,14 @@
   }
 }
 
-.animate-summit-logo {
-  animation: summit-logo 1.2s ease-out forwards;
+/* ----  Accordion smooth open / close  ---- */
+@keyframes accordion-down {
+  from { height: 0 }
+  to   { height: var(--radix-collapsible-content-height) }
 }
-
-.animate-fade-in {
-  animation: fade-in 1s ease-out 3s forwards;
-  opacity: 0;
+@keyframes accordion-up {
+  from { height: var(--radix-collapsible-content-height) }
+  to   { height: 0 }
 }
 
 /* ----------  Flip-card helpers  ---------- */
