@@ -145,10 +145,15 @@
   opacity: 0;
 
 /* ----------  Flip-card helpers  ---------- */
-.flip-card      { perspective: 1000px;         }
-.flip-card-face { backface-visibility: hidden; }
+.flip-card          { perspective: 1000px; }          /* already added */
+.flip-card-face     { backface-visibility: hidden; }
 
+.flip-card-inner    {          /* NEW */
+  transform-style: preserve-3d;
+  transition: transform 0.7s ease;
 }
+
+.rotate-y-180 { transform: rotateY(180deg); }        
 
 /* Modal styles */
 .modal-backdrop {
