@@ -41,9 +41,9 @@ export default function SpeakerFlipCard({ speaker }: { speaker: Speaker }) {
         </CardContent>
 
         {/* Back – scrollable bio */}
-        <CardContent className="flip-card-face absolute inset-0 flex flex-col items-center justify-center bg-primary text-white p-6 rounded-xl overflow-y-auto rotate-y-180">
+        <CardContent className="flip-card-face absolute inset-0 flex flex-col bg-primary text-white p-6 rounded-xl overflow-y-auto rotate-y-180">
           <h3 className="text-xl font-biondi mb-4 text-center">{speaker.name}</h3>
-          <p className="text-sm sm:text-base leading-relaxed text-center">{speaker.bio}</p>
+          <p className="text-sm sm:text-base leading-relaxed text-white text-left">{speaker.bio}</p>
         </CardContent>
       </div>
     </Card>
