@@ -30,7 +30,7 @@ const speakers = [
     name: 'Dr. Alex Otto',   
     title: 'Co-Founder, Alcan',                         
     image: '/lovable-uploads/5a2076b1-3dc8-4a01-a5e2-db5b762eb990.png',
-    bio: 'Named an Incisal Edge "40 Under 40" winner, Dr. Alex Otto mixes clinical talent, legislative savvy and big-hearted activism. A VCU DDS, Denver Health GPR grad, and Alaska-trained pediatric specialist, she now anchors Kids Tooth Team in Texas while holding leadership seats at the ADA, TDA and is the President of the Texas Academy of Pediatric Dentistry. She is an international speaker and clinical instructor for Sprig Oral Technologies, but her proudest line item? A nonprofit mobile clinic that has already delivered $600-plus K in free care to underserved kids. From Capitol Hill testimony to kid-friendly operatories, Dr. Otto keeps one promise: every child deserves a champion in their corner.'
+    bio: 'Named an Incisal Edge "40 Under 40" winner, Dr. Alex Otto mixes clinical talent, legislative savvy and big-hearted activism. A VCU DDS, Denver Health GPR grad, and Alaska-trained pediatric specialist, she now anchors Kids Tooth Team in Texas while holding leadership seats at the ADA, TDA and is the President of the Texas Academy of Pediatric Dentistry. She is an international speaker and clinical instructor for Sprig Oral Health Technologies, but her proudest line item? A nonprofit mobile clinic that has already delivered $600-plus K in free care to underserved kids. From Capitol Hill testimony to kid-friendly operatories, Dr. Otto keeps one promise: every child deserves a champion in their corner.'
   },
   { 
     name: 'Tim Otto',        
