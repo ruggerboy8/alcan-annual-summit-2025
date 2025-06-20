@@ -143,6 +143,11 @@
 .animate-fade-in {
   animation: fade-in 1s ease-out 3s forwards;
   opacity: 0;
+
+/* ----------  Flip-card helpers  ---------- */
+.flip-card      { perspective: 1000px;         }
+.flip-card-face { backface-visibility: hidden; }
+
 }
 
 /* Modal styles */
