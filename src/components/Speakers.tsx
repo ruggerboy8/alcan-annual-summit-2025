@@ -10,7 +10,7 @@ const speakers = [
   },
   { 
     name: 'Dr. Barry Oulton', 
-    title: 'Dental Coach, UK',                         
+    title: 'The Confident Dentist, UK',                         
     image: '/lovable-uploads/aff85297-abd8-4c3b-9c22-f63c8349e76a.png',
     bio: 'For nearly a quarter-century Barry Oulton steered his award-winning Surrey practice while obsessing over one thing: conversations that turn patients into raving fans. Today he coaches full-time, teaching dentists how finely tuned communication and simple repeatable systems can double private revenue without adding extra treatment rooms. A keynote favourite for Septodont, SOE, Henry Schein and Bupa, Barry blends science-backed behaviour psychology with cheeky British humour, proving that warmer words and clearer choices build healthier smiles and healthier bottom lines.'
   },
@@ -18,7 +18,7 @@ const speakers = [
     name: 'Dr. Kasey Stark', 
     title: 'Co-Founder, Kids Tooth Team Michigan',      
     image: '/lovable-uploads/4f473ff7-c1eb-4ee2-b65d-eb35eaa2e7be.png',
-    bio: 'Michigan-raised, Alaska-shaped and now happily rooted in Lake Orion, Dr. Kasey Stark personifies adventurous pediatric care. A seven-year accelerated DDS, two-year NYU Langone pediatric residency, and faculty stint with Alaska\'s cleft-lip program gave her clinical depth—and frostbite stories. Today she leads Kids Tooth Team\'s first Midwest location, helping young patients by day and chasing daughter Penny (and 180-lb mastiff Lebowski) by weekend. Whether carving ski slopes or caries, Dr. Kasey\'s mission stays the same: deliver fearless, family-centered dentistry that makes every kid grin wider than the Upper Peninsula.'
+    bio: 'Michigan-raised, Alaska-shaped and now happily rooted in Lake Orion, Dr. Kasey Stark personifies adventurous pediatric care. A seven-year accelerated DDS, two-year NYU Langone pediatric residency, and faculty stint with Alaska\'s cleft-lip program gave her clinical depth—and frostbite stories. Today she leads Kids Tooth Team\'s first Midwest location, helping young patients by day and chasing daughter Penny (and 180-lb mastiff Lebowski) by weekend. Learn how Dr. Kasey leveraged the Alcan systems to create the fastest growing pediatric startup in the nation, with an AVERAGE of over 240 new patients per month in her first 12 months of operation.'
   },
   { 
     name: 'Johno Oberly',    
