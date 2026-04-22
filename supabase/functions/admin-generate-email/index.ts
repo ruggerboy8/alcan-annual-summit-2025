@@ -148,9 +148,13 @@ Deno.serve(async (req) => {
 
   const prompt = String(body?.prompt ?? "").trim();
   const recipientType = body?.recipientType;
-  const assetUrls: string[] = Array.isArray(body?.assetUrls)
+  const userAssetUrls: string[] = Array.isArray(body?.assetUrls)
     ? body.assetUrls.filter((u: unknown) => typeof u === "string" && u.length > 0).slice(0, 8)
     : [];
+
+  // Permanent brand hero image — prepended to every email so all sends share
+  // the same masthead. Hosted on the published site under /email-hero.png.
+  const HERO_IMAGE_URL = "https://alcan-annual-meeting-2025.lovable.app/email-hero.png";
 
   if (!prompt) return json({ error: "prompt required" }, 400);
   if (!["all", "staff", "guests"].includes(recipientType)) {
@@ -166,9 +170,13 @@ Deno.serve(async (req) => {
     ? "Audience: outside guests (industry partners, vendors, friends of Alcan). Tone is welcoming and slightly more polished; explain context where useful."
     : "Audience: all registrants (Alcan staff + outside guests). Tone is warm and inclusive; assume mixed familiarity.";
 
-  const assetBlock = assetUrls.length
-    ? `\n\nUPLOADED IMAGES (use these — do NOT invent other image URLs):\n${assetUrls.map((u, i) => `  ${i + 1}. ${u}`).join("\n")}\n\nThe first image is typically the hero banner (place inside the navy hero band). Others can be placed in body sections as appropriate. Always include alt text describing what's in the image based on context.`
-    : "\n\nNo images were uploaded. Build the email with typography, color, and layout only — no <img> tags.";
+  const heroLine = `MANDATORY HERO BANNER (always image #1): ${HERO_IMAGE_URL}\nThis is a cinematic photo of mountaineering gear — a navy and gold backpack stamped with "The Summit" logo, an ice axe, coiled climbing rope, hiking boots, helmet, gloves, and carabiners arranged on a rocky ledge with a sunlit Himalayan peak in the background. It MUST appear as a full-bleed banner at the very top of every email, INSIDE the navy hero band, ABOVE any headline. Use exactly: <img src="${HERO_IMAGE_URL}" width="600" alt="The Summit — mountaineering gear at sunrise" style="display:block;width:100%;max-width:600px;height:auto;border:0;outline:none;text-decoration:none;" />\nDo NOT omit it. Do NOT replace it. Do NOT resize it smaller.`;
+
+  const additionalAssets = userAssetUrls.length
+    ? `\n\nADDITIONAL UPLOADED IMAGES (use in body sections as relevant; always include alt text):\n${userAssetUrls.map((u, i) => `  ${i + 1}. ${u}`).join("\n")}`
+    : "";
+
+  const assetBlock = `\n\n${heroLine}${additionalAssets}`;
 
   const userMessage =
     `${audienceLine}\n\nBrief from the team:\n\n"""${prompt}"""${assetBlock}\n\nDesign the email to feel like a confident expedition dispatch — not a corporate newsletter. Honor the design system precisely.`;
