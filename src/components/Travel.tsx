@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 
 const HOTEL_PHONE = '512-277-3482';
 const HOTEL_PHONE_HREF = 'tel:+15122773482';
-const HOTEL_URL = 'https://www.marriott.com/en-us/hotels/auscb-fairfield-inn-and-suites-austin-buda/overview/';
+const HOTEL_URL = 'https://www.marriott.com/en-us/hotels/ausbu-fairfield-inn-and-suites-austin-buda/overview/';
 
 const Travel = () => {
   const prefersReducedMotion = useReducedMotion();
