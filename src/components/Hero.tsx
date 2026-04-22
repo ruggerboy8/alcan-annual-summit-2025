@@ -68,10 +68,10 @@ export default function Hero() {
           initial="hidden" animate="visible"
           variants={prefersReducedMotion ? {} : logoVariants}
           className="mb-6 flex justify-center sm:mb-8"
+          style={{ height: 'clamp(180px, 38vw, 460px)' }}
         >
           <SummitLogo
-            className="w-auto"
-            style={{ height: 'clamp(180px, 38vw, 460px)' }}
+            className="h-full w-auto"
             variant="white"
           />
         </motion.div>

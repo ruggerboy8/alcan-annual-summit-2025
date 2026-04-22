@@ -53,7 +53,7 @@ const CountdownTimer = () => {
               })}
           className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-gold"
         >
-          The Summit Begins
+          The Ascent Begins
         </motion.p>
         <div className="mx-auto mb-12 h-px w-24 bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
 
