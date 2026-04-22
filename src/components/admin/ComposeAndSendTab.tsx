@@ -129,23 +129,48 @@ export default function ComposeAndSendTab({ token }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [api]);
 
-  const startNew = () => {
-    setCampaignId(null);
-    setName("");
-    setPrompt("");
-    setRecipientFilter("all");
-    setSubject("");
-    setPreheader("");
-    setHtml("");
-    setTextFallback("");
-    setAssets([]);
-    setComposerCollapsed(false);
-    // Don't show empty editor scaffolding — user starts in the composer
-    setHasContent(false);
-    // Scroll the composer into view so it's obvious the button worked
-    requestAnimationFrame(() => {
-      document.getElementById("ai-composer-anchor")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
+  const startNew = async () => {
+    // Create a real draft row immediately so it shows up in the list and
+    // the user has something concrete to "Edit". Avoids the confusing
+    // "nothing happened" feeling of just clearing local state.
+    setSaving(true);
+    try {
+      const stamp = new Date().toLocaleString();
+      const data = await api("/admin-campaign-save", {
+        method: "POST",
+        body: {
+          id: null,
+          name: `New draft — ${stamp}`,
+          prompt: null,
+          subject: "Untitled draft",
+          preheader: null,
+          html: "<p>Start by writing your AI prompt below, or edit this HTML directly.</p>",
+          text_fallback: null,
+          recipient_filter: "all",
+        },
+      });
+      const c = data.campaign;
+      setCampaignId(c.id);
+      setName(c.name);
+      setPrompt("");
+      setRecipientFilter("all");
+      setSubject(c.subject);
+      setPreheader("");
+      setHtml(c.html);
+      setTextFallback("");
+      setAssets([]);
+      setHasContent(true);
+      setComposerCollapsed(false);
+      setEditorResetKey((k) => k + 1);
+      await loadList();
+      requestAnimationFrame(() => {
+        document.getElementById("ai-composer-anchor")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    } catch (err: any) {
+      toast.error(err.message ?? "Failed to create draft");
+    } finally {
+      setSaving(false);
+    }
   };
 
   const deleteCampaign = async (id: string, status: string) => {
@@ -336,8 +361,12 @@ export default function ComposeAndSendTab({ token }: Props) {
       <div className="rounded-lg border border-border bg-card shadow-sm">
         <div className="flex items-center justify-between p-4 border-b border-border">
           <h2 className="font-semibold text-base">Previous emails</h2>
-          <Button onClick={startNew} size="sm" variant="outline">
-            <FilePlus className="mr-1.5 h-4 w-4" />
+          <Button onClick={startNew} size="sm" variant="outline" disabled={saving}>
+            {saving && !campaignId ? (
+              <Loader2 className="mr-1.5 h-4 w-4 animate-spin" />
+            ) : (
+              <FilePlus className="mr-1.5 h-4 w-4" />
+            )}
             New Email
           </Button>
         </div>
@@ -394,7 +423,7 @@ export default function ComposeAndSendTab({ token }: Props) {
                     <td className="px-4 py-2.5 text-right">
                       <div className="flex justify-end gap-1">
                         <Button size="sm" variant="ghost" onClick={() => openCampaign(c.id)}>
-                          Open
+                          {c.status === "sent" ? "View" : "Edit"}
                         </Button>
                         {c.status === "draft" && (
                           <Button

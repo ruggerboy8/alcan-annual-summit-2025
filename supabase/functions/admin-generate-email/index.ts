@@ -147,6 +147,7 @@ Deno.serve(async (req) => {
   }
 
   const prompt = String(body?.prompt ?? "").trim();
+  const mode: "broadcast" | "confirmation" = body?.mode === "confirmation" ? "confirmation" : "broadcast";
   const recipientType = body?.recipientType;
   const userAssetUrls: string[] = Array.isArray(body?.assetUrls)
     ? body.assetUrls.filter((u: unknown) => typeof u === "string" && u.length > 0).slice(0, 8)
@@ -157,14 +158,16 @@ Deno.serve(async (req) => {
   const HERO_IMAGE_URL = "https://alcan-annual-meeting-2025.lovable.app/email-hero.png";
 
   if (!prompt) return json({ error: "prompt required" }, 400);
-  if (!["all", "staff", "guests"].includes(recipientType)) {
+  if (mode === "broadcast" && !["all", "staff", "guests"].includes(recipientType)) {
     return json({ error: "recipientType must be all|staff|guests" }, 400);
   }
 
   const apiKey = Deno.env.get("LOVABLE_API_KEY");
   if (!apiKey) return json({ error: "LOVABLE_API_KEY not configured" }, 500);
 
-  const audienceLine = recipientType === "staff"
+  const audienceLine = mode === "confirmation"
+    ? "Audience: a single person who JUST registered for The Alcan Summit 2026. This is the AUTOMATIC welcome / confirmation email they receive immediately after signing up. Tone is warm, congratulatory, and a little hyped — they just committed to the climb. MUST greet them by first name using the {{first_name}} variable, and reference {{event_date}} and {{event_location}} naturally. Do not include broadcast-style 'team' framing — this is one-to-one."
+    : recipientType === "staff"
     ? "Audience: internal Alcan team members (staff). Tone can be familiar, insider-y, energetic — they're part of the cooperative."
     : recipientType === "guests"
     ? "Audience: outside guests (industry partners, vendors, friends of Alcan). Tone is welcoming and slightly more polished; explain context where useful."
