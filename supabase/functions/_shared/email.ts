@@ -114,7 +114,7 @@ export async function sendEmail(params: SendEmailParams): Promise<SendEmailResul
   }
 
   const subject = params.testPrefix ? `[TEST] ${params.subject}` : params.subject;
-  const html = injectPreheader(params.html, params.preheader);
+  const html = injectPreheader(normalizeDoctype(params.html), params.preheader);
   const text = params.text && params.text.trim().length
     ? params.text
     : htmlToText(html);
