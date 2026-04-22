@@ -1,16 +1,16 @@
 export const PRACTICES = [
   "Big Apple",
-  "Lake Orion",
-  "Fenton",
-  "South Austin",
   "Buda",
+  "Fenton",
   "Kyle",
+  "Lake Orion",
   "Manor Kids",
+  "Pflugerville",
+  "South Austin",
+  "Sprout Allen",
   "Sprout Frisco",
   "Sprout McKinney",
-  "Sprout Allen",
   "Steiner Ranch",
-  "Pflugerville",
 ] as const;
 
 export const EVENT_VERSION = "v1-alcan-summit-2026";
