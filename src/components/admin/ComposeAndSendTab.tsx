@@ -138,8 +138,60 @@ export default function ComposeAndSendTab({ token }: Props) {
     setPreheader("");
     setHtml("");
     setTextFallback("");
+    setAssets([]);
     setComposerCollapsed(false);
+    // Don't show empty editor scaffolding — user starts in the composer
     setHasContent(false);
+    // Scroll the composer into view so it's obvious the button worked
+    requestAnimationFrame(() => {
+      document.getElementById("ai-composer-anchor")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
+
+  const deleteCampaign = async (id: string, status: string) => {
+    if (status === "sent") {
+      toast.error("Sent emails can't be deleted — they're a permanent record.");
+      return;
+    }
+    if (!confirm("Delete this draft? This can't be undone.")) return;
+    setDeletingId(id);
+    try {
+      await api("/admin-campaign-delete", { method: "POST", body: { id } });
+      toast.success("Draft deleted.");
+      if (campaignId === id) startNew();
+      loadList();
+    } catch (err: any) {
+      toast.error(err.message ?? "Delete failed");
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
+  const uploadAsset = async (file: File) => {
+    setUploading(true);
+    try {
+      const form = new FormData();
+      form.append("file", file);
+      // useAdminApi expects JSON body; do a manual fetch with token here
+      const url = `${(import.meta as any).env.VITE_SUPABASE_URL}/functions/v1/admin-upload-email-asset`;
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        body: form,
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.error ?? "Upload failed");
+      setAssets((prev) => [...prev, { url: data.url, name: data.name, size: data.size }]);
+      toast.success(`Uploaded ${data.name}`);
+    } catch (err: any) {
+      toast.error(err.message ?? "Upload failed");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const removeAsset = (url: string) => {
+    setAssets((prev) => prev.filter((a) => a.url !== url));
   };
 
   const openCampaign = async (id: string) => {
