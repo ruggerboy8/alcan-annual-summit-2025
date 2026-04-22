@@ -67,54 +67,30 @@ export default function Hero() {
         <motion.div
           initial="hidden" animate="visible"
           variants={prefersReducedMotion ? {} : logoVariants}
-          className="mb-3 flex justify-center sm:mb-5"
+          className="mb-6 flex justify-center sm:mb-8"
         >
           <SummitLogo
-            className="h-[34vh] max-h-[220px] w-auto sm:h-[44vh] sm:max-h-[300px]"
+            className="w-auto"
+            style={{ height: 'clamp(180px, 38vw, 460px)' }}
             variant="white"
           />
         </motion.div>
 
-        {/* Tagline */}
-        <motion.p
-          initial="hidden" animate="visible" custom={0.5}
-          variants={prefersReducedMotion ? {} : uiVariants}
-          className="mb-6 font-biondi text-xs uppercase tracking-[0.45em] text-white/80 sm:text-sm md:text-base"
-        >
-          Earn the View
-        </motion.p>
-
-        {/* BIG 2026 */}
-        <motion.div
+        {/* Tagline — now the headline */}
+        <motion.h1
           initial="hidden" animate="visible" custom={0.7}
           variants={prefersReducedMotion ? {} : uiVariants}
-          className="mb-6 flex flex-col items-center sm:mb-8"
+          className="mb-8 text-center font-biondi font-bold uppercase text-white tracking-[0.25em] sm:tracking-[0.35em] [text-shadow:0_2px_14px_rgba(0,0,0,0.5)]"
+          style={{ fontSize: 'clamp(1.75rem, 6vw, 4.5rem)' }}
         >
-          <div className="mb-2 h-px w-20 bg-gradient-to-r from-transparent via-gold/80 to-transparent" />
-          <div
-            className="font-biondi font-bold leading-none text-white tabular-nums [text-shadow:0_4px_24px_rgba(0,0,0,0.55)]"
-            style={{ fontSize: 'clamp(4.5rem, 14vw, 10rem)', letterSpacing: '0.04em' }}
-            aria-label="2026"
-          >
-            2026
-          </div>
-          <div className="mt-2 h-px w-20 bg-gradient-to-r from-transparent via-gold/80 to-transparent" />
-        </motion.div>
-
-        {/* Headline */}
-        <motion.h1
-          initial="hidden" animate="visible" custom={0.9}
-          variants={prefersReducedMotion ? {} : uiVariants}
-          className="mb-6 text-center font-biondi text-2xl tracking-[0.04em] text-white sm:text-3xl md:text-4xl [text-shadow:0_2px_10px_rgba(0,0,0,0.4)]"
-        >
-          Built for people who never stop climbing.
+          Earn the View
         </motion.h1>
 
         {/* Date badge — gold border */}
         <motion.div
-          initial="hidden" animate="visible" custom={1.2}
+          initial="hidden" animate="visible" custom={1.0}
           variants={prefersReducedMotion ? {} : uiVariants}
-          className="inline-block rounded-sm border border-gold/80 px-6 py-2.5 text-sm font-medium uppercase tracking-[0.28em] text-white backdrop-blur-sm sm:px-10 sm:text-base"
+          className="inline-block rounded-sm border border-gold/80 px-5 py-2.5 text-xs font-medium uppercase tracking-[0.22em] text-white backdrop-blur-sm sm:px-10 sm:text-base sm:tracking-[0.28em]"
           aria-label="Event date: December 11 to 12, 2026, Austin Texas"
         >
           December&nbsp;11&ndash;12,&nbsp;2026 · Austin,&nbsp;TX
