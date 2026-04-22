@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { AlertTriangle, Info, Loader2, Save, Send, Sparkles, Wand2, FilePlus, RefreshCw } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { AlertTriangle, ImagePlus, Info, Loader2, Save, Send, Sparkles, Trash2, Wand2, FilePlus, RefreshCw, X } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
