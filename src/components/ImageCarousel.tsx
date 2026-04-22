@@ -29,7 +29,7 @@ const ImageCarousel = () => {
             src={image}
             alt={`Alcan team photo ${index + 1}`}
             loading="lazy"
-            className={`absolute inset-0 h-full w-full rounded-lg object-cover object-top transition-opacity duration-500 ease-in-out ${
+            className={`absolute inset-0 h-full w-full rounded-lg object-cover transition-opacity duration-500 ease-in-out ${image === bigapple ? 'object-center' : 'object-top'} ${
               index === currentImage ? 'opacity-100' : 'opacity-0'
             }`}
           />
