@@ -70,11 +70,11 @@ const Travel = () => {
               </div>
               <div
                 className="text-center text-lg leading-relaxed text-white md:text-left"
-                style={{ textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}
+                style={{ textShadow: '0 2px 6px rgba(0,0,0,0.55)' }}
               >
-                <p className="text-xl font-semibold">Texas Old Town</p>
-                <p>1205 Roland Ln</p>
-                <p>Kyle, TX 78640</p>
+                <p className="text-xl font-semibold text-white">Texas Old Town</p>
+                <p className="text-white">1205 Roland Ln</p>
+                <p className="text-white">Kyle, TX 78640</p>
               </div>
 
               <div className="mb-4 mt-8 flex items-center justify-center gap-3 md:justify-start">
@@ -85,10 +85,10 @@ const Travel = () => {
               </div>
               <div
                 className="space-y-1 text-center text-lg leading-relaxed text-white md:text-left"
-                style={{ textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}
+                style={{ textShadow: '0 2px 6px rgba(0,0,0,0.55)' }}
               >
-                <p><strong>From Austin-Bergstrom Airport:</strong> 25 min by car</p>
-                <p><strong>From Downtown Austin:</strong> 30 min by car</p>
+                <p className="text-white"><strong className="text-white">From Austin-Bergstrom Airport:</strong> 25 min by car</p>
+                <p className="text-white"><strong className="text-white">From Downtown Austin:</strong> 30 min by car</p>
               </div>
             </motion.div>
 
@@ -118,7 +118,7 @@ const Travel = () => {
               Where to Stay
             </p>
             <h3 className="mb-4 font-biondi text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-              Staying in Buda!
+              Fairfield Inn &amp; Suites
             </h3>
             <div className="mx-auto mb-6 h-px w-16 bg-gold/60" />
 

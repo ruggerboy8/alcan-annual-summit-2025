@@ -21,18 +21,37 @@ const ImageCarousel = () => {
   }, [images.length]);
 
   return (
-    <div className="relative w-full h-80 rounded-lg overflow-hidden">
-      {images.map((image, index) => (
-        <img
-          key={index}
-          src={image}
-          alt={`Alcan team photo ${index + 1}`}
-          loading="lazy"
-          className={`absolute inset-0 w-full h-full object-cover object-top rounded-lg transition-opacity duration-400 ease-in-out ${
-            index === currentImage ? 'opacity-100' : 'opacity-0'
-          }`}
-        />
-      ))}
+    <div className="relative w-full">
+      <div className="relative h-80 w-full overflow-hidden rounded-lg">
+        {images.map((image, index) => (
+          <img
+            key={index}
+            src={image}
+            alt={`Alcan team photo ${index + 1}`}
+            loading="lazy"
+            className={`absolute inset-0 h-full w-full rounded-lg object-cover object-top transition-opacity duration-500 ease-in-out ${
+              index === currentImage ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        ))}
+      </div>
+
+      {/* Dot indicators */}
+      <div className="mt-4 flex justify-center gap-2">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            type="button"
+            aria-label={`Go to slide ${index + 1}`}
+            onClick={() => setCurrentImage(index)}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              index === currentImage
+                ? 'w-6 bg-primary'
+                : 'w-2 bg-primary/30 hover:bg-primary/50'
+            }`}
+          />
+        ))}
+      </div>
     </div>
   );
 };

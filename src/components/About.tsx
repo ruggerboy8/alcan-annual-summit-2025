@@ -20,77 +20,83 @@ const bullets = [
 const About = () => {
   const prefersReducedMotion = useReducedMotion();
 
-  const fade = (delay = 0) =>
-    prefersReducedMotion
-      ? {}
-      : {
-          initial: { opacity: 0, y: 20 },
-          whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true, amount: 0.2 },
-          transition: { duration: 0.6, delay, ease: 'easeOut' as const },
-        };
+  const headingFade = prefersReducedMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 12 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, amount: 0.2 },
+        transition: { duration: 0.5, ease: 'easeOut' as const },
+      };
+
+  const bodyFade = prefersReducedMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 12 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, amount: 0.2 },
+        transition: { duration: 0.5, delay: 0.07, ease: 'easeOut' as const },
+      };
+
+  const carouselFade = prefersReducedMotion
+    ? {}
+    : {
+        initial: { opacity: 0, x: 24 },
+        whileInView: { opacity: 1, x: 0 },
+        viewport: { once: true, amount: 0.2 },
+        transition: { duration: 0.6, ease: 'easeOut' as const },
+      };
 
   return (
-    <section id="about" className="border-t border-gray-100 bg-gray-50 py-14 lg:py-20">
+    <section id="about" className="border-t border-gray-100 bg-gray-50 py-12 lg:py-16">
       <div className="container">
         <div className="mx-auto max-w-6xl">
           <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
             {/* Copy block */}
             <div className="order-2 max-w-[680px] md:order-1">
               <motion.h2
-                {...fade(0)}
+                {...headingFade}
                 className="mb-6 font-biondi text-3xl font-bold leading-tight text-primary sm:text-4xl md:text-5xl"
               >
                 A Different Kind of Gathering.
               </motion.h2>
 
-              <motion.p
-                {...fade(0.1)}
-                className="mb-5 text-lg leading-relaxed text-text sm:text-xl"
-              >
-                The Summit is the annual gathering for every member of the Alcan network &mdash; doctors, coordinators, managers, and front-desk teams alike. Not a CE requirement. Not a sales floor. A two-day climb designed for the people who show up every day to do something nobody&rsquo;s done before.
-              </motion.p>
+              <motion.div {...bodyFade}>
+                <p className="mb-5 text-lg leading-relaxed text-text sm:text-xl">
+                  The Summit is the annual gathering for every member of the Alcan network &mdash; doctors, coordinators, managers, and front-desk teams alike. Not a CE requirement. Not a sales floor. A two-day climb designed for the people who show up every day to do something nobody&rsquo;s done before.
+                </p>
 
-              <motion.p {...fade(0.2)} className="mb-5 text-lg leading-relaxed text-text sm:text-xl">
-                What you can expect:
-              </motion.p>
+                <p className="mb-5 text-lg leading-relaxed text-text sm:text-xl">
+                  What you can expect:
+                </p>
 
-              <ul className="mb-8 list-none space-y-4 text-lg leading-relaxed text-text sm:text-xl">
-                {bullets.map((b, i) => (
-                  <motion.li key={b.title} {...fade(0.3 + i * 0.1)} className="flex">
-                    <span className="mr-3 font-bold text-gold">•</span>
-                    <span>
-                      <strong>{b.title}</strong> &mdash; {b.body}
-                    </span>
-                  </motion.li>
-                ))}
-              </ul>
+                <ul className="mb-8 list-none space-y-4 text-lg leading-relaxed text-text sm:text-xl">
+                  {bullets.map((b) => (
+                    <li key={b.title} className="flex">
+                      <span className="mr-3 font-bold text-gold">•</span>
+                      <span>
+                        <strong>{b.title}</strong> &mdash; {b.body}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
 
-              <motion.p
-                {...fade(0.6)}
-                className="mb-10 text-lg leading-relaxed text-text sm:text-xl"
-              >
-                You&rsquo;ll leave with new tools, real relationships, and a clearer sense of where you fit in something much bigger than any one practice.
-              </motion.p>
+                <p className="mb-10 text-lg leading-relaxed text-text sm:text-xl">
+                  You&rsquo;ll leave with new tools, real relationships, and a clearer sense of where you fit in something much bigger than any one practice.
+                </p>
 
-              <motion.div {...fade(0.7)} className="flex">
-                <RegistrationModal
-                  buttonText="Reserve Your Spot"
-                  buttonClassName="bg-primary hover:bg-primary/90 text-white px-8 sm:px-12 py-4 text-lg sm:text-xl rounded-lg shadow-lg transition-transform duration-300 hover:scale-105 font-biondi font-bold"
-                />
+                <div className="flex">
+                  <RegistrationModal
+                    buttonText="Reserve Your Spot"
+                    buttonClassName="bg-primary hover:bg-primary/90 text-white px-8 sm:px-12 py-4 text-lg sm:text-xl rounded-lg shadow-lg transition-transform duration-300 hover:scale-105 font-biondi font-bold"
+                  />
+                </div>
               </motion.div>
             </div>
 
             {/* Carousel */}
             <motion.div
-              {...(prefersReducedMotion
-                ? {}
-                : {
-                    initial: { opacity: 0, x: 30 },
-                    whileInView: { opacity: 1, x: 0 },
-                    viewport: { once: true, amount: 0.2 },
-                    transition: { duration: 0.7, ease: 'easeOut' },
-                  })}
+              {...carouselFade}
               className="order-1 flex justify-center md:order-2 md:justify-end"
             >
               <div className="w-full max-w-sm sm:max-w-md md:w-[80%] md:max-w-none">

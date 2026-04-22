@@ -19,6 +19,7 @@ const Navigation = () => {
     { label: 'Speakers', id: 'speakers' },
     { label: 'Agenda', id: 'agenda' },
     { label: 'Travel', id: 'travel' },
+    { label: 'Register', id: 'register' },
   ];
 
   const scrollTo = (id: string) => {
