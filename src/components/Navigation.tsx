@@ -55,7 +55,8 @@ const Navigation = () => {
             <button
               key={l.id}
               onClick={() => scrollTo(l.id)}
-              className="group relative font-biondi !text-white/90 hover:!text-white transition-colors text-sm uppercase tracking-[0.18em] [text-shadow:0_1px_8px_rgba(0,0,0,0.45)]"
+              style={{ color: '#ffffff', textShadow: '0 1px 8px rgba(0,0,0,0.45)' }}
+              className="group relative font-biondi hover:opacity-80 transition-opacity text-sm uppercase tracking-[0.18em]"
             >
               {l.label}
               <span className="pointer-events-none absolute -bottom-1.5 left-1/2 h-px w-0 -translate-x-1/2 bg-accent transition-all duration-300 group-hover:w-full" />
@@ -80,7 +81,8 @@ const Navigation = () => {
             <button
               key={l.id}
               onClick={() => scrollTo(l.id)}
-              className="block w-full text-left px-6 py-4 font-biondi text-white/90 uppercase tracking-[0.18em] text-sm hover:bg-white/10 transition-colors"
+              style={{ color: '#ffffff' }}
+              className="block w-full text-left px-6 py-4 font-biondi uppercase tracking-[0.18em] text-sm hover:bg-white/10 transition-colors"
             >
               {l.label}
             </button>
