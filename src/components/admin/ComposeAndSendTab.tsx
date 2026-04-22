@@ -392,9 +392,27 @@ export default function ComposeAndSendTab({ token }: Props) {
                       </Badge>
                     </td>
                     <td className="px-4 py-2.5 text-right">
-                      <Button size="sm" variant="ghost" onClick={() => openCampaign(c.id)}>
-                        Open
-                      </Button>
+                      <div className="flex justify-end gap-1">
+                        <Button size="sm" variant="ghost" onClick={() => openCampaign(c.id)}>
+                          Open
+                        </Button>
+                        {c.status === "draft" && (
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => deleteCampaign(c.id, c.status)}
+                            disabled={deletingId === c.id}
+                            className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                            aria-label="Delete draft"
+                          >
+                            {deletingId === c.id ? (
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                            ) : (
+                              <Trash2 className="h-4 w-4" />
+                            )}
+                          </Button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}
