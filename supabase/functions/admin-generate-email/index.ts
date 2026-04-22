@@ -261,10 +261,23 @@ Deno.serve(async (req) => {
     return json({ error: "AI response missing subject or html", raw: parsed }, 502);
   }
 
+  // Sanitize: the AI occasionally drops the leading '<' on the doctype,
+  // producing output that starts with `!DOCTYPE ...` which renders as plain
+  // text in email clients (the doctype string shows up where the hero image
+  // should be). Repair it before returning.
+  let cleanHtml = parsed.html.trimStart();
+  if (cleanHtml.startsWith("!DOCTYPE") || cleanHtml.startsWith("!doctype")) {
+    cleanHtml = "<" + cleanHtml;
+  }
+  // Also guard against a stripped leading '<html' or '<body' (rare but cheap).
+  if (cleanHtml.startsWith("html ") || cleanHtml.startsWith("html>")) {
+    cleanHtml = "<" + cleanHtml;
+  }
+
   return json({
     subject: parsed.subject,
     preheader: parsed.preheader ?? "",
-    html: parsed.html,
+    html: cleanHtml,
     text_fallback: parsed.text_fallback ?? "",
   });
 });
