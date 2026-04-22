@@ -14,7 +14,149 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      email_sends: {
+        Row: {
+          created_at: string
+          error_message: string | null
+          id: string
+          recipient_email: string
+          recipient_name: string
+          registration_id: string | null
+          resend_message_id: string | null
+          send_type: string
+          sent_by: string | null
+          status: string
+          template_key: string
+          template_version: number
+        }
+        Insert: {
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          recipient_email: string
+          recipient_name: string
+          registration_id?: string | null
+          resend_message_id?: string | null
+          send_type: string
+          sent_by?: string | null
+          status: string
+          template_key: string
+          template_version: number
+        }
+        Update: {
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          recipient_email?: string
+          recipient_name?: string
+          registration_id?: string | null
+          resend_message_id?: string | null
+          send_type?: string
+          sent_by?: string | null
+          status?: string
+          template_key?: string
+          template_version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "email_sends_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: false
+            referencedRelation: "event_registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      email_templates: {
+        Row: {
+          created_at: string
+          html: string
+          is_published: boolean
+          subject: string
+          template_key: string
+          text_fallback: string | null
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          created_at?: string
+          html: string
+          is_published?: boolean
+          subject: string
+          template_key: string
+          text_fallback?: string | null
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          created_at?: string
+          html?: string
+          is_published?: boolean
+          subject?: string
+          template_key?: string
+          text_fallback?: string | null
+          updated_at?: string
+          version?: number
+        }
+        Relationships: []
+      }
+      event_registrations: {
+        Row: {
+          attendee_type: string
+          checked_in_at: string | null
+          checked_in_by: string | null
+          confirmation_email_id: string | null
+          confirmation_email_sent_at: string | null
+          created_at: string
+          email: string
+          event_version: string
+          first_name: string
+          id: string
+          last_name: string
+          organization: string | null
+          phone: string | null
+          practice: string | null
+          registration_status: string
+          role: string | null
+        }
+        Insert: {
+          attendee_type: string
+          checked_in_at?: string | null
+          checked_in_by?: string | null
+          confirmation_email_id?: string | null
+          confirmation_email_sent_at?: string | null
+          created_at?: string
+          email: string
+          event_version?: string
+          first_name: string
+          id?: string
+          last_name: string
+          organization?: string | null
+          phone?: string | null
+          practice?: string | null
+          registration_status?: string
+          role?: string | null
+        }
+        Update: {
+          attendee_type?: string
+          checked_in_at?: string | null
+          checked_in_by?: string | null
+          confirmation_email_id?: string | null
+          confirmation_email_sent_at?: string | null
+          created_at?: string
+          email?: string
+          event_version?: string
+          first_name?: string
+          id?: string
+          last_name?: string
+          organization?: string | null
+          phone?: string | null
+          practice?: string | null
+          registration_status?: string
+          role?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
