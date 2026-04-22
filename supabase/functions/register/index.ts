@@ -140,7 +140,9 @@ Deno.serve(async (req) => {
 
   if (attendeeType === "staff") {
     practice = String(body.practice ?? "").trim();
+    role = String(body.role ?? "").trim();
     if (!practice) return json({ error: "Practice is required" }, 400);
+    if (!role) return json({ error: "Role is required" }, 400);
   } else {
     organization = String(body.organization ?? "").trim();
     role = String(body.role ?? "").trim();

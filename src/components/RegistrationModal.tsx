@@ -24,6 +24,7 @@ import {
 import { cn } from "@/lib/utils";
 import {
   PRACTICES,
+  STAFF_ROLES,
   SUPABASE_ANON_KEY,
   SUPABASE_FUNCTIONS_URL,
 } from "@/lib/event-constants";
@@ -52,6 +53,12 @@ const staffSchema = z.object({
     .refine((v) => (PRACTICES as readonly string[]).includes(v), {
       message: "Please choose your practice",
     }),
+  role: z
+    .string()
+    .min(1, "Please choose your role")
+    .refine((v) => (STAFF_ROLES as readonly string[]).includes(v), {
+      message: "Please choose your role",
+    }),
 });
 
 const guestSchema = z.object({
@@ -70,6 +77,7 @@ const defaultStaffValues: StaffValues = {
   email: "",
   phone: "",
   practice: "",
+  role: "",
   honeypot: "",
 };
 
@@ -156,6 +164,7 @@ export default function RegistrationModal({
 
     if (attendeeType === "staff") {
       payload.practice = (v as StaffValues).practice;
+      payload.role = (v as StaffValues).role;
     } else {
       payload.organization = (v as GuestValues).organization;
       payload.role = (v as GuestValues).role;
@@ -207,6 +216,7 @@ export default function RegistrationModal({
     ];
     if (attendeeType === "staff") {
       rows.push({ label: "Practice", value: (values as StaffValues).practice ?? "" });
+      rows.push({ label: "Role", value: (values as StaffValues).role ?? "" });
     } else {
       rows.push({ label: "Organization", value: (values as GuestValues).organization ?? "" });
       rows.push({ label: "Role", value: (values as GuestValues).role ?? "" });
@@ -322,31 +332,55 @@ export default function RegistrationModal({
               </FieldWrap>
 
               {attendeeType === "staff" ? (
-                <FieldWrap
-                  label="Your Practice"
-                  error={(form.formState.errors as any).practice?.message}
-                >
-                  <Select
-                    value={(values as StaffValues).practice || ""}
-                    onValueChange={(v) =>
-                      form.setValue("practice" as any, v, { shouldValidate: true })
-                    }
+                <>
+                  <FieldWrap
+                    label="Your Practice"
+                    error={(form.formState.errors as any).practice?.message}
                   >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select your practice" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {PRACTICES.map((p) => (
-                        <SelectItem key={p} value={p}>
-                          {p}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <p className="mt-1.5 text-sm text-muted-foreground">
-                    If you work at multiple locations, choose the one you're at the most.
-                  </p>
-                </FieldWrap>
+                    <Select
+                      value={(values as StaffValues).practice || ""}
+                      onValueChange={(v) =>
+                        form.setValue("practice" as any, v, { shouldValidate: true })
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your practice" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {PRACTICES.map((p) => (
+                          <SelectItem key={p} value={p}>
+                            {p}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <p className="mt-1.5 text-sm text-muted-foreground">
+                      If you work at multiple locations, choose the one you're at the most.
+                    </p>
+                  </FieldWrap>
+                  <FieldWrap
+                    label="Your Role"
+                    error={(form.formState.errors as any).role?.message}
+                  >
+                    <Select
+                      value={(values as StaffValues).role || ""}
+                      onValueChange={(v) =>
+                        form.setValue("role" as any, v, { shouldValidate: true })
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your role" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {STAFF_ROLES.map((r) => (
+                          <SelectItem key={r} value={r}>
+                            {r}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FieldWrap>
+                </>
               ) : (
                 <>
                   <FieldWrap
