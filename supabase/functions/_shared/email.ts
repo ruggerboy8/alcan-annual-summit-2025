@@ -63,6 +63,27 @@ export function injectPreheader(html: string, preheader: string | null | undefin
   return div + html;
 }
 
+/**
+ * Repair a mangled doctype at the top of an email HTML body. The AI generator
+ * sometimes drops the leading `<!` (or even `<`), causing the doctype string
+ * to render as visible text in email clients. Strip whatever doctype variant
+ * is present and prepend a clean XHTML 1.0 Transitional doctype.
+ */
+export function normalizeDoctype(html: string): string {
+  let out = html.trimStart();
+  const doctypeRe = /^<?!?doctype\b[^>]*>?/i;
+  if (doctypeRe.test(out)) {
+    out = out.replace(doctypeRe, "").trimStart();
+  }
+  if (out.startsWith("html ") || out.startsWith("html>")) {
+    out = "<" + out;
+  }
+  return (
+    '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n' +
+    out
+  );
+}
+
 export interface SendEmailParams {
   to: string;
   subject: string;
