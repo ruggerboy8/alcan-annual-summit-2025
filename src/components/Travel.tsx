@@ -56,13 +56,17 @@ const Travel = () => {
                 </h3>
                 <div className="text-lg text-white leading-relaxed" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}>
                   <p className="font-semibold">Fairfield Inn & Suites Austin Buda</p>
-                  <p className="mt-2 mb-6">We have arranged a special rate for event guests, about 15 minutes from the venue.</p>
-                  <Button 
-                    onClick={() => window.open('https://www.marriott.com/event-reservations/reservation-link.mi?id=1761234683152&key=GRP&app=resvlink&dtt=true&_branch_match_id=1502013738935472207&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXTywo0MtNLCrKzC8p0UvOz9UvSi3OyczLtgdK2ALZZSCOWkpJiW1JUWmqWmaKraG5maGRsYmZhbGhqZFadmqlrXtQgFpdUWpaKtCYvPT4pKL88uLUIlvnjKL83FQAYuUMv2kAAAA%3D', '_blank')}
-                    className="bg-white text-primary hover:bg-white/90 px-8 py-4 text-lg rounded-lg transition-all duration-300 hover:scale-105 shadow-lg font-biondi font-bold"
-                  >
-                    Book Hotel Room
-                  </Button>
+                  <p className="mt-2">
+                    Call the hotel directly and <strong>mention Alcan</strong> to receive your discounted group rate.
+                  </p>
+                  <p className="mt-4">
+                    <a href="tel:+10000000000" className="underline decoration-white/50 underline-offset-4 hover:decoration-white">
+                      Phone number coming soon
+                    </a>
+                  </p>
+                  <p className="mt-1 text-base text-white/80">
+                    Hotel website coming soon
+                  </p>
                 </div>
               </div>
             </div>
