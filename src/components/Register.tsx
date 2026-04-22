@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import RegisterModal from '@/components/RegisterModal';
+import RegistrationModal from '@/components/RegistrationModal';
 
 const Register = () => {
   const prefersReducedMotion = useReducedMotion();
@@ -32,7 +32,7 @@ const Register = () => {
           </motion.p>
 
           <motion.div {...fade(0.2)}>
-            <RegisterModal
+            <RegistrationModal
               buttonText="Register Now"
               buttonClassName="bg-gold hover:bg-white text-primary px-12 sm:px-16 py-6 text-xl sm:text-2xl rounded-lg transition-all duration-300 hover:scale-105 shadow-xl font-biondi font-bold min-w-[280px] sm:min-w-[320px]"
             />

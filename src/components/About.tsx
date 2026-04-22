@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import ImageCarousel from './ImageCarousel';
-import RegisterModal from './RegisterModal';
+import RegistrationModal from './RegistrationModal';
 
 const bullets = [
   {
@@ -74,7 +74,7 @@ const About = () => {
               </motion.p>
 
               <motion.div {...fade(0.7)} className="flex">
-                <RegisterModal
+                <RegistrationModal
                   buttonText="Reserve Your Spot"
                   buttonClassName="bg-primary hover:bg-primary/90 text-white px-8 sm:px-12 py-4 text-lg sm:text-xl rounded-lg shadow-lg transition-transform duration-300 hover:scale-105 font-biondi font-bold"
                 />
