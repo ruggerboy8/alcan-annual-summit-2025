@@ -423,7 +423,7 @@ export default function ComposeAndSendTab({ token }: Props) {
       </div>
 
       {/* AI Composer */}
-      <div className="rounded-lg border border-border bg-card shadow-sm p-5 space-y-4">
+      <div id="ai-composer-anchor" className="rounded-lg border border-border bg-card shadow-sm p-5 space-y-4 scroll-mt-4">
         <div className="flex items-center justify-between">
           <h2 className="flex items-center gap-2 font-semibold text-base">
             <Sparkles className="h-4 w-4 text-primary" />
