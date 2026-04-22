@@ -38,3 +38,9 @@ verify_jwt = false
 
 [functions.admin-campaign-save]
 verify_jwt = false
+
+[functions.admin-campaign-delete]
+verify_jwt = false
+
+[functions.admin-upload-email-asset]
+verify_jwt = false

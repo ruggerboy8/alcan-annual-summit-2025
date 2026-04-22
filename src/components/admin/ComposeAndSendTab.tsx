@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { AlertTriangle, Info, Loader2, Save, Send, Sparkles, Wand2, FilePlus, RefreshCw } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { AlertTriangle, ImagePlus, Info, Loader2, Save, Send, Sparkles, Trash2, Wand2, FilePlus, RefreshCw, X } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -82,8 +82,15 @@ export default function ComposeAndSendTab({ token }: Props) {
   const [editorResetKey, setEditorResetKey] = useState(0);
   const [hasContent, setHasContent] = useState(false);
 
+  // Uploaded image assets (URLs are passed to the AI and recipients fetch them via public bucket)
+  interface Asset { url: string; name: string; size: number; }
+  const [assets, setAssets] = useState<Asset[]>([]);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const [generating, setGenerating] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const [sendModalOpen, setSendModalOpen] = useState(false);
   const [sending, setSending] = useState(false);
   const [dryRun, setDryRun] = useState<{ count: number; preview: { name: string; email: string }[] } | null>(null);
@@ -131,8 +138,60 @@ export default function ComposeAndSendTab({ token }: Props) {
     setPreheader("");
     setHtml("");
     setTextFallback("");
+    setAssets([]);
     setComposerCollapsed(false);
+    // Don't show empty editor scaffolding — user starts in the composer
     setHasContent(false);
+    // Scroll the composer into view so it's obvious the button worked
+    requestAnimationFrame(() => {
+      document.getElementById("ai-composer-anchor")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
+
+  const deleteCampaign = async (id: string, status: string) => {
+    if (status === "sent") {
+      toast.error("Sent emails can't be deleted — they're a permanent record.");
+      return;
+    }
+    if (!confirm("Delete this draft? This can't be undone.")) return;
+    setDeletingId(id);
+    try {
+      await api("/admin-campaign-delete", { method: "POST", body: { id } });
+      toast.success("Draft deleted.");
+      if (campaignId === id) startNew();
+      loadList();
+    } catch (err: any) {
+      toast.error(err.message ?? "Delete failed");
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
+  const uploadAsset = async (file: File) => {
+    setUploading(true);
+    try {
+      const form = new FormData();
+      form.append("file", file);
+      // useAdminApi expects JSON body; do a manual fetch with token here
+      const url = `${(import.meta as any).env.VITE_SUPABASE_URL}/functions/v1/admin-upload-email-asset`;
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        body: form,
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.error ?? "Upload failed");
+      setAssets((prev) => [...prev, { url: data.url, name: data.name, size: data.size }]);
+      toast.success(`Uploaded ${data.name}`);
+    } catch (err: any) {
+      toast.error(err.message ?? "Upload failed");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const removeAsset = (url: string) => {
+    setAssets((prev) => prev.filter((a) => a.url !== url));
   };
 
   const openCampaign = async (id: string) => {
@@ -166,7 +225,11 @@ export default function ComposeAndSendTab({ token }: Props) {
     try {
       const data = await api("/admin-generate-email", {
         method: "POST",
-        body: { prompt, recipientType: recipientFilter },
+        body: {
+          prompt,
+          recipientType: recipientFilter,
+          assetUrls: assets.map((a) => a.url),
+        },
       });
       setSubject(data.subject ?? "");
       setPreheader(data.preheader ?? "");
@@ -329,9 +392,27 @@ export default function ComposeAndSendTab({ token }: Props) {
                       </Badge>
                     </td>
                     <td className="px-4 py-2.5 text-right">
-                      <Button size="sm" variant="ghost" onClick={() => openCampaign(c.id)}>
-                        Open
-                      </Button>
+                      <div className="flex justify-end gap-1">
+                        <Button size="sm" variant="ghost" onClick={() => openCampaign(c.id)}>
+                          Open
+                        </Button>
+                        {c.status === "draft" && (
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => deleteCampaign(c.id, c.status)}
+                            disabled={deletingId === c.id}
+                            className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                            aria-label="Delete draft"
+                          >
+                            {deletingId === c.id ? (
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                            ) : (
+                              <Trash2 className="h-4 w-4" />
+                            )}
+                          </Button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -342,7 +423,7 @@ export default function ComposeAndSendTab({ token }: Props) {
       </div>
 
       {/* AI Composer */}
-      <div className="rounded-lg border border-border bg-card shadow-sm p-5 space-y-4">
+      <div id="ai-composer-anchor" className="rounded-lg border border-border bg-card shadow-sm p-5 space-y-4 scroll-mt-4">
         <div className="flex items-center justify-between">
           <h2 className="flex items-center gap-2 font-semibold text-base">
             <Sparkles className="h-4 w-4 text-primary" />
@@ -373,6 +454,66 @@ export default function ComposeAndSendTab({ token }: Props) {
                 rows={5}
                 placeholder="e.g. Remind everyone the event is 3 weeks away, remind them to book their hotel room soon, and get them excited about what's coming."
               />
+            </div>
+
+            {/* Image uploads — AI will embed these into the email */}
+            <div className="rounded-md border border-dashed border-border bg-muted/20 p-3 space-y-3">
+              <div className="flex items-center justify-between gap-3 flex-wrap">
+                <div>
+                  <Label className="text-sm font-medium">Images for this email</Label>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    Upload PNG/JPG photos or graphics. The AI will place them in the email (first image is usually the hero banner).
+                  </p>
+                </div>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp,image/gif"
+                  className="hidden"
+                  onChange={(e) => {
+                    const f = e.target.files?.[0];
+                    if (f) uploadAsset(f);
+                    if (fileInputRef.current) fileInputRef.current.value = "";
+                  }}
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploading}
+                >
+                  {uploading ? (
+                    <Loader2 className="mr-1.5 h-4 w-4 animate-spin" />
+                  ) : (
+                    <ImagePlus className="mr-1.5 h-4 w-4" />
+                  )}
+                  Upload image
+                </Button>
+              </div>
+              {assets.length > 0 && (
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {assets.map((a, i) => (
+                    <div key={a.url} className="relative group rounded-md overflow-hidden border border-border bg-background">
+                      <img src={a.url} alt={a.name} className="w-full h-24 object-cover" />
+                      <div className="absolute top-1 left-1 bg-background/90 text-[10px] font-medium px-1.5 py-0.5 rounded">
+                        {i === 0 ? "Hero" : `#${i + 1}`}
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => removeAsset(a.url)}
+                        className="absolute top-1 right-1 bg-background/90 hover:bg-destructive hover:text-destructive-foreground rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition"
+                        aria-label={`Remove ${a.name}`}
+                      >
+                        <X className="h-3.5 w-3.5" />
+                      </button>
+                      <div className="px-1.5 py-1 text-[10px] truncate text-muted-foreground" title={a.name}>
+                        {a.name}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:items-end">
