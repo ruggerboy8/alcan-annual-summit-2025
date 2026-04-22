@@ -81,7 +81,8 @@ const Navigation = () => {
             <button
               key={l.id}
               onClick={() => scrollTo(l.id)}
-              className="block w-full text-left px-6 py-4 font-biondi text-white/90 uppercase tracking-[0.18em] text-sm hover:bg-white/10 transition-colors"
+              style={{ color: '#ffffff' }}
+              className="block w-full text-left px-6 py-4 font-biondi uppercase tracking-[0.18em] text-sm hover:bg-white/10 transition-colors"
             >
               {l.label}
             </button>
