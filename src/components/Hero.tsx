@@ -3,7 +3,6 @@
 /*  Hero                                                                     */
 /* -------------------------------------------------------------------------- */
 import { motion, useReducedMotion } from 'framer-motion';
-import RegisterModal           from '@/components/RegisterModal';
 import SummitLogo              from '@/components/SummitLogo';
 
 const bgPoster = '/lovable-uploads/246de050-106d-48c5-b1b9-e68886c9e482.png';
@@ -91,12 +90,31 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
           variants={prefersReducedMotion ? {} : logoVariants}
-          className="mb-6 flex justify-center sm:mb-8"
+          className="mb-4 flex justify-center sm:mb-6"
         >
           <SummitLogo
-            className="h-[45vh] max-h-[280px] w-auto sm:h-[55vh] sm:max-h-[360px]"
+            className="h-[38vh] max-h-[240px] w-auto sm:h-[48vh] sm:max-h-[320px]"
             variant="white"
           />
+        </motion.div>
+
+        {/* BIG 2026 announcement */}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          custom={0.7}
+          variants={prefersReducedMotion ? {} : uiVariants}
+          className="mb-6 flex flex-col items-center sm:mb-8"
+        >
+          <div className="mb-2 h-px w-20 bg-gradient-to-r from-transparent via-white/70 to-transparent" />
+          <div
+            className="font-biondi font-bold leading-none text-white tabular-nums [text-shadow:0_4px_24px_rgba(0,0,0,0.55)]"
+            style={{ fontSize: 'clamp(4.5rem, 14vw, 10rem)', letterSpacing: '0.04em' }}
+            aria-label="2026"
+          >
+            2026
+          </div>
+          <div className="mt-2 h-px w-20 bg-gradient-to-r from-transparent via-white/70 to-transparent" />
         </motion.div>
 
         {/* headline */}
@@ -105,7 +123,7 @@ export default function Hero() {
           animate="visible"
           custom={0.9}
           variants={prefersReducedMotion ? {} : uiVariants}
-          className="mb-6 text-center font-biondi text-3xl tracking-wide text-white sm:text-4xl md:text-5xl [text-shadow:0_2px_12px_rgba(0,0,0,0.45)]"
+          className="mb-6 text-center font-biondi text-2xl tracking-[0.04em] text-white sm:text-3xl md:text-4xl [text-shadow:0_2px_10px_rgba(0,0,0,0.4)]"
         >
           Let&rsquo;s&nbsp;climb&nbsp;together
         </motion.h1>
@@ -116,20 +134,10 @@ export default function Hero() {
           animate="visible"
           custom={1.2}
           variants={prefersReducedMotion ? {} : uiVariants}
-          className="mb-10 inline-block rounded border border-white/80 bg-black/30 px-6 py-2.5 text-base font-medium uppercase tracking-[0.2em] text-white backdrop-blur-sm shadow-[inset_0_0_20px_rgba(255,255,255,0.08)] sm:px-10 sm:text-lg"
-          aria-label="Event date: December 2026, dates coming soon"
+          className="inline-block rounded-sm border border-white/70 bg-white/5 px-6 py-2.5 text-sm font-medium uppercase tracking-[0.28em] text-white backdrop-blur-md shadow-[inset_0_0_30px_rgba(255,255,255,0.06)] sm:px-10 sm:text-base"
+          aria-label="Event date: December 11 to 12, 2026, Austin Texas"
         >
-          December&nbsp;2026 — Dates&nbsp;Coming&nbsp;Soon
-        </motion.div>
-
-        {/* CTA button */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          custom={1.5}
-          variants={prefersReducedMotion ? {} : uiVariants}
-        >
-          <RegisterModal />
+          December&nbsp;11&ndash;12,&nbsp;2026 · Austin,&nbsp;TX
         </motion.div>
       </div>
     </section>

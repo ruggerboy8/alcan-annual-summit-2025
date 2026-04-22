@@ -19,9 +19,9 @@ import SpeakerFlipCard from '@/components/SpeakerFlipCard';
 //   { name: 'Ryan Jones', title: 'Financial Advisor, Raymond James', image: '/lovable-uploads/829ddd51-7341-483a-bf9d-ce0f13e489e8.png', bio: '...' },
 // ];
 
-// Drop hype video at this path: /public/lovable-uploads/SummitHypeVideo2025.mp4
-const HYPE_VIDEO_SRC = '/lovable-uploads/SummitHypeVideo2025.mp4';
-const HYPE_VIDEO_POSTER = '/lovable-uploads/246de050-106d-48c5-b1b9-e68886c9e482.png';
+// Vimeo hype reel from The Summit 2025
+const HYPE_VIDEO_VIMEO_SRC =
+  'https://player.vimeo.com/video/1154545041?h=abccca39e0&title=0&byline=0&portrait=0';
 
 // Keep import referenced for future restoration without TS unused warning.
 void SpeakerFlipCard;
@@ -43,17 +43,16 @@ export default function Speakers() {
         {/* Hype video frame */}
         <div className="mx-auto max-w-5xl">
           <div className="relative rounded-2xl bg-gradient-to-br from-primary/20 via-accent/20 to-primary/20 p-1 shadow-2xl">
-            <div className="overflow-hidden rounded-[14px] bg-black">
-              <video
-                className="h-auto w-full"
-                controls
-                playsInline
-                preload="metadata"
-                poster={HYPE_VIDEO_POSTER}
-              >
-                <source src={HYPE_VIDEO_SRC} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+            <div className="relative overflow-hidden rounded-[14px] bg-black" style={{ paddingTop: '56.25%' }}>
+              <iframe
+                title="The Summit 2025 — Hype Reel"
+                src={HYPE_VIDEO_VIMEO_SRC}
+                className="absolute inset-0 h-full w-full"
+                frameBorder={0}
+                referrerPolicy="strict-origin-when-cross-origin"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                allowFullScreen
+              />
             </div>
           </div>
           <p className="mt-6 text-center text-sm uppercase tracking-[0.25em] text-primary/70">
