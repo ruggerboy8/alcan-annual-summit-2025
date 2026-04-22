@@ -82,8 +82,15 @@ export default function ComposeAndSendTab({ token }: Props) {
   const [editorResetKey, setEditorResetKey] = useState(0);
   const [hasContent, setHasContent] = useState(false);
 
+  // Uploaded image assets (URLs are passed to the AI and recipients fetch them via public bucket)
+  interface Asset { url: string; name: string; size: number; }
+  const [assets, setAssets] = useState<Asset[]>([]);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const [generating, setGenerating] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const [sendModalOpen, setSendModalOpen] = useState(false);
   const [sending, setSending] = useState(false);
   const [dryRun, setDryRun] = useState<{ count: number; preview: { name: string; email: string }[] } | null>(null);
