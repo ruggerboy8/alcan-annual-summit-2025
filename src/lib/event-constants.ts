@@ -1,4 +1,5 @@
 export const PRACTICES = [
+  "Alcan Staff",
   "Big Apple",
   "Buda",
   "Fenton",
@@ -11,6 +12,14 @@ export const PRACTICES = [
   "Sprout Frisco",
   "Sprout McKinney",
   "Steiner Ranch",
+] as const;
+
+export const STAFF_ROLES = [
+  "RDA",
+  "DFI",
+  "Office Manager",
+  "Doctor",
+  "Alcan Staff",
 ] as const;
 
 export const EVENT_VERSION = "v1-alcan-summit-2026";
