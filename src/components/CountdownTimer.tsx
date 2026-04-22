@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
  * Tentative target date for the 2026 Summit.
  * Update this single constant when official dates are confirmed.
  */
-const TARGET_DATE = new Date('December 1, 2026 09:00:00').getTime();
+const TARGET_DATE = new Date('December 11, 2026 09:00:00').getTime();
 
 const CountdownTimer = () => {
   const [timeLeft, setTimeLeft] = useState({
