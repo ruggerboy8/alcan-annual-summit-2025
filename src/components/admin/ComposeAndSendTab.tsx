@@ -225,7 +225,11 @@ export default function ComposeAndSendTab({ token }: Props) {
     try {
       const data = await api("/admin-generate-email", {
         method: "POST",
-        body: { prompt, recipientType: recipientFilter },
+        body: {
+          prompt,
+          recipientType: recipientFilter,
+          assetUrls: assets.map((a) => a.url),
+        },
       });
       setSubject(data.subject ?? "");
       setPreheader(data.preheader ?? "");
