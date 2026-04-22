@@ -261,18 +261,22 @@ Deno.serve(async (req) => {
     return json({ error: "AI response missing subject or html", raw: parsed }, 502);
   }
 
-  // Sanitize: the AI occasionally drops the leading '<' on the doctype,
-  // producing output that starts with `!DOCTYPE ...` which renders as plain
-  // text in email clients (the doctype string shows up where the hero image
-  // should be). Repair it before returning.
+  // Sanitize: the AI sometimes mangles the doctype, dropping `<!` or `<` so it
+  // renders as visible text at the top of the email. Strip whatever doctype
+  // variant we see and prepend a clean one.
   let cleanHtml = parsed.html.trimStart();
-  if (cleanHtml.startsWith("!DOCTYPE") || cleanHtml.startsWith("!doctype")) {
-    cleanHtml = "<" + cleanHtml;
+  // Match: <!DOCTYPE ...>, !DOCTYPE ...>, or DOCTYPE ...> (with optional > )
+  const doctypeRe = /^<?!?doctype\b[^>]*>?/i;
+  if (doctypeRe.test(cleanHtml)) {
+    cleanHtml = cleanHtml.replace(doctypeRe, "").trimStart();
   }
-  // Also guard against a stripped leading '<html' or '<body' (rare but cheap).
+  // Also guard against a stripped leading '<html' or '<body'.
   if (cleanHtml.startsWith("html ") || cleanHtml.startsWith("html>")) {
     cleanHtml = "<" + cleanHtml;
   }
+  cleanHtml =
+    '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n' +
+    cleanHtml;
 
   return json({
     subject: parsed.subject,
