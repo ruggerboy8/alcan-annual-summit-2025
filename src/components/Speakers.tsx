@@ -17,9 +17,9 @@ export default function Speakers() {
         };
 
   return (
-    <section id="speakers" className="bg-white py-16 sm:py-20">
+    <section id="speakers" className="border-t border-gray-100 bg-white py-12 sm:py-16">
       <div className="container">
-        <div className="mb-10 text-center sm:mb-12">
+        <div className="mb-8 text-center sm:mb-10">
           <motion.h2
             {...fade(0)}
             className="mb-3 font-biondi text-3xl font-bold leading-tight text-primary sm:text-4xl md:text-5xl"

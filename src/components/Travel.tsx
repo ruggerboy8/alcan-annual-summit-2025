@@ -118,7 +118,7 @@ const Travel = () => {
               Where to Stay
             </p>
             <h3 className="mb-4 font-biondi text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-              Staying in Buda!
+              Fairfield Inn &amp; Suites
             </h3>
             <div className="mx-auto mb-6 h-px w-16 bg-gold/60" />
 
