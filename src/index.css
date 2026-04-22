@@ -8,10 +8,13 @@
 @layer base {
   :root {
     --clr-primary: #124570;
+    --clr-primary-deep: #0d2e4a;
     --clr-accent: #515458;
     --clr-text: #080809;
     --clr-surface: #949AA1;
     --clr-white: #FDFEFE;
+    --clr-gold: #C9A14A;
+    --clr-gold-light: #D4A843;
     
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -104,6 +107,8 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Biondi', serif;
+    letter-spacing: -0.025em;
+    text-wrap: pretty;
   }
 
   p {

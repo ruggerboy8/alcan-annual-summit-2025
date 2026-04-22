@@ -68,10 +68,17 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				navy: 'var(--clr-primary)',
+				'navy-deep': 'var(--clr-primary-deep)',
 				teal: 'var(--clr-accent)',
 				surface: 'var(--clr-surface)',
 				text: 'var(--clr-text)',
-				white: 'var(--clr-white)'
+				white: 'var(--clr-white)',
+				gold: {
+					DEFAULT: 'var(--clr-gold)',
+					400: '#D4A843',
+					500: 'var(--clr-gold)',
+					600: '#B08838',
+				},
 			},
 			fontFamily: {
 				'biondi': ['Biondi', 'serif'],
