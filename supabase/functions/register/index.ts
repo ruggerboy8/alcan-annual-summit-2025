@@ -1,4 +1,5 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { renderTemplate, sendEmail } from "../_shared/email.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -8,7 +9,7 @@ const corsHeaders = {
 };
 
 const EVENT_VERSION = "v1-alcan-summit-2026";
-const EVENT_DATE = "TBD — check back soon";
+const EVENT_DATE = "December 11–12, 2026";
 const EVENT_LOCATION = "Austin, TX";
 
 const supabase = createClient(
@@ -23,22 +24,12 @@ function json(body: unknown, status = 200) {
   });
 }
 
-function renderTemplate(tpl: string, vars: Record<string, string>): string {
-  return tpl.replace(/\{\{(\w+)\}\}/g, (_, k) => vars[k] ?? "");
-}
-
 async function sendConfirmationEmail(registration: {
   id: string;
   first_name: string;
   last_name: string;
   email: string;
 }): Promise<void> {
-  const apiKey = Deno.env.get("RESEND_API_KEY");
-  if (!apiKey) {
-    console.warn("RESEND_API_KEY not configured; skipping confirmation email");
-    return;
-  }
-
   const { data: tpl, error: tplErr } = await supabase
     .from("email_templates")
     .select("*")
@@ -60,65 +51,50 @@ async function sendConfirmationEmail(registration: {
 
   const subject = renderTemplate(tpl.subject, vars);
   const html = renderTemplate(tpl.html, vars);
-  const text = tpl.text_fallback ? renderTemplate(tpl.text_fallback, vars) : undefined;
+  const text = tpl.text_fallback ? renderTemplate(tpl.text_fallback, vars) : null;
+  const preheader = tpl.preheader ? renderTemplate(tpl.preheader, vars) : null;
 
-  const from = Deno.env.get("RESEND_FROM_EMAIL") ??
-    "The Alcan Summit <onboarding@resend.dev>";
+  const result = await sendEmail({
+    to: registration.email,
+    subject,
+    html,
+    text,
+    preheader,
+  });
 
-  try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from,
-        reply_to: "info@alcandentalcooperative.com",
-        to: [registration.email],
-        subject,
-        html,
-        ...(text ? { text } : {}),
-      }),
-    });
+  const recipientName = `${registration.first_name} ${registration.last_name}`;
 
-    const result = await res.json();
-
-    if (!res.ok) {
-      console.error("Resend error:", result);
-      await supabase.from("email_sends").insert({
-        template_key: "confirmation",
-        template_version: tpl.version,
-        recipient_email: registration.email,
-        recipient_name: `${registration.first_name} ${registration.last_name}`,
-        registration_id: registration.id,
-        send_type: "production",
-        status: "failed",
-        error_message: JSON.stringify(result),
-        sent_by: "system",
-      });
-      return;
-    }
-
-    const messageId = result.id ?? null;
+  if (!result.ok) {
+    console.error("Resend error:", result.error);
     await supabase.from("email_sends").insert({
       template_key: "confirmation",
       template_version: tpl.version,
       recipient_email: registration.email,
-      recipient_name: `${registration.first_name} ${registration.last_name}`,
+      recipient_name: recipientName,
       registration_id: registration.id,
-      resend_message_id: messageId,
       send_type: "production",
-      status: "sent",
+      status: "failed",
+      error_message: result.error,
       sent_by: "system",
     });
-    await supabase.from("event_registrations").update({
-      confirmation_email_sent_at: new Date().toISOString(),
-      confirmation_email_id: messageId,
-    }).eq("id", registration.id);
-  } catch (err) {
-    console.error("Failed to send confirmation email:", err);
+    return;
   }
+
+  await supabase.from("email_sends").insert({
+    template_key: "confirmation",
+    template_version: tpl.version,
+    recipient_email: registration.email,
+    recipient_name: recipientName,
+    registration_id: registration.id,
+    resend_message_id: result.messageId,
+    send_type: "production",
+    status: "sent",
+    sent_by: "system",
+  });
+  await supabase.from("event_registrations").update({
+    confirmation_email_sent_at: new Date().toISOString(),
+    confirmation_email_id: result.messageId,
+  }).eq("id", registration.id);
 }
 
 Deno.serve(async (req) => {
@@ -133,12 +109,10 @@ Deno.serve(async (req) => {
     return json({ error: "Invalid JSON" }, 400);
   }
 
-  // Honeypot — silent success for bots
   if (body.honeypot && String(body.honeypot).trim() !== "") {
     return json({ success: true });
   }
 
-  // Time-to-submit check
   const submittedAt = Number(body.submittedAt);
   if (!submittedAt || Date.now() - submittedAt < 3000) {
     return json({ error: "Too fast" }, 400);
@@ -174,7 +148,6 @@ Deno.serve(async (req) => {
     if (!role) return json({ error: "Role is required" }, 400);
   }
 
-  // Duplicate check
   const { data: existing } = await supabase
     .from("event_registrations")
     .select("id")
@@ -208,7 +181,6 @@ Deno.serve(async (req) => {
     return json({ error: "Registration failed. Please try again." }, 500);
   }
 
-  // Non-blocking confirmation email
   await sendConfirmationEmail(inserted);
 
   return json({ success: true });

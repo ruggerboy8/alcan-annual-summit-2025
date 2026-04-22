@@ -26,7 +26,7 @@ Deno.serve(async (req) => {
     return json({ error: "Invalid JSON" }, 400);
   }
 
-  const { templateKey, subject, html, textFallback, publish } = body ?? {};
+  const { templateKey, subject, html, textFallback, preheader, publish } = body ?? {};
   if (!templateKey || typeof templateKey !== "string") {
     return json({ error: "templateKey required" }, 400);
   }
@@ -53,6 +53,7 @@ Deno.serve(async (req) => {
       subject,
       html,
       text_fallback: textFallback ?? null,
+      preheader: preheader ?? null,
       is_published: !!publish,
       updated_at: new Date().toISOString(),
     }, { onConflict: "template_key" })
