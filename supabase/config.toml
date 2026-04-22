@@ -1,1 +1,25 @@
 project_id = "ljjgpiimryvfaoxpoqoy"
+
+[functions.register]
+verify_jwt = false
+
+[functions.admin-login]
+verify_jwt = false
+
+[functions.admin-list-registrations]
+verify_jwt = false
+
+[functions.admin-update-registration]
+verify_jwt = false
+
+[functions.admin-email-template-get]
+verify_jwt = false
+
+[functions.admin-email-template-save]
+verify_jwt = false
+
+[functions.admin-email-send-test]
+verify_jwt = false
+
+[functions.admin-email-resend-confirmation]
+verify_jwt = false
