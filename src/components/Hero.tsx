@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import SummitLogo from '@/components/SummitLogo';
+import RegistrationModal from '@/components/RegistrationModal';
 
 
 const bgPoster = '/lovable-uploads/246de050-106d-48c5-b1b9-e68886c9e482.png';
@@ -94,6 +95,17 @@ export default function Hero() {
           aria-label="Event date: December 11 to 12, 2026, Austin Texas"
         >
           December&nbsp;11&ndash;12,&nbsp;2026 · Austin,&nbsp;TX
+        </motion.div>
+
+        <motion.div
+          initial="hidden" animate="visible" custom={1.2}
+          variants={prefersReducedMotion ? {} : uiVariants}
+          className="mt-8 sm:mt-10"
+        >
+          <RegistrationModal
+            buttonText="Register Now"
+            buttonClassName="bg-gold hover:bg-white text-primary px-10 sm:px-14 py-5 sm:py-6 text-lg sm:text-xl rounded-lg transition-all duration-300 hover:scale-105 shadow-xl font-biondi font-bold"
+          />
         </motion.div>
       </div>
 
