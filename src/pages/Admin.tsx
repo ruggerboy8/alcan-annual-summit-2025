@@ -3,7 +3,7 @@ import { LogOut } from "lucide-react";
 import PasswordGate from "@/components/admin/PasswordGate";
 import RegistrationsTab from "@/components/admin/RegistrationsTab";
 import CheckInTab from "@/components/admin/CheckInTab";
-import EmailTemplatesTab from "@/components/admin/EmailTemplatesTab";
+import EmailTab from "@/components/admin/EmailTab";
 import SummitLogo from "@/components/SummitLogo";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -25,7 +25,7 @@ const Admin = () => {
   const tabs: Array<{ id: Tab; label: string }> = [
     { id: "registrations", label: "Registrations" },
     { id: "checkin", label: "Check-In" },
-    { id: "email", label: "Email Templates" },
+    { id: "email", label: "Email" },
   ];
 
   return (
@@ -78,7 +78,7 @@ const Admin = () => {
       <main className="mx-auto max-w-7xl px-4 py-6">
         {activeTab === "registrations" && <RegistrationsTab token={token} />}
         {activeTab === "checkin" && <CheckInTab token={token} />}
-        {activeTab === "email" && <EmailTemplatesTab token={token} />}
+        {activeTab === "email" && <EmailTab token={token} />}
       </main>
     </div>
   );
