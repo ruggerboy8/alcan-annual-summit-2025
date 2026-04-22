@@ -23,3 +23,18 @@ verify_jwt = false
 
 [functions.admin-email-resend-confirmation]
 verify_jwt = false
+
+[functions.admin-generate-email]
+verify_jwt = false
+
+[functions.admin-send-broadcast]
+verify_jwt = false
+
+[functions.admin-campaigns-list]
+verify_jwt = false
+
+[functions.admin-campaign-get]
+verify_jwt = false
+
+[functions.admin-campaign-save]
+verify_jwt = false
