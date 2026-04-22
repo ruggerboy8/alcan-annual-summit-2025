@@ -456,6 +456,66 @@ export default function ComposeAndSendTab({ token }: Props) {
               />
             </div>
 
+            {/* Image uploads — AI will embed these into the email */}
+            <div className="rounded-md border border-dashed border-border bg-muted/20 p-3 space-y-3">
+              <div className="flex items-center justify-between gap-3 flex-wrap">
+                <div>
+                  <Label className="text-sm font-medium">Images for this email</Label>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    Upload PNG/JPG photos or graphics. The AI will place them in the email (first image is usually the hero banner).
+                  </p>
+                </div>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp,image/gif"
+                  className="hidden"
+                  onChange={(e) => {
+                    const f = e.target.files?.[0];
+                    if (f) uploadAsset(f);
+                    if (fileInputRef.current) fileInputRef.current.value = "";
+                  }}
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploading}
+                >
+                  {uploading ? (
+                    <Loader2 className="mr-1.5 h-4 w-4 animate-spin" />
+                  ) : (
+                    <ImagePlus className="mr-1.5 h-4 w-4" />
+                  )}
+                  Upload image
+                </Button>
+              </div>
+              {assets.length > 0 && (
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {assets.map((a, i) => (
+                    <div key={a.url} className="relative group rounded-md overflow-hidden border border-border bg-background">
+                      <img src={a.url} alt={a.name} className="w-full h-24 object-cover" />
+                      <div className="absolute top-1 left-1 bg-background/90 text-[10px] font-medium px-1.5 py-0.5 rounded">
+                        {i === 0 ? "Hero" : `#${i + 1}`}
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => removeAsset(a.url)}
+                        className="absolute top-1 right-1 bg-background/90 hover:bg-destructive hover:text-destructive-foreground rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition"
+                        aria-label={`Remove ${a.name}`}
+                      >
+                        <X className="h-3.5 w-3.5" />
+                      </button>
+                      <div className="px-1.5 py-1 text-[10px] truncate text-muted-foreground" title={a.name}>
+                        {a.name}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
             <div className="flex flex-col sm:flex-row gap-3 sm:items-end">
               <div className="sm:w-72">
                 <Label htmlFor="audience" className="mb-1.5 block">Send to</Label>
