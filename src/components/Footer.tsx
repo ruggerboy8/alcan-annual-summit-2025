@@ -3,7 +3,7 @@ const Footer = () => {
     <footer className="bg-accent py-12 text-white">
       <div className="container">
         <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.45em] text-white/50">
-          Earn the View
+          Earn the View ·
         </p>
 
         <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-3">
