@@ -133,6 +133,64 @@ Call the tool "compose_email" exactly once with all four fields populated:
 - text_fallback: plain-text version with paragraph breaks; mirrors the email content.
 `;
 
+// Some models (notably Gemini) occasionally emit invalid JSON escapes like
+// \' (apostrophe) or stray control chars in tool-call arguments. JSON.parse
+// rejects \' outright. We pre-clean and try again.
+function repairJson(raw: string): string {
+  return raw
+    // Strip BOM and leading/trailing whitespace
+    .replace(/^\uFEFF/, "")
+    // \' is not a valid JSON escape — replace with a real apostrophe
+    .replace(/\\'/g, "'")
+    // Lone backslash before a non-escape char (rare) — drop the backslash
+    .replace(/\\(?!["\\/bfnrtu])/g, "")
+    // Strip raw control characters (except \n and \t which JSON allows escaped, but raw ones break)
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, "");
+}
+
+function parseToolArgs(argsRaw: unknown): any | null {
+  if (!argsRaw) return null;
+  if (typeof argsRaw !== "string") return argsRaw;
+  try {
+    return JSON.parse(argsRaw);
+  } catch {
+    try {
+      return JSON.parse(repairJson(argsRaw));
+    } catch (err) {
+      console.error("Could not repair tool-call JSON:", err, argsRaw.slice(0, 400));
+      return null;
+    }
+  }
+}
+
+// Even after JSON.parse succeeds, the strings inside may contain a literal
+// backslash-apostrophe (because the model wrote `we\'re` and the parser kept
+// the backslash). Clean those.
+function cleanString(s: string | undefined | null): string {
+  if (!s) return "";
+  return s.replace(/\\'/g, "'");
+}
+
+const BROADCAST_PROMPT_TAIL =
+  `\n\nDesign the email to feel like a confident expedition dispatch — not a corporate newsletter. Honor the design system precisely.`;
+
+const CONFIRMATION_SYSTEM_TAIL = `
+
+==================================================
+THIS IS A CONFIRMATION EMAIL (sent automatically right after someone registers)
+==================================================
+- Tone: warm, congratulatory, welcoming. They just signed up — make them feel good about it.
+- Subject should clearly confirm their registration (e.g. "You're in — see you at The Alcan Summit"). Avoid generic "Registration confirmed".
+- Body MUST include:
+  • A confirming opening line that references {{first_name}}.
+  • The event date ({{event_date}}) and location ({{event_location}}) clearly displayed (consider a small "Event Details" block with gold rule above and below).
+  • A short "What's next" section: book your hotel, watch for updates, etc.
+  • A reassurance/sign-off line.
+- Available variables (use them — DO NOT use {{full_name}} in headlines, but it's allowed in body if natural):
+  {{first_name}}, {{full_name}}, {{event_date}}, {{event_location}}
+- Single CTA at most (e.g., "Book your hotel" or "Add to calendar"). Often no CTA is fine.
+`;
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -147,20 +205,23 @@ Deno.serve(async (req) => {
   }
 
   const prompt = String(body?.prompt ?? "").trim();
-  const recipientType = body?.recipientType;
+  const mode: "broadcast" | "confirmation" = body?.mode === "confirmation" ? "confirmation" : "broadcast";
+  const recipientType = body?.recipientType ?? "all";
   const assetUrls: string[] = Array.isArray(body?.assetUrls)
     ? body.assetUrls.filter((u: unknown) => typeof u === "string" && u.length > 0).slice(0, 8)
     : [];
 
   if (!prompt) return json({ error: "prompt required" }, 400);
-  if (!["all", "staff", "guests"].includes(recipientType)) {
+  if (mode === "broadcast" && !["all", "staff", "guests"].includes(recipientType)) {
     return json({ error: "recipientType must be all|staff|guests" }, 400);
   }
 
   const apiKey = Deno.env.get("LOVABLE_API_KEY");
   if (!apiKey) return json({ error: "LOVABLE_API_KEY not configured" }, 500);
 
-  const audienceLine = recipientType === "staff"
+  const audienceLine = mode === "confirmation"
+    ? "Audience: a person who JUST registered for The Alcan Summit. They're expecting this email — confirm and welcome them."
+    : recipientType === "staff"
     ? "Audience: internal Alcan team members (staff). Tone can be familiar, insider-y, energetic — they're part of the cooperative."
     : recipientType === "guests"
     ? "Audience: outside guests (industry partners, vendors, friends of Alcan). Tone is welcoming and slightly more polished; explain context where useful."
@@ -171,7 +232,11 @@ Deno.serve(async (req) => {
     : "\n\nNo images were uploaded. Build the email with typography, color, and layout only — no <img> tags.";
 
   const userMessage =
-    `${audienceLine}\n\nBrief from the team:\n\n"""${prompt}"""${assetBlock}\n\nDesign the email to feel like a confident expedition dispatch — not a corporate newsletter. Honor the design system precisely.`;
+    `${audienceLine}\n\nBrief from the team:\n\n"""${prompt}"""${assetBlock}${BROADCAST_PROMPT_TAIL}`;
+
+  const systemPrompt = mode === "confirmation"
+    ? SYSTEM_PROMPT + CONFIRMATION_SYSTEM_TAIL
+    : SYSTEM_PROMPT;
 
   let res: Response;
   try {
@@ -184,7 +249,7 @@ Deno.serve(async (req) => {
       body: JSON.stringify({
         model: "google/gemini-2.5-pro",
         messages: [
-          { role: "system", content: SYSTEM_PROMPT },
+          { role: "system", content: systemPrompt },
           { role: "user", content: userMessage },
         ],
         tools: [
@@ -229,9 +294,9 @@ Deno.serve(async (req) => {
 
   const data = await res.json().catch(() => null);
   const toolCall = data?.choices?.[0]?.message?.tool_calls?.[0];
-  const argsRaw = toolCall?.function?.arguments;
+  const parsed = parseToolArgs(toolCall?.function?.arguments);
 
-  if (!argsRaw) {
+  if (!parsed) {
     const fallbackText = data?.choices?.[0]?.message?.content ?? "";
     return json({
       error: "AI did not return a structured response",
@@ -239,21 +304,15 @@ Deno.serve(async (req) => {
     }, 502);
   }
 
-  let parsed: { subject?: string; preheader?: string; html?: string; text_fallback?: string };
-  try {
-    parsed = typeof argsRaw === "string" ? JSON.parse(argsRaw) : argsRaw;
-  } catch {
-    return json({ error: "Could not parse AI response", raw: argsRaw }, 502);
-  }
-
   if (!parsed.subject || !parsed.html) {
     return json({ error: "AI response missing subject or html", raw: parsed }, 502);
   }
 
   return json({
-    subject: parsed.subject,
-    preheader: parsed.preheader ?? "",
-    html: parsed.html,
-    text_fallback: parsed.text_fallback ?? "",
+    subject: cleanString(parsed.subject),
+    preheader: cleanString(parsed.preheader),
+    html: cleanString(parsed.html),
+    text_fallback: cleanString(parsed.text_fallback),
   });
 });
+
