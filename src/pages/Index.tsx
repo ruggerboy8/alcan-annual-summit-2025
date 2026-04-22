@@ -6,7 +6,6 @@ import About from '@/components/About';
 import Agenda from '@/components/Agenda';
 import Speakers from '@/components/Speakers';
 import Travel from '@/components/Travel';
-import Register from '@/components/Register';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -16,10 +15,9 @@ const Index = () => {
       <Hero />
       <CountdownTimer />
       <About />
-      <Agenda />
       <Speakers />
+      <Agenda />
       <Travel />
-      <Register />
       <Footer />
     </div>
   );
