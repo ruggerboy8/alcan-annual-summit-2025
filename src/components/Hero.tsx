@@ -2,7 +2,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import SummitLogo from '@/components/SummitLogo';
-import RegisterModal from '@/components/RegisterModal';
+import RegistrationModal from '@/components/RegistrationModal';
 
 const bgPoster = '/lovable-uploads/246de050-106d-48c5-b1b9-e68886c9e482.png';
 
