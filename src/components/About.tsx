@@ -1,64 +1,107 @@
-// components/About.tsx
+import { motion, useReducedMotion } from 'framer-motion';
 import ImageCarousel from './ImageCarousel';
 import RegisterModal from './RegisterModal';
 
-const About = () => (
-  <section id="about" className="py-14 lg:py-20 bg-gray-50">
-    <div className="container">
-      <div className="mx-auto max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* ── Copy block ───────────────────────────── */}
-          <div className="order-2 md:order-1 max-w-[680px]">
+const bullets = [
+  {
+    title: 'Hands-on continuing education',
+    body: 'Practical, immediately usable, led by people who\u2019ve done the work.',
+  },
+  {
+    title: 'Real conversations between practices',
+    body: 'The kind where someone else\u2019s solved problem saves you six months of trial and error.',
+  },
+  {
+    title: 'Time to celebrate',
+    body: 'To connect. To remember that the people at this table are building something that matters.',
+  },
+];
 
-            <h2 className="font-biondi font-bold text-primary text-3xl sm:text-4xl md:text-5xl mb-6 leading-tight">
-              Why attend&nbsp;The&nbsp;Summit?
-            </h2>
+const About = () => {
+  const prefersReducedMotion = useReducedMotion();
 
-            <p className="text-lg sm:text-xl text-text leading-relaxed mb-5">
-              Two days built to sharpen your skills, widen your network, and celebrate the work we’re doing together.
-            </p>
+  const fade = (delay = 0) =>
+    prefersReducedMotion
+      ? {}
+      : {
+          initial: { opacity: 0, y: 20 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, amount: 0.2 },
+          transition: { duration: 0.6, delay, ease: 'easeOut' as const },
+        };
 
-            <p className="text-lg sm:text-xl text-text leading-relaxed mb-5">
-              You can look forward&nbsp;to:
-            </p>
+  return (
+    <section id="about" className="border-t border-gray-100 bg-gray-50 py-14 lg:py-20">
+      <div className="container">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
+            {/* Copy block */}
+            <div className="order-2 max-w-[680px] md:order-1">
+              <motion.h2
+                {...fade(0)}
+                className="mb-6 font-biondi text-3xl font-bold leading-tight text-primary sm:text-4xl md:text-5xl"
+              >
+                A Different Kind of Gathering.
+              </motion.h2>
 
-            <ul className="space-y-4 text-lg sm:text-xl text-text leading-relaxed mb-8 list-none">
-              <li className="flex">
-                <span className="text-primary mr-3 font-bold">•</span>
-                <span><strong>Focused CE workshops</strong> led by industry experts.</span>
-              </li>
-              <li className="flex">
-                <span className="text-primary mr-3 font-bold">•</span>
-                <span><strong>Cross-practice round-tables</strong> where ideas move from concept to roadmap.</span>
-              </li>
-              <li className="flex">
-                <span className="text-primary mr-3 font-bold">•</span>
-                <span><strong>Evening gatherings</strong> that build culture and spark new friendships.</span>
-              </li>
-            </ul>
+              <motion.p
+                {...fade(0.1)}
+                className="mb-5 text-lg leading-relaxed text-text sm:text-xl"
+              >
+                The Summit is the annual gathering for every member of the Alcan network &mdash; doctors, coordinators, managers, and front-desk teams alike. Not a CE requirement. Not a sales floor. A two-day climb designed for the people who show up every day to do something nobody&rsquo;s done before.
+              </motion.p>
 
-            <p className="text-lg sm:text-xl text-text leading-relaxed mb-10">
-              You’ll head home with fresh tools, stronger partnerships, and a clear view of what’s next.
-            </p>
+              <motion.p {...fade(0.2)} className="mb-5 text-lg leading-relaxed text-text sm:text-xl">
+                What you can expect:
+              </motion.p>
 
-            {/* CTA */}
-            <div className="flex">
-              <RegisterModal
-                buttonClassName="bg-primary hover:bg-primary/90 text-white px-8 sm:px-12 py-4 text-lg sm:text-xl rounded-lg shadow-lg transition-transform duration-300 hover:scale-105 font-biondi font-bold"
-              />
+              <ul className="mb-8 list-none space-y-4 text-lg leading-relaxed text-text sm:text-xl">
+                {bullets.map((b, i) => (
+                  <motion.li key={b.title} {...fade(0.3 + i * 0.1)} className="flex">
+                    <span className="mr-3 font-bold text-gold">•</span>
+                    <span>
+                      <strong>{b.title}</strong> &mdash; {b.body}
+                    </span>
+                  </motion.li>
+                ))}
+              </ul>
+
+              <motion.p
+                {...fade(0.6)}
+                className="mb-10 text-lg leading-relaxed text-text sm:text-xl"
+              >
+                You&rsquo;ll leave with new tools, real relationships, and a clearer sense of where you fit in something much bigger than any one practice.
+              </motion.p>
+
+              <motion.div {...fade(0.7)} className="flex">
+                <RegisterModal
+                  buttonText="Reserve Your Spot"
+                  buttonClassName="bg-primary hover:bg-primary/90 text-white px-8 sm:px-12 py-4 text-lg sm:text-xl rounded-lg shadow-lg transition-transform duration-300 hover:scale-105 font-biondi font-bold"
+                />
+              </motion.div>
             </div>
-          </div>
 
-          {/* ── Carousel ────────────────────────────── */}
-          <div className="order-1 md:order-2 flex justify-center md:justify-end">
-            <div className="w-full max-w-sm sm:max-w-md md:max-w-none md:w-[80%]">
-              <ImageCarousel />
-            </div>
+            {/* Carousel */}
+            <motion.div
+              {...(prefersReducedMotion
+                ? {}
+                : {
+                    initial: { opacity: 0, x: 30 },
+                    whileInView: { opacity: 1, x: 0 },
+                    viewport: { once: true, amount: 0.2 },
+                    transition: { duration: 0.7, ease: 'easeOut' },
+                  })}
+              className="order-1 flex justify-center md:order-2 md:justify-end"
+            >
+              <div className="w-full max-w-sm sm:max-w-md md:w-[80%] md:max-w-none">
+                <ImageCarousel />
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default About;
