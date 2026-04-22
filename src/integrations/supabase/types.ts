@@ -14,6 +14,57 @@ export type Database = {
   }
   public: {
     Tables: {
+      email_campaigns: {
+        Row: {
+          created_at: string
+          html: string
+          id: string
+          name: string
+          preheader: string | null
+          prompt: string | null
+          recipient_count: number | null
+          recipient_filter: string
+          sent_at: string | null
+          sent_by: string | null
+          status: string
+          subject: string
+          text_fallback: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          html: string
+          id?: string
+          name: string
+          preheader?: string | null
+          prompt?: string | null
+          recipient_count?: number | null
+          recipient_filter?: string
+          sent_at?: string | null
+          sent_by?: string | null
+          status?: string
+          subject: string
+          text_fallback?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          html?: string
+          id?: string
+          name?: string
+          preheader?: string | null
+          prompt?: string | null
+          recipient_count?: number | null
+          recipient_filter?: string
+          sent_at?: string | null
+          sent_by?: string | null
+          status?: string
+          subject?: string
+          text_fallback?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       email_sends: {
         Row: {
           created_at: string
@@ -72,6 +123,7 @@ export type Database = {
           created_at: string
           html: string
           is_published: boolean
+          preheader: string | null
           subject: string
           template_key: string
           text_fallback: string | null
@@ -82,6 +134,7 @@ export type Database = {
           created_at?: string
           html: string
           is_published?: boolean
+          preheader?: string | null
           subject: string
           template_key: string
           text_fallback?: string | null
@@ -92,6 +145,7 @@ export type Database = {
           created_at?: string
           html?: string
           is_published?: boolean
+          preheader?: string | null
           subject?: string
           template_key?: string
           text_fallback?: string | null
