@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
-import { ImagePlus, Info, Loader2, Save, Send, Sparkles, Upload, Wand2, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Info, Loader2, Save, Send, Upload } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { useAdminApi } from "@/lib/admin-api";
 import EmailEditor from "./EmailEditor";
@@ -23,8 +22,6 @@ interface Template {
   is_published: boolean;
 }
 
-interface Asset { url: string; name: string; size: number; }
-
 const TEMPLATE_KEY = "confirmation";
 
 export default function AutoEmailTab({ token }: Props) {
@@ -42,14 +39,6 @@ export default function AutoEmailTab({ token }: Props) {
   const [publishing, setPublishing] = useState(false);
   const [testEmail, setTestEmail] = useState("");
   const [sendingTest, setSendingTest] = useState(false);
-
-  // AI composer
-  const [prompt, setPrompt] = useState("");
-  const [generating, setGenerating] = useState(false);
-  const [editorResetKey, setEditorResetKey] = useState(0);
-  const [assets, setAssets] = useState<Asset[]>([]);
-  const [uploading, setUploading] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -77,60 +66,6 @@ export default function AutoEmailTab({ token }: Props) {
       cancelled = true;
     };
   }, [api]);
-
-  const generate = async () => {
-    if (!prompt.trim()) {
-      toast.error("Tell the AI what the confirmation email should say.");
-      return;
-    }
-    setGenerating(true);
-    try {
-      const data = await api("/admin-generate-email", {
-        method: "POST",
-        body: {
-          mode: "confirmation",
-          prompt,
-          assetUrls: assets.map((a) => a.url),
-        },
-      });
-      setSubject(data.subject ?? "");
-      setPreheader(data.preheader ?? "");
-      setHtml(data.html ?? "");
-      setTextFallback(data.text_fallback ?? "");
-      setEditorResetKey((k) => k + 1);
-      toast.success("Confirmation email drafted — review, then Save and Publish to make it live.");
-    } catch (err: any) {
-      toast.error(err.message ?? "AI generation failed");
-    } finally {
-      setGenerating(false);
-    }
-  };
-
-  const uploadAsset = async (file: File) => {
-    setUploading(true);
-    try {
-      const form = new FormData();
-      form.append("file", file);
-      const url = `${(import.meta as any).env.VITE_SUPABASE_URL}/functions/v1/admin-upload-email-asset`;
-      const res = await fetch(url, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
-        body: form,
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data?.error ?? "Upload failed");
-      setAssets((prev) => [...prev, { url: data.url, name: data.name, size: data.size }]);
-      toast.success(`Uploaded ${data.name}`);
-    } catch (err: any) {
-      toast.error(err.message ?? "Upload failed");
-    } finally {
-      setUploading(false);
-    }
-  };
-
-  const removeAsset = (url: string) => {
-    setAssets((prev) => prev.filter((a) => a.url !== url));
-  };
 
   const save = async (publish: boolean) => {
     const setter = publish ? setPublishing : setSavingDraft;
@@ -206,110 +141,6 @@ export default function AutoEmailTab({ token }: Props) {
         </ul>
       </div>
 
-      {/* AI Composer */}
-      <div className="rounded-lg border border-border bg-card shadow-sm p-5 space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="flex items-center gap-2 font-semibold text-base">
-            <Sparkles className="h-4 w-4 text-primary" />
-            AI Composer
-          </h2>
-          <span className="text-xs text-muted-foreground">
-            Replaces the current draft below
-          </span>
-        </div>
-        <div>
-          <Label htmlFor="conf-prompt" className="text-base font-medium mb-1.5 block">
-            What should the confirmation email say?
-          </Label>
-          <Textarea
-            id="conf-prompt"
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            rows={4}
-            placeholder="e.g. Warmly confirm their registration, remind them to book the Fairfield Inn before the block expires, and tease the climbing-themed agenda."
-          />
-        </div>
-
-        {/* Image uploads */}
-        <div className="rounded-md border border-dashed border-border bg-muted/20 p-3 space-y-3">
-          <div className="flex items-center justify-between gap-3 flex-wrap">
-            <div>
-              <Label className="text-sm font-medium">Images for this email</Label>
-              <p className="text-xs text-muted-foreground mt-0.5">
-                Optional. The AI will place uploaded images in the email (first one is usually the hero banner).
-              </p>
-            </div>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/png,image/jpeg,image/webp,image/gif"
-              className="hidden"
-              onChange={(e) => {
-                const f = e.target.files?.[0];
-                if (f) uploadAsset(f);
-                if (fileInputRef.current) fileInputRef.current.value = "";
-              }}
-            />
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => fileInputRef.current?.click()}
-              disabled={uploading}
-            >
-              {uploading ? (
-                <Loader2 className="mr-1.5 h-4 w-4 animate-spin" />
-              ) : (
-                <ImagePlus className="mr-1.5 h-4 w-4" />
-              )}
-              Upload image
-            </Button>
-          </div>
-          {assets.length > 0 && (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              {assets.map((a, i) => (
-                <div key={a.url} className="relative group rounded-md overflow-hidden border border-border bg-background">
-                  <img src={a.url} alt={a.name} className="w-full h-24 object-cover" />
-                  <div className="absolute top-1 left-1 bg-background/90 text-[10px] font-medium px-1.5 py-0.5 rounded">
-                    {i === 0 ? "Hero" : `#${i + 1}`}
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => removeAsset(a.url)}
-                    className="absolute top-1 right-1 bg-background/90 hover:bg-destructive hover:text-destructive-foreground rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition"
-                    aria-label={`Remove ${a.name}`}
-                  >
-                    <X className="h-3.5 w-3.5" />
-                  </button>
-                  <div className="px-1.5 py-1 text-[10px] truncate text-muted-foreground" title={a.name}>
-                    {a.name}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        <Button
-          onClick={generate}
-          disabled={generating || !prompt.trim()}
-          className="bg-primary hover:bg-primary/90 text-primary-foreground"
-          size="lg"
-        >
-          {generating ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Writing your email…
-            </>
-          ) : (
-            <>
-              <Wand2 className="mr-2 h-4 w-4" />
-              Generate Confirmation Email
-            </>
-          )}
-        </Button>
-      </div>
-
       {/* Header + version badges */}
       <div className="flex items-center justify-between">
         <h2 className="font-biondi text-xl text-primary">Confirmation Email</h2>
@@ -358,7 +189,6 @@ export default function AutoEmailTab({ token }: Props) {
         onHtmlChange={setHtml}
         onTextChange={setTextFallback}
         initialView="preview"
-        resetKey={editorResetKey}
       />
 
       {/* Save buttons */}
