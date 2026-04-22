@@ -32,7 +32,7 @@ const Footer = () => {
               </a>
             </div>
             <div className="mt-4 text-white/70 text-sm">
-              © 2025 Alcan Dental Cooperative. All rights reserved.
+              © 2026 Alcan Dental Cooperative. All rights reserved.
             </div>
           </div>
         </div>

@@ -213,3 +213,12 @@
 .animate-accordion-up {
   animation: accordion-up 0.3s ease-out;
 }
+
+/* Soft pulse for countdown seconds */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.65; }
+}
+.animate-pulse-soft {
+  animation: pulse-soft 1s ease-in-out infinite;
+}

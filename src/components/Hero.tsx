@@ -71,6 +71,8 @@ export default function Hero() {
 
       {/* ---------- dark overlay for readability ---------- */}
       <div className="absolute inset-0 bg-black/60 sm:bg-black/50" />
+      {/* ---------- bottom gradient for legibility & countdown bridge ---------- */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-b from-transparent to-black/80" />
 
       {/* ---------- subtle mist layer (parallax) ---------- */}
       <div
@@ -89,7 +91,7 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
           variants={prefersReducedMotion ? {} : logoVariants}
-          className="mb-10 flex justify-center"
+          className="mb-6 flex justify-center sm:mb-8"
         >
           <SummitLogo
             className="h-[45vh] max-h-[280px] w-auto sm:h-[55vh] sm:max-h-[360px]"
@@ -103,7 +105,7 @@ export default function Hero() {
           animate="visible"
           custom={0.9}
           variants={prefersReducedMotion ? {} : uiVariants}
-          className="mb-8 text-center font-biondi text-3xl text-white drop-shadow-md sm:text-4xl md:text-5xl"
+          className="mb-6 text-center font-biondi text-3xl tracking-wide text-white sm:text-4xl md:text-5xl [text-shadow:0_2px_12px_rgba(0,0,0,0.45)]"
         >
           Let&rsquo;s&nbsp;climb&nbsp;together
         </motion.h1>
@@ -114,10 +116,10 @@ export default function Hero() {
           animate="visible"
           custom={1.2}
           variants={prefersReducedMotion ? {} : uiVariants}
-          className="mb-14 inline-block rounded border-2 border-white/90 bg-black/30 px-6 py-3 text-lg font-semibold tracking-wide text-white backdrop-blur-sm sm:px-10 sm:text-2xl"
-          aria-label="Event date: December 11 to 12"
+          className="mb-10 inline-block rounded border border-white/80 bg-black/30 px-6 py-2.5 text-base font-medium uppercase tracking-[0.2em] text-white backdrop-blur-sm shadow-[inset_0_0_20px_rgba(255,255,255,0.08)] sm:px-10 sm:text-lg"
+          aria-label="Event date: December 2026, dates coming soon"
         >
-          December&nbsp;11&nbsp;–&nbsp;12
+          December&nbsp;2026 — Dates&nbsp;Coming&nbsp;Soon
         </motion.div>
 
         {/* CTA button */}
