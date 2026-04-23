@@ -10,7 +10,7 @@ const supabase = createClient(
   Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
 );
 
-const EVENT_DATE = "December 11–12, 2026";
+const EVENT_DATE = "December 10–11, 2026";
 const EVENT_LOCATION = "Austin, TX";
 
 function json(body: unknown, status = 200) {

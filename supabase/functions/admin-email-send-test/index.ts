@@ -42,7 +42,7 @@ Deno.serve(async (req) => {
   const vars = {
     first_name: "Test",
     full_name: "Test User",
-    event_date: "December 11–12, 2026",
+    event_date: "December 10–11, 2026",
     event_location: "Austin, TX",
   };
   const subject = renderTemplate(tpl.subject, vars);

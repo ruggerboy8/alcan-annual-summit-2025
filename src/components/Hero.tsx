@@ -92,9 +92,9 @@ export default function Hero() {
           initial="hidden" animate="visible" custom={1.0}
           variants={prefersReducedMotion ? {} : uiVariants}
           className="inline-block rounded-sm border border-gold/80 px-5 py-2.5 text-xs font-medium uppercase tracking-[0.22em] text-white backdrop-blur-sm sm:px-10 sm:text-base sm:tracking-[0.28em]"
-          aria-label="Event date: December 11 to 12, 2026, Austin Texas"
+          aria-label="Event date: December 10 to 11, 2026, Austin Texas"
         >
-          December&nbsp;11&ndash;12,&nbsp;2026 · Austin,&nbsp;TX
+          December&nbsp;10&ndash;11,&nbsp;2026 · Austin,&nbsp;TX
         </motion.div>
 
         <motion.div

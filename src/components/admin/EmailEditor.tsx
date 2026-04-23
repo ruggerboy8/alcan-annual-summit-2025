@@ -18,7 +18,7 @@ interface Props {
 const MOCK_VARS: Record<string, string> = {
   first_name: "Alex",
   full_name: "Alex Johnson",
-  event_date: "December 11–12, 2026",
+  event_date: "December 10–11, 2026",
   event_location: "Austin, TX",
 };
 

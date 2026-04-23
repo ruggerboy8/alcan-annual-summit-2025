@@ -384,7 +384,7 @@ export default function AutoEmailTab({ token }: Props) {
       <div className="rounded-lg border border-border bg-card shadow-sm p-5">
         <h3 className="text-base font-semibold mb-1">Send Test to Myself</h3>
         <p className="text-sm text-muted-foreground mb-4">
-          Sends a test using placeholder values (Test User, Dec 11–12 2026, Austin TX).
+          Sends a test using placeholder values (Test User, Dec 10–11 2026, Austin TX).
         </p>
         <div className="flex flex-col sm:flex-row gap-2">
           <Input
