@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
-const TARGET_DATE = new Date('December 11, 2026 09:00:00').getTime();
+const TARGET_DATE = new Date('December 10, 2026 09:00:00').getTime();
 
 const CountdownTimer = () => {
   const prefersReducedMotion = useReducedMotion();

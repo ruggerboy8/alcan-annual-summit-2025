@@ -2,7 +2,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { corsHeaders, unauthorized, verifyAdminToken } from "../_shared/admin-auth.ts";
 import { renderTemplate, sendEmail } from "../_shared/email.ts";
 
-const EVENT_DATE = "December 11–12, 2026";
+const EVENT_DATE = "December 10–11, 2026";
 const EVENT_LOCATION = "Austin, TX";
 
 const supabase = createClient(
