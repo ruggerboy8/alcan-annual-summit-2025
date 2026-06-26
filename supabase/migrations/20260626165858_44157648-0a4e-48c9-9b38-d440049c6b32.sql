@@ -1,0 +1,1 @@
+DELETE FROM public.event_registrations WHERE email = 'wiring-test-12345@example.com';
