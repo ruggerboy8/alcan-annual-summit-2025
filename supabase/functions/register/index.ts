@@ -11,6 +11,7 @@ const corsHeaders = {
 const EVENT_VERSION = "v1-alcan-summit-2026";
 const EVENT_DATE = "December 10–11, 2026";
 const EVENT_LOCATION = "Austin, TX";
+const VALID_PROMO_CODE = "AlcanVIP2026";
 
 const supabase = createClient(
   Deno.env.get("SUPABASE_URL")!,
@@ -39,6 +40,18 @@ async function sendConfirmationEmail(registration: {
 
   if (tplErr || !tpl) {
     console.error("No published confirmation template found", tplErr);
+    await supabase.from("email_sends").insert({
+      template_key: "confirmation",
+      template_version: 0,
+      recipient_email: registration.email,
+      recipient_name: `${registration.first_name} ${registration.last_name}`,
+      registration_id: registration.id,
+      send_type: "production",
+      status: "failed",
+      error_message:
+        "No PUBLISHED confirmation template found. Open Admin → Email → Auto Email and click 'Save and Publish'.",
+      sent_by: "system",
+    });
     return;
   }
 
@@ -150,6 +163,12 @@ Deno.serve(async (req) => {
     if (!role) return json({ error: "Role is required" }, 400);
   }
 
+  // Optional sponsor promo code. An unrecognized code never blocks
+  // registration — it simply isn't stored and doesn't unlock sponsor status.
+  const rawPromo = String(body.promoCode ?? "").trim();
+  const isSponsor = rawPromo.toLowerCase() === VALID_PROMO_CODE.toLowerCase();
+  const promoCode = isSponsor ? VALID_PROMO_CODE : null;
+
   const { data: existing } = await supabase
     .from("event_registrations")
     .select("id")
@@ -172,6 +191,7 @@ Deno.serve(async (req) => {
       practice,
       organization,
       role,
+      promo_code: promoCode,
       registration_status: "registered",
       event_version: EVENT_VERSION,
     })
@@ -185,5 +205,5 @@ Deno.serve(async (req) => {
 
   await sendConfirmationEmail(inserted);
 
-  return json({ success: true });
+  return json({ success: true, sponsor: isSponsor });
 });

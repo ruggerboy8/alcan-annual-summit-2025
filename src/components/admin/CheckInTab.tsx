@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { Registration, useAdminApi } from "@/lib/admin-api";
+import { Registration, useAdminApi, attendeeLabel } from "@/lib/admin-api";
 
 interface Props {
   token: string;
@@ -166,12 +166,18 @@ export default function CheckInTab({ token }: Props) {
                         variant="outline"
                         className={cn(
                           "border-transparent text-[10px]",
-                          r.attendee_type === "staff"
-                            ? "bg-primary/10 text-primary"
-                            : "bg-gold/15 text-gold",
+                          attendeeLabel(r) === "Sponsor"
+                            ? "bg-gold text-primary"
+                            : r.attendee_type === "staff"
+                              ? "bg-primary/10 text-primary"
+                              : "bg-gold/15 text-gold",
                         )}
                       >
-                        {r.attendee_type === "staff" ? r.practice ?? "Team" : r.organization ?? "Guest"}
+                        {attendeeLabel(r) === "Sponsor"
+                          ? `Sponsor · ${r.organization ?? r.practice ?? ""}`.trim()
+                          : r.attendee_type === "staff"
+                            ? r.practice ?? "Team"
+                            : r.organization ?? "Guest"}
                       </Badge>
                     </div>
                   </div>
@@ -213,7 +219,7 @@ export default function CheckInTab({ token }: Props) {
                     </div>
                     <div className="text-xs text-muted-foreground mt-0.5">
                       {timeOfDay(r.checked_in_at)} ·{" "}
-                      {r.attendee_type === "staff" ? "Team" : "Guest"}
+                      {attendeeLabel(r)}
                     </div>
                   </div>
                   <Button
