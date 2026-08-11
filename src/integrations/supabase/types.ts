@@ -170,6 +170,7 @@ export type Database = {
           organization: string | null
           phone: string | null
           practice: string | null
+          promo_code: string | null
           registration_status: string
           role: string | null
         }
@@ -188,6 +189,7 @@ export type Database = {
           organization?: string | null
           phone?: string | null
           practice?: string | null
+          promo_code?: string | null
           registration_status?: string
           role?: string | null
         }
@@ -206,6 +208,7 @@ export type Database = {
           organization?: string | null
           phone?: string | null
           practice?: string | null
+          promo_code?: string | null
           registration_status?: string
           role?: string | null
         }

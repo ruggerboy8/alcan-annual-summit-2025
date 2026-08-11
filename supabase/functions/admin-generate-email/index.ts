@@ -154,8 +154,9 @@ Deno.serve(async (req) => {
     : [];
 
   // Permanent brand hero image — prepended to every email so all sends share
-  // the same masthead. Hosted on the published site under /email-hero.png.
-  const HERO_IMAGE_URL = "https://alcan-annual-meeting-2025.lovable.app/email-hero.png";
+  // the same masthead. Served directly from the canonical custom domain (no
+  // redirect) so email-client image proxies can fetch it reliably.
+  const HERO_IMAGE_URL = "https://alcansummit.com/email-hero.png";
 
   if (!prompt) return json({ error: "prompt required" }, 400);
   if (mode === "broadcast" && !["all", "staff", "guests"].includes(recipientType)) {
