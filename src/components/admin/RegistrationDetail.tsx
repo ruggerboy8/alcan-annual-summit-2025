@@ -261,6 +261,10 @@ export default function RegistrationDetail({
               )}
             </Field>
 
+            {r.promo_code && <Field label="Promo Code">{r.promo_code}</Field>}
+
+
+
             {r.attendee_type === "staff" ? (
               <Field label="Practice">
                 {editing ? (
