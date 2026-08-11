@@ -11,6 +11,7 @@ const corsHeaders = {
 const EVENT_VERSION = "v1-alcan-summit-2026";
 const EVENT_DATE = "December 10–11, 2026";
 const EVENT_LOCATION = "Austin, TX";
+const VALID_PROMO_CODE = "AlcanVIP2026";
 
 const supabase = createClient(
   Deno.env.get("SUPABASE_URL")!,
