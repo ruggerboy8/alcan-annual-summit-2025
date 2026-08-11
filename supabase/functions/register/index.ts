@@ -39,6 +39,18 @@ async function sendConfirmationEmail(registration: {
 
   if (tplErr || !tpl) {
     console.error("No published confirmation template found", tplErr);
+    await supabase.from("email_sends").insert({
+      template_key: "confirmation",
+      template_version: 0,
+      recipient_email: registration.email,
+      recipient_name: `${registration.first_name} ${registration.last_name}`,
+      registration_id: registration.id,
+      send_type: "production",
+      status: "failed",
+      error_message:
+        "No PUBLISHED confirmation template found. Open Admin → Email → Auto Email and click 'Save and Publish'.",
+      sent_by: "system",
+    });
     return;
   }
 
