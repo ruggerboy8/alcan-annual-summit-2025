@@ -8,6 +8,7 @@ import {
   Registration,
   RegistrationStats,
   useAdminApi,
+  attendeeLabel,
 } from "@/lib/admin-api";
 import RegistrationDetail from "@/components/admin/RegistrationDetail";
 
