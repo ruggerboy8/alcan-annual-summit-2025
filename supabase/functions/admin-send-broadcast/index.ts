@@ -110,6 +110,7 @@ Deno.serve(async (req) => {
       full_name: `${r.first_name} ${r.last_name}`,
       event_date: EVENT_DATE,
       event_location: EVENT_LOCATION,
+      days_until_summit: String(daysUntilSummit()),
     };
 
     const recipientName = `${r.first_name} ${r.last_name}`;
