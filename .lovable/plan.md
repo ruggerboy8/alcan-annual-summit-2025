@@ -30,6 +30,7 @@
 - Add an optional **Promo Code** field to the registration form with the copy: "Have a sponsor promo code? Enter it here."
 - Accepted code: `AlcanVIP2026` (case-insensitive, trimmed).
 - Store the code on the registration record so it shows in the admin Registrations detail view and can be exported.
+- In the admin dashboard, anyone with a valid promo code displays as **Sponsor** instead of "Team" or "Guest" — in the registrations list, the detail view, filters/counts, and check-in.
 - Success screen copy: normal registrants see the standard confirmation; anyone who entered a valid sponsor code sees a warmer, gratitude-forward message thanking them for their sponsorship and support of The Summit.
 - An invalid code does **not** block registration — it just doesn't unlock the sponsor message (no scary error).
 
