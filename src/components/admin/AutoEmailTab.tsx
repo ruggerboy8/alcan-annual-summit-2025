@@ -199,6 +199,21 @@ export default function AutoEmailTab({ token }: Props) {
         </div>
       </div>
 
+      {/* Not-published warning — while in Draft, NO confirmation emails go out */}
+      {tpl && !tpl.is_published && (
+        <div className="flex items-start gap-3 rounded-lg border border-destructive/40 bg-destructive/10 p-4 text-sm">
+          <Info className="h-4 w-4 mt-0.5 text-destructive flex-shrink-0" />
+          <div className="text-destructive">
+            <span className="font-semibold">This email is not published.</span> While
+            it's in Draft, new registrants receive <span className="font-semibold">no</span>{" "}
+            confirmation email at all. Click <span className="font-semibold">Save &amp; Publish</span>{" "}
+            below to turn automatic sending back on.
+          </div>
+        </div>
+      )}
+
+
+
       {/* AI Composer */}
       <div className="rounded-lg border border-border bg-card shadow-sm p-5 space-y-4">
         <h2 className="flex items-center gap-2 font-semibold text-base">
