@@ -414,6 +414,23 @@ export default function RegistrationModal({
                 </>
               )}
 
+              {attendeeType === "guest" && (
+                <FieldWrap
+                  label="Promo Code"
+                  hint="(optional)"
+                  error={(form.formState.errors as any).promoCode?.message}
+                >
+                  <Input
+                    autoComplete="off"
+                    placeholder="Enter your code"
+                    {...form.register("promoCode")}
+                  />
+                  <p className="mt-1.5 text-sm text-muted-foreground">
+                    Have a sponsor promo code? Enter it here.
+                  </p>
+                </FieldWrap>
+              )}
+
               <Button
                 type="submit"
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-6 text-base"
