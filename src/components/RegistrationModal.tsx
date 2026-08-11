@@ -341,21 +341,6 @@ export default function RegistrationModal({
                 />
               </FieldWrap>
 
-              <FieldWrap
-                label="Promo Code"
-                hint="(optional)"
-                error={(form.formState.errors as any).promoCode?.message}
-              >
-                <Input
-                  autoComplete="off"
-                  placeholder="Enter your code"
-                  {...form.register("promoCode")}
-                />
-                <p className="mt-1.5 text-sm text-muted-foreground">
-                  Have a sponsor promo code? Enter it here.
-                </p>
-              </FieldWrap>
-
               {attendeeType === "staff" ? (
                 <>
                   <FieldWrap
