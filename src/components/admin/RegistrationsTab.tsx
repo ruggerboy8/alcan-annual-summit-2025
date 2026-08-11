@@ -147,7 +147,7 @@ export default function RegistrationsTab({ token }: Props) {
           [
             r.first_name,
             r.last_name,
-            r.attendee_type === "staff" ? "Team" : "Guest",
+            attendeeLabel(r),
             r.email,
             r.phone ?? "",
             r.practice ?? "",
@@ -270,7 +270,7 @@ export default function RegistrationsTab({ token }: Props) {
                         {r.first_name} {r.last_name}
                       </td>
                       <td className="px-4 py-3">
-                        <TypeBadge type={r.attendee_type} />
+                        <TypeBadge r={r} />
                       </td>
                       <td className="px-4 py-3 text-muted-foreground">
                         {r.email}
@@ -318,7 +318,7 @@ export default function RegistrationsTab({ token }: Props) {
                         {r.email}
                       </div>
                       <div className="mt-2">
-                        <TypeBadge type={r.attendee_type} />
+                        <TypeBadge r={r} />
                       </div>
                     </div>
                     <Button size="sm" variant="outline" onClick={() => setSelected(r)}>
@@ -373,18 +373,21 @@ export default function RegistrationsTab({ token }: Props) {
   );
 }
 
-function TypeBadge({ type }: { type: "staff" | "guest" }) {
+function TypeBadge({ r }: { r: Registration }) {
+  const label = attendeeLabel(r);
   return (
     <Badge
       variant="outline"
       className={cn(
         "border-transparent text-xs font-semibold",
-        type === "staff"
-          ? "bg-primary/10 text-primary"
-          : "bg-gold/15 text-gold",
+        label === "Sponsor"
+          ? "bg-gold text-primary"
+          : label === "Team"
+            ? "bg-primary/10 text-primary"
+            : "bg-gold/15 text-gold",
       )}
     >
-      {type === "staff" ? "Team" : "Guest"}
+      {label}
     </Badge>
   );
 }

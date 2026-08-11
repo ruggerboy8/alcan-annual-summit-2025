@@ -193,12 +193,14 @@ export default function RegistrationDetail({
                 variant="outline"
                 className={cn(
                   "border-transparent",
-                  r.attendee_type === "staff"
-                    ? "bg-primary/10 text-primary"
-                    : "bg-gold/15 text-gold",
+                  attendeeLabel(r) === "Sponsor"
+                    ? "bg-gold text-primary"
+                    : r.attendee_type === "staff"
+                      ? "bg-primary/10 text-primary"
+                      : "bg-gold/15 text-gold",
                 )}
               >
-                {r.attendee_type === "staff" ? "Team" : "Guest"}
+                {attendeeLabel(r)}
               </Badge>
               {r.checked_in_at && (
                 <Badge className="bg-green-100 text-green-700 border-transparent">

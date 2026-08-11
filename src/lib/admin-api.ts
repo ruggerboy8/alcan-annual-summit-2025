@@ -122,6 +122,7 @@ export type Registration = {
   practice: string | null;
   organization: string | null;
   role: string | null;
+  promo_code: string | null;
   registration_status: string;
   confirmation_email_sent_at: string | null;
   confirmation_email_id: string | null;
@@ -130,6 +131,15 @@ export type Registration = {
   event_version: string;
   created_at: string;
 };
+
+/** Anyone who registered with a valid sponsor promo code shows as "Sponsor". */
+export function attendeeLabel(r: {
+  attendee_type: "staff" | "guest";
+  promo_code?: string | null;
+}): "Sponsor" | "Team" | "Guest" {
+  if (r.promo_code) return "Sponsor";
+  return r.attendee_type === "staff" ? "Team" : "Guest";
+}
 
 export type RegistrationStats = {
   total: number;
