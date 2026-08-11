@@ -1,0 +1,1 @@
+UPDATE public.email_campaigns SET subject = replace(subject, '121 days', '{{days_until_summit}} days'), html = replace(replace(html, '121 Days to The Summit', '{{days_until_summit}} Days to The Summit'), '121 days to the summit', '{{days_until_summit}} days to the summit') WHERE id = '1918ed24-e454-4a97-8a22-320318ceb168';
