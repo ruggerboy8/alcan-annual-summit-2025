@@ -635,6 +635,37 @@ export default function ComposeAndSendTab({ token }: Props) {
                 placeholder="e.g. 3-week reminder"
               />
             </div>
+            <div className="rounded-md border border-dashed border-border bg-muted/20 p-3 space-y-2">
+              <Label htmlFor="campaign-test-email" className="text-sm font-medium">
+                Send a test to yourself first
+              </Label>
+              <p className="text-xs text-muted-foreground">
+                Sends this exact email (subject prefixed with [TEST]) to one address. Nobody on the
+                list is emailed.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <Input
+                  id="campaign-test-email"
+                  type="email"
+                  value={testEmail}
+                  onChange={(e) => setTestEmail(e.target.value)}
+                  placeholder="you@alcanhearing.com"
+                  className="sm:w-72 w-full"
+                />
+                <Button
+                  variant="outline"
+                  onClick={sendTest}
+                  disabled={testing || sending || !testEmail.trim()}
+                >
+                  {testing ? (
+                    <Loader2 className="mr-1.5 h-4 w-4 animate-spin" />
+                  ) : (
+                    <Send className="mr-1.5 h-4 w-4" />
+                  )}
+                  Send Test
+                </Button>
+              </div>
+            </div>
             <div className="flex flex-wrap gap-2">
               <Button variant="outline" onClick={saveDraft} disabled={saving || sending}>
                 {saving ? (
@@ -653,6 +684,7 @@ export default function ComposeAndSendTab({ token }: Props) {
                 Send Email
               </Button>
             </div>
+
           </div>
         </>
       )}
