@@ -308,7 +308,33 @@ export default function ComposeAndSendTab({ token }: Props) {
     }
   };
 
+  const sendTest = async () => {
+    if (!subject.trim() || !html.trim()) {
+      toast.error("Subject and body are required.");
+      return;
+    }
+    setTesting(true);
+    try {
+      await api("/admin-email-send-test", {
+        method: "POST",
+        body: {
+          recipientEmail: testEmail.trim(),
+          subject,
+          html,
+          preheader: preheader || null,
+          text_fallback: textFallback || null,
+        },
+      });
+      toast.success(`Test sent to ${testEmail.trim()}.`);
+    } catch (err: any) {
+      toast.error(err.message ?? "Test send failed");
+    } finally {
+      setTesting(false);
+    }
+  };
+
   const openSendModal = async () => {
+
     if (!subject.trim() || !html.trim()) {
       toast.error("Subject and body are required.");
       return;
