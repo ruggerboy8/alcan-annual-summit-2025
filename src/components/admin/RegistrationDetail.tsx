@@ -29,7 +29,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
-import { Registration, useAdminApi } from "@/lib/admin-api";
+import { Registration, useAdminApi, attendeeLabel } from "@/lib/admin-api";
 import { PRACTICES } from "@/lib/event-constants";
 import { cn } from "@/lib/utils";
 
