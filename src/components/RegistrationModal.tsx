@@ -42,6 +42,7 @@ const baseFields = {
   lastName: z.string().trim().min(1, "Last name is required").max(100),
   email: z.string().trim().email("Enter a valid email").max(255),
   phone: z.string().trim().max(40).optional().or(z.literal("")),
+  promoCode: z.string().trim().max(60).optional().or(z.literal("")),
   honeypot: z.string().max(0).optional().or(z.literal("")),
 };
 
@@ -78,6 +79,7 @@ const defaultStaffValues: StaffValues = {
   phone: "",
   practice: "",
   role: "",
+  promoCode: "",
   honeypot: "",
 };
 
@@ -88,6 +90,7 @@ const defaultGuestValues: GuestValues = {
   phone: "",
   organization: "",
   role: "",
+  promoCode: "",
   honeypot: "",
 };
 
@@ -101,6 +104,7 @@ export default function RegistrationModal({
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [loadedAt, setLoadedAt] = useState<number>(() => Date.now());
+  const [isSponsor, setIsSponsor] = useState(false);
 
   const schema = attendeeType === "staff" ? staffSchema : guestSchema;
   const defaults =
@@ -120,6 +124,7 @@ export default function RegistrationModal({
       setLoadedAt(Date.now());
       setStep("form");
       setSubmitError(null);
+      setIsSponsor(false);
       setAttendeeType("staff");
       form.reset(defaultStaffValues as FormValues);
     }
@@ -158,6 +163,7 @@ export default function RegistrationModal({
       lastName: v.lastName,
       email: v.email,
       phone: v.phone || undefined,
+      promoCode: v.promoCode || undefined,
       honeypot: v.honeypot ?? "",
       submittedAt: loadedAt,
     };
@@ -184,6 +190,7 @@ export default function RegistrationModal({
       const data = await res.json().catch(() => ({}));
 
       if (res.ok && data?.success) {
+        setIsSponsor(!!data?.sponsor);
         setStep("submitted");
       } else if (res.status === 409) {
         setSubmitError(
@@ -220,6 +227,9 @@ export default function RegistrationModal({
     } else {
       rows.push({ label: "Organization", value: (values as GuestValues).organization ?? "" });
       rows.push({ label: "Role", value: (values as GuestValues).role ?? "" });
+    }
+    if (values.promoCode) {
+      rows.push({ label: "Promo Code", value: values.promoCode });
     }
     return rows;
   }, [values, attendeeType]);
@@ -329,6 +339,21 @@ export default function RegistrationModal({
                   autoComplete="tel"
                   {...form.register("phone")}
                 />
+              </FieldWrap>
+
+              <FieldWrap
+                label="Promo Code"
+                hint="(optional)"
+                error={(form.formState.errors as any).promoCode?.message}
+              >
+                <Input
+                  autoComplete="off"
+                  placeholder="Enter your code"
+                  {...form.register("promoCode")}
+                />
+                <p className="mt-1.5 text-sm text-muted-foreground">
+                  Have a sponsor promo code? Enter it here.
+                </p>
               </FieldWrap>
 
               {attendeeType === "staff" ? (
@@ -467,10 +492,23 @@ export default function RegistrationModal({
         {step === "submitted" && (
           <div className="flex flex-col items-center text-center py-6 space-y-4">
             <CheckCircle2 className="h-14 w-14 text-gold" strokeWidth={1.5} />
-            <h3 className="font-biondi text-2xl text-primary">You're registered!</h3>
+            <h3 className="font-biondi text-2xl text-primary">
+              {isSponsor ? "Welcome, Sponsor!" : "You're registered!"}
+            </h3>
             <p className="text-muted-foreground max-w-md">
-              Thanks{values.firstName ? `, ${values.firstName}` : ""}. We'll see you
-              at The Summit. Check your inbox for a confirmation email.
+              {isSponsor ? (
+                <>
+                  Thank you{values.firstName ? `, ${values.firstName}` : ""} — your
+                  sponsorship is what makes this climb possible. You're on the roster
+                  as a Summit sponsor, and we're grateful for your support. Check your
+                  inbox for a confirmation email.
+                </>
+              ) : (
+                <>
+                  Thanks{values.firstName ? `, ${values.firstName}` : ""}. We'll see you
+                  at The Summit. Check your inbox for a confirmation email.
+                </>
+              )}
             </p>
             <Button
               type="button"
