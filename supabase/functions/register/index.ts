@@ -162,6 +162,12 @@ Deno.serve(async (req) => {
     if (!role) return json({ error: "Role is required" }, 400);
   }
 
+  // Optional sponsor promo code. An unrecognized code never blocks
+  // registration — it simply isn't stored and doesn't unlock sponsor status.
+  const rawPromo = String(body.promoCode ?? "").trim();
+  const isSponsor = rawPromo.toLowerCase() === VALID_PROMO_CODE.toLowerCase();
+  const promoCode = isSponsor ? VALID_PROMO_CODE : null;
+
   const { data: existing } = await supabase
     .from("event_registrations")
     .select("id")
@@ -184,6 +190,7 @@ Deno.serve(async (req) => {
       practice,
       organization,
       role,
+      promo_code: promoCode,
       registration_status: "registered",
       event_version: EVENT_VERSION,
     })
@@ -197,5 +204,5 @@ Deno.serve(async (req) => {
 
   await sendConfirmationEmail(inserted);
 
-  return json({ success: true });
+  return json({ success: true, sponsor: isSponsor });
 });
