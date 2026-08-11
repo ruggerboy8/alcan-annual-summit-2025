@@ -39,5 +39,6 @@
 - Database: add a nullable `promo_code` column to `event_registrations` (migration; no backfill needed).
 - `supabase/functions/register/index.ts`: accept and validate `promoCode`, persist it, return a `sponsor: true` flag for a valid code, and log a failed `email_sends` row when no published template is found.
 - `src/components/RegistrationModal.tsx`: new optional field, zod schema entry, review row, and branched success copy.
+- Admin display: derive a "Sponsor" label from a present/valid `promo_code` (attendee type stays `staff`/`guest` in the data) across `RegistrationsTab`, `RegistrationDetail`, and `CheckInTab`.
 - Image asset uploaded to the `email-assets` public bucket; `HERO_IMAGE_URL` in `admin-generate-email` and the stored confirmation template HTML both updated.
 - `src/components/admin/AutoEmailTab.tsx`: unpublished-template warning banner.
