@@ -13,6 +13,14 @@ const supabase = createClient(
 const EVENT_DATE = "December 10–11, 2026";
 const EVENT_LOCATION = "Austin, TX";
 
+// Summit start in Austin, TX (CST, UTC-6). Used to render a live
+// "days until" countdown inside campaign emails at send time.
+const SUMMIT_START = new Date("2026-12-10T00:00:00-06:00");
+function daysUntilSummit(): number {
+  const ms = SUMMIT_START.getTime() - Date.now();
+  return Math.max(0, Math.ceil(ms / (1000 * 60 * 60 * 24)));
+}
+
 function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
