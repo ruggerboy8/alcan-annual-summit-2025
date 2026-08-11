@@ -28,27 +28,57 @@ Deno.serve(async (req) => {
   }
 
   const { templateKey, recipientEmail } = body ?? {};
-  if (!templateKey || !recipientEmail) {
-    return json({ error: "templateKey and recipientEmail required" }, 400);
+  if (!recipientEmail) {
+    return json({ error: "recipientEmail required" }, 400);
   }
 
-  const { data: tpl, error: tplErr } = await supabase
-    .from("email_templates")
-    .select("*")
-    .eq("template_key", templateKey)
-    .maybeSingle();
-  if (tplErr || !tpl) return json({ error: "Template not found" }, 404);
+  // Summit start in Austin, TX (CST, UTC-6) — keeps {{days_until_summit}} live.
+  const SUMMIT_START = new Date("2026-12-10T00:00:00-06:00");
+  const daysUntil = Math.max(
+    0,
+    Math.ceil((SUMMIT_START.getTime() - Date.now()) / (1000 * 60 * 60 * 24)),
+  );
 
   const vars = {
     first_name: "Test",
     full_name: "Test User",
     event_date: "December 10–11, 2026",
     event_location: "Austin, TX",
+    days_until_summit: String(daysUntil),
   };
+
+  // Inline mode: caller passes the content directly (e.g. an unsaved campaign draft).
+  const inlineHtml = typeof body?.html === "string" ? body.html : null;
+  const inlineSubject = typeof body?.subject === "string" ? body.subject : null;
+
+  let tpl: any;
+  if (inlineHtml && inlineSubject) {
+    tpl = {
+      subject: inlineSubject,
+      html: inlineHtml,
+      text_fallback: body?.text_fallback ?? null,
+      preheader: body?.preheader ?? null,
+      version: 1,
+    };
+  } else {
+    if (!templateKey) {
+      return json({ error: "templateKey or subject+html required" }, 400);
+    }
+    const { data, error: tplErr } = await supabase
+      .from("email_templates")
+      .select("*")
+      .eq("template_key", templateKey)
+      .maybeSingle();
+    if (tplErr || !data) return json({ error: "Template not found" }, 404);
+    tpl = data;
+  }
+
   const subject = renderTemplate(tpl.subject, vars);
   const html = renderTemplate(tpl.html, vars);
   const text = tpl.text_fallback ? renderTemplate(tpl.text_fallback, vars) : null;
   const preheader = tpl.preheader ? renderTemplate(tpl.preheader, vars) : null;
+  const logKey = templateKey ?? "campaign-test";
+
 
   const result = await sendEmail({
     to: recipientEmail,
