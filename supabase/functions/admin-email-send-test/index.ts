@@ -91,7 +91,7 @@ Deno.serve(async (req) => {
 
   if (!result.ok) {
     await supabase.from("email_sends").insert({
-      template_key: templateKey,
+      template_key: logKey,
       template_version: tpl.version,
       recipient_email: recipientEmail,
       recipient_name: "Test User",
@@ -104,7 +104,7 @@ Deno.serve(async (req) => {
   }
 
   await supabase.from("email_sends").insert({
-    template_key: templateKey,
+    template_key: logKey,
     template_version: tpl.version,
     recipient_email: recipientEmail,
     recipient_name: "Test User",
