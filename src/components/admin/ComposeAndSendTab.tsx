@@ -93,6 +93,9 @@ export default function ComposeAndSendTab({ token }: Props) {
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [sendModalOpen, setSendModalOpen] = useState(false);
   const [sending, setSending] = useState(false);
+  const [testEmail, setTestEmail] = useState("");
+  const [testing, setTesting] = useState(false);
+
   const [dryRun, setDryRun] = useState<{ count: number; preview: { name: string; email: string }[] } | null>(null);
   const [dryRunLoading, setDryRunLoading] = useState(false);
 
