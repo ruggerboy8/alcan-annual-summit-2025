@@ -139,8 +139,27 @@ const Travel = () => {
               </a>
 
               <p className="mx-auto mt-5 max-w-xl text-white/90">
-                To receive the Alcan group rate, call the hotel directly and let them know you&rsquo;re with Alcan.
+                To receive the Alcan group rate, book online using our corporate promo code.
               </p>
+
+              <div className="mx-auto mt-5 max-w-xl rounded-xl border border-gold/40 bg-white/[0.06] p-5 text-left">
+                <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-gold">
+                  Promo Code
+                </p>
+                <p className="mt-2 text-center font-biondi text-2xl font-bold tracking-wider text-white">
+                  F3088
+                </p>
+                <ol className="mt-4 list-decimal space-y-1.5 pl-5 text-base text-white/90">
+                  <li>Select your dates and number of occupants.</li>
+                  <li>Under the <strong className="text-white">Special Rate</strong> tab, choose <strong className="text-white">Corp/Promo Code</strong>.</li>
+                  <li>Enter code <strong className="text-white">F3088</strong>, then pick the room you&rsquo;d like to book.</li>
+                </ol>
+              </div>
+
+              <p className="mx-auto mt-5 max-w-xl text-white/90">
+                Questions about your reservation? Call the hotel directly and let them know you&rsquo;re with Alcan.
+              </p>
+
 
               <a
                 href={HOTEL_PHONE_HREF}
