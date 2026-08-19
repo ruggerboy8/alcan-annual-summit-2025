@@ -1,0 +1,2 @@
+ALTER TABLE public.email_sends DROP CONSTRAINT email_sends_send_type_check;
+ALTER TABLE public.email_sends ADD CONSTRAINT email_sends_send_type_check CHECK (send_type = ANY (ARRAY['test'::text,'production'::text,'broadcast'::text]));
