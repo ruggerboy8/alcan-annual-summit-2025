@@ -195,6 +195,8 @@ export default function RegistrationDetail({
                   "border-transparent",
                   attendeeLabel(r) === "Sponsor"
                     ? "bg-gold text-primary"
+                    : attendeeLabel(r) === "Alcan CA"
+                    ? "bg-primary text-primary-foreground"
                     : r.attendee_type === "staff"
                       ? "bg-primary/10 text-primary"
                       : "bg-gold/15 text-gold",
