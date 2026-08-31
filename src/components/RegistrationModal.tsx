@@ -126,6 +126,7 @@ export default function RegistrationModal({
       setStep("form");
       setSubmitError(null);
       setIsSponsor(false);
+      setIsCalifornia(false);
       setAttendeeType("staff");
       form.reset(defaultStaffValues as FormValues);
     }
@@ -192,6 +193,7 @@ export default function RegistrationModal({
 
       if (res.ok && data?.success) {
         setIsSponsor(!!data?.sponsor);
+        setIsCalifornia(!!data?.california);
         setStep("submitted");
       } else if (res.status === 409) {
         setSubmitError(
