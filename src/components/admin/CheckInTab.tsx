@@ -168,13 +168,17 @@ export default function CheckInTab({ token }: Props) {
                           "border-transparent text-[10px]",
                           attendeeLabel(r) === "Sponsor"
                             ? "bg-gold text-primary"
-                            : r.attendee_type === "staff"
+                            : attendeeLabel(r) === "Alcan CA"
+                              ? "bg-primary text-primary-foreground"
+                              : r.attendee_type === "staff"
                               ? "bg-primary/10 text-primary"
                               : "bg-gold/15 text-gold",
                         )}
                       >
                         {attendeeLabel(r) === "Sponsor"
                           ? `Sponsor · ${r.organization ?? r.practice ?? ""}`.trim()
+                          : attendeeLabel(r) === "Alcan CA"
+                          ? `Alcan CA · ${r.organization ?? r.practice ?? ""}`.trim()
                           : r.attendee_type === "staff"
                             ? r.practice ?? "Team"
                             : r.organization ?? "Guest"}

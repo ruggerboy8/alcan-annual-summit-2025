@@ -383,7 +383,9 @@ function TypeBadge({ r }: { r: Registration }) {
         "border-transparent text-xs font-semibold",
         label === "Sponsor"
           ? "bg-gold text-primary"
-          : label === "Team"
+          : label === "Alcan CA"
+            ? "bg-primary text-primary-foreground"
+            : label === "Team"
             ? "bg-primary/10 text-primary"
             : "bg-gold/15 text-gold",
       )}
