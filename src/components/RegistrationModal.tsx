@@ -105,6 +105,7 @@ export default function RegistrationModal({
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [loadedAt, setLoadedAt] = useState<number>(() => Date.now());
   const [isSponsor, setIsSponsor] = useState(false);
+  const [isCalifornia, setIsCalifornia] = useState(false);
 
   const schema = attendeeType === "staff" ? staffSchema : guestSchema;
   const defaults =
@@ -426,7 +427,7 @@ export default function RegistrationModal({
                     {...form.register("promoCode")}
                   />
                   <p className="mt-1.5 text-sm text-muted-foreground">
-                    Have a sponsor promo code? Enter it here.
+                    Have a sponsor or California promo code? Enter it here.
                   </p>
                 </FieldWrap>
               )}
