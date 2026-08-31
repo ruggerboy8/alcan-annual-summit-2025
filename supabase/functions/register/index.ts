@@ -12,6 +12,7 @@ const EVENT_VERSION = "v1-alcan-summit-2026";
 const EVENT_DATE = "December 10–11, 2026";
 const EVENT_LOCATION = "Austin, TX";
 const VALID_PROMO_CODE = "AlcanVIP2026";
+const CA_PROMO_CODE = "AlcanCA2026";
 
 const supabase = createClient(
   Deno.env.get("SUPABASE_URL")!,
@@ -167,7 +168,12 @@ Deno.serve(async (req) => {
   // registration — it simply isn't stored and doesn't unlock sponsor status.
   const rawPromo = String(body.promoCode ?? "").trim();
   const isSponsor = rawPromo.toLowerCase() === VALID_PROMO_CODE.toLowerCase();
-  const promoCode = isSponsor ? VALID_PROMO_CODE : null;
+  const isCalifornia = rawPromo.toLowerCase() === CA_PROMO_CODE.toLowerCase();
+  const promoCode = isSponsor
+    ? VALID_PROMO_CODE
+    : isCalifornia
+      ? CA_PROMO_CODE
+      : null;
 
   const { data: existing } = await supabase
     .from("event_registrations")
@@ -205,5 +211,5 @@ Deno.serve(async (req) => {
 
   await sendConfirmationEmail(inserted);
 
-  return json({ success: true, sponsor: isSponsor });
+  return json({ success: true, sponsor: isSponsor, california: isCalifornia });
 });

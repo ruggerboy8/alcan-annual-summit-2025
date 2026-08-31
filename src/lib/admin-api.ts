@@ -132,12 +132,18 @@ export type Registration = {
   created_at: string;
 };
 
-/** Anyone who registered with a valid sponsor promo code shows as "Sponsor". */
+export const CA_PROMO_CODE = "AlcanCA2026";
+
+/** Promo-code registrants show as "Sponsor" or "Alcan CA". */
 export function attendeeLabel(r: {
   attendee_type: "staff" | "guest";
   promo_code?: string | null;
-}): "Sponsor" | "Team" | "Guest" {
-  if (r.promo_code) return "Sponsor";
+}): "Sponsor" | "Alcan CA" | "Team" | "Guest" {
+  if (r.promo_code) {
+    return r.promo_code.toLowerCase() === CA_PROMO_CODE.toLowerCase()
+      ? "Alcan CA"
+      : "Sponsor";
+  }
   return r.attendee_type === "staff" ? "Team" : "Guest";
 }
 
