@@ -498,7 +498,11 @@ export default function RegistrationModal({
           <div className="flex flex-col items-center text-center py-6 space-y-4">
             <CheckCircle2 className="h-14 w-14 text-gold" strokeWidth={1.5} />
             <h3 className="font-biondi text-2xl text-primary">
-              {isSponsor ? "Welcome, Sponsor!" : "You're registered!"}
+              {isSponsor
+                ? "Welcome, Sponsor!"
+                : isCalifornia
+                  ? "Welcome, Alcan CA!"
+                  : "You're registered!"}
             </h3>
             <p className="text-muted-foreground max-w-md">
               {isSponsor ? (
@@ -507,6 +511,12 @@ export default function RegistrationModal({
                   sponsorship is what makes this climb possible. You're on the roster
                   as a Summit sponsor, and we're grateful for your support. Check your
                   inbox for a confirmation email.
+                </>
+              ) : isCalifornia ? (
+                <>
+                  Thanks{values.firstName ? `, ${values.firstName}` : ""} — you're on
+                  the roster with the Alcan California crew. We're glad you're making
+                  the trip. Check your inbox for a confirmation email.
                 </>
               ) : (
                 <>
