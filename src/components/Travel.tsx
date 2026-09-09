@@ -53,7 +53,7 @@ const Travel = () => {
         <div className="mb-14 text-center">
           <motion.h2
             {...fadeUp(0)}
-            className="mb-4 font-biondi text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl"
+            className="mb-4 font-biondi text-display-md font-bold text-white"
           >
             Getting Here.
           </motion.h2>
@@ -66,7 +66,7 @@ const Travel = () => {
             <motion.div {...fromLeft(0)}>
               <div className="mb-4 flex items-center justify-center gap-3 md:justify-start">
                 <MapPin className="h-6 w-6 text-teal-bright" strokeWidth={1.5} />
-                <h3 className="font-biondi text-2xl font-bold text-white sm:text-3xl">
+                <h3 className="font-biondi text-display-sm font-bold text-white">
                   Event Venue
                 </h3>
               </div>
@@ -77,11 +77,15 @@ const Travel = () => {
                 <p className="text-xl font-semibold text-white">Texas Old Town</p>
                 <p className="text-white">1205 Roland Ln</p>
                 <p className="text-white">Kyle, TX 78640</p>
+                <p className="mt-3 text-base text-white/90">
+                  The venue is in Kyle, about 25 minutes south of downtown
+                  Austin. Book travel into Austin.
+                </p>
               </div>
 
               <div className="mb-4 mt-8 flex items-center justify-center gap-3 md:justify-start">
                 <Plane className="h-6 w-6 text-teal-bright" strokeWidth={1.5} />
-                <h3 className="font-biondi text-2xl font-bold text-white sm:text-3xl">
+                <h3 className="font-biondi text-display-sm font-bold text-white">
                   Travel Times
                 </h3>
               </div>
@@ -111,15 +115,18 @@ const Travel = () => {
           </div>
         </div>
 
-        {/* Staying in Buda */}
+        {/* Staying in Buda.
+            The card uses a navy-deep wash rather than a white glass wash: the
+            backdrop photo has a near-white region, which made accent text on a
+            translucent white card fail contrast wherever that region sat. */}
         <motion.div {...fadeUp(0.1)} className="mx-auto max-w-3xl">
-          <div className="relative overflow-hidden rounded-2xl border border-white/20 bg-white/[0.07] p-8 text-center shadow-2xl backdrop-blur-md sm:p-12">
+          <div className="relative overflow-hidden rounded-2xl border border-white/20 bg-navy-deep/80 p-8 text-center shadow-2xl backdrop-blur-md sm:p-12">
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-teal-bright/80 to-transparent" />
 
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-teal-bright sm:text-sm">
               Where to Stay
             </p>
-            <h3 className="mb-4 font-biondi text-2xl font-bold text-white sm:text-3xl md:text-4xl">
+            <h3 className="mb-4 font-biondi text-display-sm font-bold text-white">
               Fairfield Inn &amp; Suites
             </h3>
             <div className="mx-auto mb-6 h-px w-16 bg-teal-bright/60" />

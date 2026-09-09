@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
-const TARGET_DATE = new Date('December 10, 2026 09:00:00').getTime();
+// Pinned to Central with an explicit UTC offset. Parsing a bare date string
+// resolves in the VISITOR's timezone, so the Michigan practices (Lake Orion,
+// Fenton) would have counted down to a different moment than the Texas ones.
+// 10 Dec 2026 is CST, which is UTC-6.
+const TARGET_DATE = new Date('2026-12-10T09:00:00-06:00').getTime();
 
 const CountdownTimer = () => {
   const prefersReducedMotion = useReducedMotion();
@@ -51,7 +55,7 @@ const CountdownTimer = () => {
                 viewport: { once: true },
                 transition: { duration: 0.6 },
               })}
-          className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-teal-bright"
+          className="mb-3 font-mono text-eyebrow font-medium uppercase text-teal-bright"
         >
           The Ascent Begins
         </motion.p>
@@ -66,8 +70,7 @@ const CountdownTimer = () => {
                 className="flex flex-col items-center"
               >
                 <div
-                  className="font-biondi font-bold text-white tabular-nums leading-none"
-                  style={{ fontSize: 'clamp(2.5rem, 10vw, 7rem)' }}
+                  className="font-biondi text-stat font-light text-white tabular-nums"
                 >
                   {u.value.toString().padStart(2, '0')}
                 </div>

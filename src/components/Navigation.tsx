@@ -18,8 +18,7 @@ const Navigation = () => {
   const links = [
     { label: 'Home', id: 'hero' },
     { label: 'About', id: 'about' },
-    { label: 'Speakers', id: 'speakers' },
-    { label: 'Agenda', id: 'agenda' },
+    { label: 'Lineup', id: 'lineup' },
     { label: 'Travel', id: 'travel' },
     { label: 'Register', id: 'register' },
   ];

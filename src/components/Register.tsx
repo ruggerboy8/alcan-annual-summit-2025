@@ -20,7 +20,7 @@ const Register = () => {
         <div className="text-center">
           <motion.h2
             {...fade(0)}
-            className="mb-6 font-biondi text-3xl font-bold leading-tight sm:text-4xl md:text-5xl"
+            className="mb-6 font-biondi text-display-lg font-bold"
           >
             Ready to Make the Climb?
           </motion.h2>

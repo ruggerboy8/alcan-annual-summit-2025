@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import ImageCarousel from './ImageCarousel';
+import { Eyebrow } from '@/components/section';
 import RegistrationModal from './RegistrationModal';
 
 const bullets = [
@@ -54,12 +55,12 @@ const About = () => {
           <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
             {/* Copy block */}
             <div className="order-2 max-w-[680px] md:order-1">
-              <motion.h2
-                {...headingFade}
-                className="mb-6 font-biondi text-3xl font-bold leading-tight text-primary sm:text-4xl md:text-5xl"
-              >
-                A Different Kind of Gathering.
-              </motion.h2>
+              <motion.div {...headingFade}>
+                <Eyebrow className="mb-4">Why we gather</Eyebrow>
+                <h2 className="mb-6 font-biondi text-display-lg font-bold text-navy">
+                  A Different Kind of Gathering.
+                </h2>
+              </motion.div>
 
               <motion.div {...bodyFade}>
                 <p className="mb-5 text-lg leading-relaxed text-ink sm:text-xl">

@@ -121,6 +121,24 @@ export default {
 				'sans': ['Public Sans', 'system-ui', '-apple-system', 'sans-serif'],
 				'mono': ['IBM Plex Mono', 'ui-monospace', 'monospace'],
 			},
+			fontSize: {
+				/* Display scale. The brand deck scale is authored at 1920x1080; these are
+				   its web equivalents, kept in the same proportions and fluid between a
+				   phone and a large desktop. Roles, not sizes: pick by what the text IS.
+
+				     display-xl  the page thesis. One per page (the hero).
+				     display-lg  a section that carries weight (the story, the ask).
+				     display-md  a supporting or utility section.
+				     display-sm  a heading inside a section.
+				     eyebrow     mono metadata above a heading (brand metadata face).
+				     stat        large numerals. Brand specifies Light 300, never Bold. */
+				'display-xl': ['clamp(1.5rem, 4.6vw, 3.5rem)',   { lineHeight: '1.04', letterSpacing: '0.005em' }],
+				'display-lg': ['clamp(2rem, 4.2vw, 3.25rem)',    { lineHeight: '1.08', letterSpacing: '0.005em' }],
+				'display-md': ['clamp(1.75rem, 3.1vw, 2.5rem)',  { lineHeight: '1.12', letterSpacing: '0.005em' }],
+				'display-sm': ['clamp(1.375rem, 2.2vw, 1.75rem)',{ lineHeight: '1.2',  letterSpacing: '0.005em' }],
+				'eyebrow':    ['0.75rem',                        { lineHeight: '1.3',  letterSpacing: '0.16em' }],
+				'stat':       ['clamp(2.5rem, 9vw, 6.5rem)',     { lineHeight: '0.9',  letterSpacing: '0' }],
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
