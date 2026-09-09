@@ -60,7 +60,7 @@ const Navigation = () => {
         </button>
 
         {/* Desktop Links */}
-        <div className="hidden lg:flex gap-x-7 xl:gap-x-9">
+        <div className="hidden md:flex gap-x-7 lg:gap-x-9">
           {links.map(l => (
             <button
               key={l.id}
@@ -76,7 +76,7 @@ const Navigation = () => {
         {/* Hamburger */}
         <button
           onClick={() => setOpen(!open)}
-          className={`lg:hidden transition-colors duration-300 drop-shadow-[0_1px_4px_rgb(0_0_0/0.4)] ${linkTone}`}
+          className={`md:hidden transition-colors duration-300 drop-shadow-[0_1px_4px_rgb(0_0_0/0.4)] ${linkTone}`}
           aria-label="Toggle menu"
         >
           {open ? <X size={28} /> : <Menu size={28} />}
@@ -85,7 +85,7 @@ const Navigation = () => {
 
       {/* Mobile dropdown — always white */}
       {open && (
-        <div className="lg:hidden bg-white border-t border-black/5 shadow-lg">
+        <div className="md:hidden bg-white border-t border-black/5 shadow-lg">
           {links.map(l => (
             <button
               key={l.id}
