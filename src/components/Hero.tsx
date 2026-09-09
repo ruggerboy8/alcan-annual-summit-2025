@@ -69,14 +69,17 @@ export default function Hero() {
 
       {/* Main content */}
       <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center px-4">
+        {/* The mark is wide (~2.4:1), so it is sized by WIDTH. The source PNG used
+            to be a 1563x1563 square whose artwork filled only 41% of the height,
+            which meant a tall box rendered a small logo; the padding is now
+            trimmed off the asset itself. */}
         <motion.div
           initial="hidden" animate="visible"
           variants={prefersReducedMotion ? {} : logoVariants}
-          className="mb-6 flex justify-center sm:mb-8"
-          style={{ height: 'clamp(140px, 30vw, 360px)' }}
+          className="mb-6 flex w-full justify-center sm:mb-8"
         >
           <SummitLogo
-            className="h-full w-auto"
+            className="h-auto w-[min(88%,720px)]"
             variant="white"
           />
         </motion.div>
