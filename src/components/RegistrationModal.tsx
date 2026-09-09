@@ -496,7 +496,7 @@ export default function RegistrationModal({
 
         {step === "submitted" && (
           <div className="flex flex-col items-center text-center py-6 space-y-4">
-            <CheckCircle2 className="h-14 w-14 text-gold" strokeWidth={1.5} />
+            <CheckCircle2 className="h-14 w-14 text-teal" strokeWidth={1.5} />
             <h3 className="font-biondi text-2xl text-primary">
               {isSponsor
                 ? "Welcome, Sponsor!"

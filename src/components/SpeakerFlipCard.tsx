@@ -42,7 +42,7 @@ export default function SpeakerFlipCard({ speaker }: { speaker: Speaker }) {
           <h3 className="text-xl font-biondi text-primary mb-2 leading-tight text-center">
             {speaker.name}
           </h3>
-          <p className="text-base text-gray-600 leading-tight text-center">
+          <p className="text-base text-ink-soft leading-tight text-center">
             {speaker.title}
           </p>
         </CardContent>

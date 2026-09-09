@@ -17,7 +17,7 @@ export default function Speakers() {
         };
 
   return (
-    <section id="speakers" className="border-t border-gray-100 bg-white py-12 sm:py-16">
+    <section id="speakers" className="border-t border-n03 bg-white py-12 sm:py-16">
       <div className="container">
         <div className="mb-8 text-center sm:mb-10">
           <motion.h2
@@ -28,7 +28,7 @@ export default function Speakers() {
           </motion.h2>
           <motion.p
             {...fade(0.1)}
-            className="text-sm font-semibold uppercase tracking-[0.3em] text-gold"
+            className="text-sm font-semibold uppercase tracking-[0.3em] text-teal"
           >
             Speaker announcements coming soon
           </motion.p>
@@ -58,7 +58,7 @@ export default function Speakers() {
           </div>
           <motion.p
             {...fade(0.4)}
-            className="mt-6 text-center text-base text-gray-500"
+            className="mt-6 text-center text-base text-ink-soft"
           >
             Until then, here&rsquo;s a look at what we built last year.
           </motion.p>

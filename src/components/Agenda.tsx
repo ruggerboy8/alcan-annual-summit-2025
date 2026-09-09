@@ -14,7 +14,7 @@ const Agenda = () => {
         };
 
   return (
-    <section id="agenda" className="bg-gray-50 py-16 sm:py-20">
+    <section id="agenda" className="bg-n01 py-16 sm:py-20">
       <div className="container">
         <div className="mb-10 text-center sm:mb-12">
           <motion.h2
@@ -25,7 +25,7 @@ const Agenda = () => {
           </motion.h2>
           <motion.p
             {...fade(0.1)}
-            className="text-sm font-semibold uppercase tracking-[0.3em] text-gold"
+            className="text-sm font-semibold uppercase tracking-[0.3em] text-teal"
           >
             Full agenda releasing soon
           </motion.p>
@@ -33,14 +33,14 @@ const Agenda = () => {
 
         <motion.p
           {...fade(0.2)}
-          className="mx-auto max-w-2xl text-center text-lg leading-relaxed text-text sm:text-xl"
+          className="mx-auto max-w-2xl text-center text-lg leading-relaxed text-ink sm:text-xl"
         >
           The 2026 Summit agenda is being finalized. Expect two focused days of workshops, keynotes, and connection &mdash; built for every member of your team.
         </motion.p>
 
         <motion.div
           {...fade(0.3)}
-          className="mx-auto mt-10 h-px w-24 bg-gradient-to-r from-transparent via-gold/60 to-transparent"
+          className="mx-auto mt-10 h-px w-24 bg-gradient-to-r from-transparent via-teal/60 to-transparent"
         />
       </div>
     </section>

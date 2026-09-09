@@ -69,7 +69,7 @@ export default function PasswordGate({ onAuthenticated }: PasswordGateProps) {
       <div className="w-full max-w-md rounded-xl bg-card p-8 shadow-2xl">
         <div className="flex justify-center mb-6">
           <div style={{ height: 90 }}>
-            <SummitLogo className="h-full w-auto" variant="black" animate={false} />
+            <SummitLogo className="h-full w-auto" variant="black" />
           </div>
         </div>
         <h1 className="font-biondi text-2xl font-bold text-primary text-center mb-1">

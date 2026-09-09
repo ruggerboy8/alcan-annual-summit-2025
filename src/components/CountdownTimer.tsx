@@ -40,7 +40,7 @@ const CountdownTimer = () => {
       };
 
   return (
-    <section className="bg-[#0d2e4a] py-16 sm:py-24">
+    <section className="bg-navy-deep py-16 sm:py-24">
       <div className="container text-center">
         <motion.p
           {...(prefersReducedMotion
@@ -51,11 +51,11 @@ const CountdownTimer = () => {
                 viewport: { once: true },
                 transition: { duration: 0.6 },
               })}
-          className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-gold"
+          className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-teal-bright"
         >
           The Ascent Begins
         </motion.p>
-        <div className="mx-auto mb-12 h-px w-24 bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+        <div className="mx-auto mb-12 h-px w-24 bg-gradient-to-r from-transparent via-teal-bright/60 to-transparent" />
 
         <div className="mx-auto flex max-w-5xl items-center justify-center gap-3 sm:gap-6 lg:gap-10">
           {units.map((u, i) => (
@@ -71,12 +71,12 @@ const CountdownTimer = () => {
                 >
                   {u.value.toString().padStart(2, '0')}
                 </div>
-                <p className="mt-2 text-[10px] font-medium uppercase tracking-[0.3em] text-white/50 sm:text-xs">
+                <p className="mt-2 text-[10px] font-medium uppercase tracking-[0.3em] text-white/60 sm:text-xs">
                   {u.label}
                 </p>
               </motion.div>
               {i < units.length - 1 && (
-                <div className="mx-2 h-10 w-px bg-gold/60 sm:mx-4 lg:mx-6" />
+                <div className="mx-2 h-10 w-px bg-teal-bright/60 sm:mx-4 lg:mx-6" />
               )}
             </div>
           ))}

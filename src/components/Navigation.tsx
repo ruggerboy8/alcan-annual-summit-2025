@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import wordmarkNavy from '@/assets/logos/alcan-wordmark-navy.png';
+import wordmarkWhite from '@/assets/logos/alcan-wordmark-white.png';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,8 +30,11 @@ const Navigation = () => {
     setOpen(false);
   };
 
-  const linkColor = isScrolled ? '#124570' : '#ffffff';
-  const linkShadow = isScrolled ? 'none' : '0 1px 8px rgba(0,0,0,0.45)';
+  // Over the hero the bar is transparent, so links need white + a shadow to stay
+  // legible against the video. Once the bar goes solid they switch to navy.
+  const linkTone = isScrolled
+    ? 'text-navy'
+    : 'text-white [text-shadow:0_1px_8px_rgb(0_0_0/0.45)]';
 
   return (
     <nav
@@ -45,24 +50,26 @@ const Navigation = () => {
           onClick={() => scrollTo('hero')}
           className="flex items-center transition-opacity hover:opacity-80"
         >
+          {/* Two real brand wordmarks rather than a CSS filter. The old markup
+              used the WHITE artwork for both states and only inverted it over the
+              hero — so once the bar went solid white, the logo was white on white. */}
           <img
-            src="/lovable-uploads/b03b3869-2bb8-4e4a-9e0b-db7f04c5d946.png"
+            src={isScrolled ? wordmarkNavy : wordmarkWhite}
             alt="Alcan Dental Cooperative"
-            className={`h-8 w-auto transition-all duration-300 ${isScrolled ? '' : 'brightness-0 invert'}`}
+            className="h-8 w-auto transition-opacity duration-300"
           />
         </button>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex gap-x-7 lg:gap-x-9">
+        <div className="hidden lg:flex gap-x-7 xl:gap-x-9">
           {links.map(l => (
             <button
               key={l.id}
               onClick={() => scrollTo(l.id)}
-              style={{ color: linkColor, textShadow: linkShadow }}
-              className="group relative font-biondi hover:opacity-80 transition-all duration-300 text-sm uppercase tracking-[0.18em]"
+              className={`group relative font-biondi hover:opacity-80 transition-all duration-300 text-sm uppercase tracking-[0.18em] ${linkTone}`}
             >
               {l.label}
-              <span className="pointer-events-none absolute -bottom-1.5 left-1/2 h-px w-0 -translate-x-1/2 bg-gold transition-all duration-300 group-hover:w-full" />
+              <span className="pointer-events-none absolute -bottom-1.5 left-1/2 h-px w-0 -translate-x-1/2 bg-teal transition-all duration-300 group-hover:w-full" />
             </button>
           ))}
         </div>
@@ -70,8 +77,7 @@ const Navigation = () => {
         {/* Hamburger */}
         <button
           onClick={() => setOpen(!open)}
-          style={{ color: linkColor }}
-          className="md:hidden transition-colors duration-300 drop-shadow-[0_1px_4px_rgba(0,0,0,0.4)]"
+          className={`lg:hidden transition-colors duration-300 drop-shadow-[0_1px_4px_rgb(0_0_0/0.4)] ${linkTone}`}
           aria-label="Toggle menu"
         >
           {open ? <X size={28} /> : <Menu size={28} />}
@@ -80,13 +86,12 @@ const Navigation = () => {
 
       {/* Mobile dropdown — always white */}
       {open && (
-        <div className="md:hidden bg-white border-t border-black/5 shadow-lg">
+        <div className="lg:hidden bg-white border-t border-black/5 shadow-lg">
           {links.map(l => (
             <button
               key={l.id}
               onClick={() => scrollTo(l.id)}
-              style={{ color: '#124570' }}
-              className="block w-full text-left px-6 py-4 font-biondi uppercase tracking-[0.18em] text-sm hover:bg-gray-50 transition-colors"
+              className="block w-full text-left px-6 py-4 font-biondi uppercase tracking-[0.18em] text-sm text-navy hover:bg-n02 transition-colors"
             >
               {l.label}
             </button>

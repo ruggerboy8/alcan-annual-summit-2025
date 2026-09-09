@@ -1,27 +1,29 @@
+import wordmarkWhite from '@/assets/logos/alcan-wordmark-white.png';
+
 const Footer = () => {
   return (
-    <footer className="bg-accent py-12 text-white">
+    <footer className="bg-navy-deep py-12 text-white">
       <div className="container">
-        <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.45em] text-white/50">
+        <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.45em] text-white/60">
           Earn the View ·
         </p>
 
         <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-3">
           <div className="flex justify-center md:justify-start">
             <img
-              src="/lovable-uploads/b03b3869-2bb8-4e4a-9e0b-db7f04c5d946.png"
+              src={wordmarkWhite}
               alt="Alcan Dental Cooperative"
-              className="h-12 w-auto brightness-0 invert"
+              className="h-12 w-auto"
             />
           </div>
 
           <div className="text-center">
             <h4 className="mb-4 font-biondi font-semibold">Quick Links</h4>
             <ul className="space-y-2">
-              <li><a href="#about" className="transition-colors hover:text-gold">About</a></li>
-              <li><a href="#speakers" className="transition-colors hover:text-gold">Speakers</a></li>
-              <li><a href="#agenda" className="transition-colors hover:text-gold">Agenda</a></li>
-              <li><a href="#travel" className="transition-colors hover:text-gold">Travel</a></li>
+              <li><a href="#about" className="transition-colors hover:text-teal-bright">About</a></li>
+              <li><a href="#speakers" className="transition-colors hover:text-teal-bright">Speakers</a></li>
+              <li><a href="#agenda" className="transition-colors hover:text-teal-bright">Agenda</a></li>
+              <li><a href="#travel" className="transition-colors hover:text-teal-bright">Travel</a></li>
             </ul>
           </div>
 

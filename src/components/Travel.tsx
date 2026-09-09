@@ -43,7 +43,9 @@ const Travel = () => {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `linear-gradient(rgba(18, 69, 112, 0.88), rgba(18, 69, 112, 0.88)), url('/lovable-uploads/e5b3efd8-7083-44d6-8335-457d92c7629e.png')`,
+          backgroundImage:
+            `linear-gradient(rgb(var(--c-navy) / 0.88), rgb(var(--c-navy) / 0.88)), ` +
+            `url('/lovable-uploads/e5b3efd8-7083-44d6-8335-457d92c7629e.png')`,
         }}
       />
 
@@ -55,7 +57,7 @@ const Travel = () => {
           >
             Getting Here.
           </motion.h2>
-          <div className="mx-auto h-px w-24 bg-gradient-to-r from-transparent via-gold/80 to-transparent" />
+          <div className="mx-auto h-px w-24 bg-gradient-to-r from-transparent via-teal-bright/80 to-transparent" />
         </div>
 
         {/* Venue */}
@@ -63,7 +65,7 @@ const Travel = () => {
           <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-2">
             <motion.div {...fromLeft(0)}>
               <div className="mb-4 flex items-center justify-center gap-3 md:justify-start">
-                <MapPin className="h-6 w-6 text-gold" strokeWidth={1.5} />
+                <MapPin className="h-6 w-6 text-teal-bright" strokeWidth={1.5} />
                 <h3 className="font-biondi text-2xl font-bold text-white sm:text-3xl">
                   Event Venue
                 </h3>
@@ -78,7 +80,7 @@ const Travel = () => {
               </div>
 
               <div className="mb-4 mt-8 flex items-center justify-center gap-3 md:justify-start">
-                <Plane className="h-6 w-6 text-gold" strokeWidth={1.5} />
+                <Plane className="h-6 w-6 text-teal-bright" strokeWidth={1.5} />
                 <h3 className="font-biondi text-2xl font-bold text-white sm:text-3xl">
                   Travel Times
                 </h3>
@@ -112,15 +114,15 @@ const Travel = () => {
         {/* Staying in Buda */}
         <motion.div {...fadeUp(0.1)} className="mx-auto max-w-3xl">
           <div className="relative overflow-hidden rounded-2xl border border-white/20 bg-white/[0.07] p-8 text-center shadow-2xl backdrop-blur-md sm:p-12">
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/80 to-transparent" />
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-teal-bright/80 to-transparent" />
 
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-gold sm:text-sm">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-teal-bright sm:text-sm">
               Where to Stay
             </p>
             <h3 className="mb-4 font-biondi text-2xl font-bold text-white sm:text-3xl md:text-4xl">
               Fairfield Inn &amp; Suites
             </h3>
-            <div className="mx-auto mb-6 h-px w-16 bg-gold/60" />
+            <div className="mx-auto mb-6 h-px w-16 bg-teal-bright/60" />
 
             <div
               className="text-lg leading-relaxed text-white"
@@ -132,7 +134,7 @@ const Travel = () => {
                 href={HOTEL_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 inline-flex items-center gap-2 text-base text-gold hover:text-gold-400 hover:underline sm:text-lg"
+                className="mt-2 inline-flex items-center gap-2 text-base text-teal-bright hover:text-white hover:underline sm:text-lg"
               >
                 View hotel website
                 <ExternalLink className="h-4 w-4" strokeWidth={2} />
@@ -142,8 +144,8 @@ const Travel = () => {
                 To receive the Alcan group rate, book online using our corporate promo code.
               </p>
 
-              <div className="mx-auto mt-5 max-w-xl rounded-xl border border-gold/40 bg-white/[0.06] p-5 text-left">
-                <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-gold">
+              <div className="mx-auto mt-5 max-w-xl rounded-xl border border-teal-bright/40 bg-white/[0.06] p-5 text-left">
+                <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-teal-bright">
                   Promo Code
                 </p>
                 <p className="mt-2 text-center font-biondi text-2xl font-bold tracking-wider text-white">
@@ -163,7 +165,7 @@ const Travel = () => {
 
               <a
                 href={HOTEL_PHONE_HREF}
-                className="mt-6 inline-flex items-center gap-3 rounded-full border border-gold/70 bg-transparent px-6 py-3 text-base font-medium text-gold shadow-lg transition-all duration-300 hover:scale-[1.03] hover:bg-gold hover:text-primary sm:text-lg"
+                className="mt-6 inline-flex items-center gap-3 rounded-full border border-teal-bright/70 bg-transparent px-6 py-3 text-base font-medium text-teal-bright shadow-lg transition-all duration-300 hover:scale-[1.03] hover:bg-teal-bright hover:text-primary sm:text-lg"
               >
                 <Phone className="h-5 w-5" strokeWidth={2} />
                 {HOTEL_PHONE}

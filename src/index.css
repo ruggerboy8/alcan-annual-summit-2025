@@ -1,89 +1,130 @@
+/* ============================================================================
+   ALCAN — Summit site
+   Single source of truth for brand tokens.
 
-@import url('https://fonts.googleapis.com/css2?family=Biondi:wght@400;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap');
+   Values are mirrored from the Alcan brand package:
+     alcan-brand/style-guide/alcan-tokens.css  (engine tokens v1, 2026-09-02)
+   Do not tune colors here. Change the brand guide, then update this block.
+
+   Colors are stored as space-separated RGB channels so Tailwind can apply
+   opacity modifiers (bg-navy/90, text-white/70, ...). Use them in plain CSS
+   as rgb(var(--c-navy)) — never as var(--c-navy) on its own.
+   ========================================================================== */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Design System CSS Variables */
 @layer base {
+  /* ---- Biondi Sans — display face. Licensed to Alcan (confirmed 2026-09-01).
+         Self-hosted: it is NOT on Google Fonts, and requesting it there
+         returns HTTP 400 and silently falls back to a serif.
+
+         Only 300/400/700 ship. The family has no Black cut: the OTF named
+         'BiondiSansBk' is BOOK, not Black — its advance widths sit between
+         Light and Regular (H: Lt 798, Bk 806, Rg 818), and its usWeightClass
+         is 400. The brand README lists it as 'Black', which is a mislabel.
+         font-black therefore resolves to Bold, which is the correct result. ---- */
+  @font-face {
+    font-family: 'Biondi Sans';
+    src: url('./assets/fonts/biondi-sans-300.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Biondi Sans';
+    src: url('./assets/fonts/biondi-sans-400.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Biondi Sans';
+    src: url('./assets/fonts/biondi-sans-700.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
   :root {
-    --clr-primary: #124570;
-    --clr-primary-deep: #0d2e4a;
-    --clr-accent: #515458;
-    --clr-text: #080809;
-    --clr-surface: #949AA1;
-    --clr-white: #FDFEFE;
-    --clr-gold: #C9A14A;
-    --clr-gold-light: #D4A843;
-    
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* ---------- 01 · brand canon (locked) ---------- */
+    --c-navy:        17 59 98;      /* #113B62 — panels, headlines, primary  */
+    --c-blue:        0 82 134;      /* #005286 — subheads, links             */
+    --c-gray:        146 148 151;   /* #929497 — 1px rules ONLY, never type  */
+    --c-teal:        14 124 134;    /* #0E7C86 — the single accent           */
+    --c-panel:       26 76 121;     /* #1A4C79 — mountains texture in panels */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* ---------- neutrals ramp ---------- */
+    --c-n01:         247 249 251;   /* #F7F9FB — default surface             */
+    --c-n02:         236 241 246;   /* #ECF1F6 — panel fills, zebra          */
+    --c-n03:         210 218 227;   /* #D2DAE3 — card edges, rules           */
+    --c-n04:         141 154 168;   /* #8D9AA8 — icon strokes, disabled      */
+    --c-n05:         71 83 95;      /* #47535F — secondary ink               */
+    --c-n06:         16 24 31;      /* #10181F — primary ink (body text)     */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* ---------- light tints ---------- */
+    --c-tint01:      231 239 247;   /* #E7EFF7 — section dividers, quiet      */
+    --c-tint02:      220 231 242;   /* #DCE7F2 — callouts, table headers      */
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --c-white:       255 255 255;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* ---------- extensions ----------------------------------------------
+       The brand guide states: "Everything beyond this we extend (neutrals,
+       tints, accent, text face) — extensions become canon only after
+       sign-off." These two are extensions pending sign-off.
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+       navy-deep   a darker navy for the countdown band, so the hero can
+                   gradient into it without a seam.
+       teal-bright the accent, lightened for dark fields. Canon teal on navy
+                   measures 2.33:1, which fails WCAG at any size. This cut
+                   measures 4.55:1 on navy and 5.72:1 on navy-deep (AA), and
+                   holds the same hue (185 vs 185).
+       -------------------------------------------------------------------- */
+    --c-navy-deep:   12 43 71;      /* #0C2B47 */
+    --c-teal-bright: 47 179 190;    /* #2FB3BE */
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* ---------- shadcn/ui surface tokens, mapped onto the brand ----------
+       shadcn components read these as hsl(var(--x)). Kept in sync with the
+       ramp above so dialogs, inputs and selects sit on the brand palette. */
+    --background:              0 0% 100%;
+    --foreground:              208 32% 9%;      /* n06 */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --card:                    0 0% 100%;
+    --card-foreground:         208 32% 9%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --popover:                 0 0% 100%;
+    --popover-foreground:      208 32% 9%;
+
+    --primary:                 209 70% 23%;     /* navy */
+    --primary-foreground:      0 0% 100%;
+
+    --secondary:               210 36% 95%;     /* n02 */
+    --secondary-foreground:    209 70% 23%;
+
+    --muted:                   210 36% 95%;     /* n02 */
+    --muted-foreground:        210 15% 33%;     /* n05 */
+
+    --accent:                  210 50% 94%;     /* tint01 */
+    --accent-foreground:       209 70% 23%;
+
+    --destructive:             0 72% 42%;
+    --destructive-foreground:  0 0% 100%;
+
+    --border:                  212 23% 86%;     /* n03 */
+    --input:                   212 23% 86%;
+    --ring:                    185 81% 29%;     /* teal — visible focus ring */
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-background:         210 33% 98%;
+    --sidebar-foreground:         210 15% 33%;
+    --sidebar-primary:            209 70% 23%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent:             210 36% 95%;
+    --sidebar-accent-foreground:  209 70% 23%;
+    --sidebar-border:             212 23% 86%;
+    --sidebar-ring:               185 81% 29%;
   }
 }
 
@@ -97,67 +138,50 @@
   }
 
   body {
-    @apply bg-background text-foreground;
-    font-family: 'Open Sans', system-ui, sans-serif;
-    color: var(--clr-text);
+    @apply bg-background text-ink;
+    font-family: 'Public Sans', system-ui, -apple-system, sans-serif;
     font-size: 18px;
     line-height: 1.6;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
 
+  /* Display face: Biondi Sans is uppercase-leaning and tracks slightly open.
+     The brand guide specifies letter-spacing .005em and forbids it for body. */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Biondi', serif;
-    letter-spacing: -0.025em;
-    text-wrap: pretty;
+    font-family: 'Biondi Sans', 'Public Sans', system-ui, sans-serif;
+    letter-spacing: 0.005em;
+    text-wrap: balance;
   }
 
   p {
-    color: var(--clr-text);
     font-size: 18px;
     line-height: 1.6;
   }
-}
 
-/* Custom animations */
-@keyframes summit-logo {
-  0% {
-    opacity: 0;
-    transform: translateY(20px) scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+  /* Keyboard focus must stay visible everywhere. */
+  :focus-visible {
+    outline: 2px solid rgb(var(--c-teal));
+    outline-offset: 2px;
   }
 }
 
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ----  Accordion smooth open / close  ---- */
-@keyframes accordion-down {
-  from { height: 0 }
-  to   { height: var(--radix-collapsible-content-height) }
-}
-@keyframes accordion-up {
-  from { height: var(--radix-collapsible-content-height) }
-  to   { height: 0 }
 }
 
 /* ----------  Flip-card helpers  ---------- */
-.flip-card { 
-  perspective: 1000px; 
+.flip-card {
+  perspective: 1000px;
 }
 
-.flip-card-face { 
-  backface-visibility: hidden; 
+.flip-card-face {
+  backface-visibility: hidden;
 }
 
 .flip-card-inner {
@@ -165,18 +189,15 @@
   transition: transform 0.7s ease;
 }
 
-.rotate-y-180 { 
-  transform: rotateY(180deg); 
+.rotate-y-180 {
+  transform: rotateY(180deg);
 }
 
-/* Modal styles */
+/* ----------  Modal helpers  ---------- */
 .modal-backdrop {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  inset: 0;
+  background: rgb(var(--c-n06) / 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -185,7 +206,7 @@
 }
 
 .modal-content {
-  background: white;
+  background: rgb(var(--c-white));
   border-radius: 12px;
   width: 100%;
   max-width: 800px;
@@ -198,7 +219,7 @@
   position: absolute;
   top: 16px;
   right: 16px;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgb(var(--c-n06) / 0.1);
   border: none;
   border-radius: 50%;
   width: 32px;
@@ -208,22 +229,4 @@
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-}
-
-/* Accordion animation utilities */
-.animate-accordion-down {
-  animation: accordion-down 0.3s ease-out;
-}
-
-.animate-accordion-up {
-  animation: accordion-up 0.3s ease-out;
-}
-
-/* Soft pulse for countdown seconds */
-@keyframes pulse-soft {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.65; }
-}
-.animate-pulse-soft {
-  animation: pulse-soft 1s ease-in-out infinite;
 }

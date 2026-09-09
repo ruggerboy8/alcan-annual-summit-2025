@@ -35,7 +35,7 @@ const Admin = () => {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
           <div className="flex items-center gap-3">
             <div style={{ height: 36 }}>
-              <SummitLogo className="h-full w-auto" variant="white" animate={false} />
+              <SummitLogo className="h-full w-auto" variant="white" />
             </div>
             <span className="hidden sm:inline-block font-biondi text-sm uppercase tracking-widest">
               Summit Admin

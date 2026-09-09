@@ -167,12 +167,12 @@ export default function CheckInTab({ token }: Props) {
                         className={cn(
                           "border-transparent text-[10px]",
                           attendeeLabel(r) === "Sponsor"
-                            ? "bg-gold text-primary"
+                            ? "bg-teal-bright text-primary"
                             : attendeeLabel(r) === "Alcan CA"
                               ? "bg-primary text-primary-foreground"
                               : r.attendee_type === "staff"
                               ? "bg-primary/10 text-primary"
-                              : "bg-gold/15 text-gold",
+                              : "bg-teal/15 text-navy",
                         )}
                       >
                         {attendeeLabel(r) === "Sponsor"

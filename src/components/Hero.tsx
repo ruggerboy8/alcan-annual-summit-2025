@@ -5,7 +5,7 @@ import SummitLogo from '@/components/SummitLogo';
 import RegistrationModal from '@/components/RegistrationModal';
 
 
-const bgPoster = '/lovable-uploads/246de050-106d-48c5-b1b9-e68886c9e482.png';
+const bgPoster = '/lovable-uploads/hero-poster.jpg';
 
 export default function Hero() {
   const prefersReducedMotion = useReducedMotion();
@@ -45,8 +45,12 @@ export default function Hero() {
           poster={bgPoster}
           preload="metadata"
         >
-          <source src="/lovable-uploads/HeroSummitVideo1.webm" type="video/webm" />
-          <source src="/lovable-uploads/HeroSummitVideo1.mp4" type="video/mp4" />
+          {/* Both files must exist. A .webm source was previously listed here
+              without the file ever being committed: browsers selected it, got a
+              404, and stalled at readyState 0 WITHOUT falling through to the mp4,
+              so the hero only ever showed its poster. */}
+          <source src="/lovable-uploads/hero-1080.webm" type="video/webm" />
+          <source src="/lovable-uploads/hero-1080.mp4" type="video/mp4" />
         </video>
       )}
 
@@ -61,7 +65,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70" />
 
       {/* Bottom gradient bridge into the dark CountdownTimer below */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0d2e4a] to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-navy-deep to-transparent" />
 
       {/* Main content */}
       <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center px-4">
@@ -69,7 +73,7 @@ export default function Hero() {
           initial="hidden" animate="visible"
           variants={prefersReducedMotion ? {} : logoVariants}
           className="mb-6 flex justify-center sm:mb-8"
-          style={{ height: 'clamp(180px, 38vw, 460px)' }}
+          style={{ height: 'clamp(140px, 30vw, 360px)' }}
         >
           <SummitLogo
             className="h-full w-auto"
@@ -81,17 +85,17 @@ export default function Hero() {
         <motion.h1
           initial="hidden" animate="visible" custom={0.7}
           variants={prefersReducedMotion ? {} : uiVariants}
-          className="mb-8 text-center font-biondi font-bold uppercase text-white tracking-[0.25em] sm:tracking-[0.35em] [text-shadow:0_2px_14px_rgba(0,0,0,0.5)]"
-          style={{ fontSize: 'clamp(1.75rem, 6vw, 4.5rem)' }}
+          className="mb-8 text-center font-biondi font-bold uppercase text-white tracking-[0.16em] sm:tracking-[0.24em] [text-shadow:0_2px_14px_rgb(0_0_0/0.5)]"
+          style={{ fontSize: 'clamp(1.5rem, 4.6vw, 3.5rem)' }}
         >
           Earn the View
         </motion.h1>
 
-        {/* Date badge — gold border */}
+        {/* Date badge — teal border */}
         <motion.div
           initial="hidden" animate="visible" custom={1.0}
           variants={prefersReducedMotion ? {} : uiVariants}
-          className="inline-block rounded-sm border border-gold/80 px-5 py-2.5 text-xs font-medium uppercase tracking-[0.22em] text-white backdrop-blur-sm sm:px-10 sm:text-base sm:tracking-[0.28em]"
+          className="inline-block rounded-sm border border-teal-bright/80 px-5 py-2.5 text-xs font-medium uppercase tracking-[0.22em] text-white backdrop-blur-sm sm:px-10 sm:text-base sm:tracking-[0.28em]"
           aria-label="Event date: December 10 to 11, 2026, Austin Texas"
         >
           December&nbsp;10&ndash;11,&nbsp;2026 · Austin,&nbsp;TX
@@ -104,7 +108,7 @@ export default function Hero() {
         >
           <RegistrationModal
             buttonText="Register Now"
-            buttonClassName="bg-gold hover:bg-white text-primary px-10 sm:px-14 py-5 sm:py-6 text-lg sm:text-xl rounded-lg transition-all duration-300 hover:scale-105 shadow-xl font-biondi font-bold"
+            buttonClassName="bg-teal-bright hover:bg-white text-primary px-10 sm:px-14 py-5 sm:py-6 text-lg sm:text-xl rounded-lg transition-all duration-300 hover:scale-105 shadow-xl font-biondi font-bold"
           />
         </motion.div>
       </div>

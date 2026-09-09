@@ -48,7 +48,7 @@ const About = () => {
       };
 
   return (
-    <section id="about" className="border-t border-gray-100 bg-gray-50 py-12 lg:py-16">
+    <section id="about" className="border-t border-n03 bg-n01 py-12 lg:py-16">
       <div className="container">
         <div className="mx-auto max-w-6xl">
           <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
@@ -62,18 +62,18 @@ const About = () => {
               </motion.h2>
 
               <motion.div {...bodyFade}>
-                <p className="mb-5 text-lg leading-relaxed text-text sm:text-xl">
+                <p className="mb-5 text-lg leading-relaxed text-ink sm:text-xl">
                   The Summit is the annual gathering for every member of the Alcan network &mdash; doctors, coordinators, managers, and front-desk teams alike. Not a CE requirement. Not a sales floor. A two-day climb designed for the people who show up every day to do something nobody&rsquo;s done before.
                 </p>
 
-                <p className="mb-5 text-lg leading-relaxed text-text sm:text-xl">
+                <p className="mb-5 text-lg leading-relaxed text-ink sm:text-xl">
                   What you can expect:
                 </p>
 
-                <ul className="mb-8 list-none space-y-4 text-lg leading-relaxed text-text sm:text-xl">
+                <ul className="mb-8 list-none space-y-4 text-lg leading-relaxed text-ink sm:text-xl">
                   {bullets.map((b) => (
                     <li key={b.title} className="flex">
-                      <span className="mr-3 font-bold text-gold">•</span>
+                      <span className="mr-3 font-bold text-teal">•</span>
                       <span>
                         <strong>{b.title}</strong> &mdash; {b.body}
                       </span>
@@ -81,7 +81,7 @@ const About = () => {
                   ))}
                 </ul>
 
-                <p className="mb-10 text-lg leading-relaxed text-text sm:text-xl">
+                <p className="mb-10 text-lg leading-relaxed text-ink sm:text-xl">
                   You&rsquo;ll leave with new tools, real relationships, and a clearer sense of where you fit in something much bigger than any one practice.
                 </p>
 

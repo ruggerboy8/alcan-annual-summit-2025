@@ -34,7 +34,7 @@ const Register = () => {
           <motion.div {...fade(0.2)}>
             <RegistrationModal
               buttonText="Register Now"
-              buttonClassName="bg-gold hover:bg-white text-primary px-12 sm:px-16 py-6 text-xl sm:text-2xl rounded-lg transition-all duration-300 hover:scale-105 shadow-xl font-biondi font-bold min-w-[280px] sm:min-w-[320px]"
+              buttonClassName="bg-teal-bright hover:bg-white text-primary px-12 sm:px-16 py-6 text-xl sm:text-2xl rounded-lg transition-all duration-300 hover:scale-105 shadow-xl font-biondi font-bold min-w-[280px] sm:min-w-[320px]"
             />
           </motion.div>
         </div>
