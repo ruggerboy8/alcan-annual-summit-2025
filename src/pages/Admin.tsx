@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LogOut } from "lucide-react";
 import PasswordGate from "@/components/admin/PasswordGate";
 import RegistrationsTab from "@/components/admin/RegistrationsTab";
@@ -14,6 +14,15 @@ type Tab = "registrations" | "checkin" | "email";
 const Admin = () => {
   const [token, setToken] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>("registrations");
+
+  // adminFetch dispatches this when any endpoint returns 401, which is what
+  // happens once the 8-hour token lapses. Drop straight back to the gate rather
+  // than leaving the operator clicking buttons that silently fail.
+  useEffect(() => {
+    const onUnauthorized = () => setToken(null);
+    window.addEventListener("admin-unauthorized", onUnauthorized);
+    return () => window.removeEventListener("admin-unauthorized", onUnauthorized);
+  }, []);
 
   if (!token) return <PasswordGate onAuthenticated={setToken} />;
 
@@ -37,7 +46,7 @@ const Admin = () => {
             <div style={{ height: 36 }}>
               <SummitLogo className="h-full w-auto" variant="white" />
             </div>
-            <span className="hidden sm:inline-block font-biondi text-sm uppercase tracking-widest">
+            <span className="hidden font-mono text-eyebrow uppercase text-white/70 sm:inline-block">
               Summit Admin
             </span>
           </div>
@@ -60,15 +69,15 @@ const Admin = () => {
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={cn(
-                "relative whitespace-nowrap px-4 py-3 text-sm font-semibold transition-colors",
+                "relative whitespace-nowrap px-4 py-3 font-mono text-eyebrow uppercase transition-colors",
                 activeTab === tab.id
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground",
+                  ? "text-navy"
+                  : "text-ink-soft hover:text-navy",
               )}
             >
               {tab.label}
               {activeTab === tab.id && (
-                <span className="absolute inset-x-2 -bottom-px h-0.5 bg-primary" />
+                <span className="absolute inset-x-2 -bottom-px h-0.5 bg-teal" />
               )}
             </button>
           ))}

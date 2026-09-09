@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { Registration, useAdminApi, attendeeLabel } from "@/lib/admin-api";
+import { Registration, useAdminApi, attendeeLabel, fetchAllRegistrations } from "@/lib/admin-api";
 
 interface Props {
   token: string;
@@ -27,10 +27,11 @@ export default function CheckInTab({ token }: Props) {
   const load = useCallback(async (silent = false) => {
     if (!silent) setLoading(true);
     try {
-      const data = await api("/admin-list-registrations", {
-        query: { type: "all", page: 1, pageSize: 10000 },
-      });
-      setAll(data.registrations ?? []);
+      // Pages until the whole list is in. Previously this asked for pageSize
+      // 10000, which the server clamps to 500 — so past 500 registrants the
+      // check-in desk was silently missing people.
+      const { registrations } = await fetchAllRegistrations(api, { type: "all" });
+      setAll(registrations);
     } catch (err: any) {
       if (!silent) toast.error(err.message ?? "Failed to load");
     } finally {
@@ -105,8 +106,12 @@ export default function CheckInTab({ token }: Props) {
     const notArrived = all
       .filter((r) => !r.checked_in_at && matches(r))
       .sort((a, b) => a.last_name.localeCompare(b.last_name));
+    // matches(r) belongs on BOTH lists. Without it, searching a name filtered
+    // "Not Yet Arrived" but left "Checked In" showing everyone, so the one
+    // question the desk actually asks — "am I already checked in?" — meant
+    // scrolling the full arrivals list.
     const checkedIn = all
-      .filter((r) => !!r.checked_in_at)
+      .filter((r) => !!r.checked_in_at && matches(r))
       .sort((a, b) => (b.checked_in_at ?? "").localeCompare(a.checked_in_at ?? ""));
 
     return {
@@ -128,8 +133,13 @@ export default function CheckInTab({ token }: Props) {
   return (
     <div className="space-y-4">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="text-lg font-semibold text-primary">
-          {checkedInCount} <span className="text-muted-foreground font-normal">of</span> {totalCount} checked in
+        <div className="flex items-baseline gap-2">
+          <span className="font-biondi text-3xl font-bold tabular-nums text-navy">
+            {checkedInCount}
+          </span>
+          <span className="font-mono text-eyebrow uppercase text-ink-soft">
+            of {totalCount} checked in
+          </span>
         </div>
         <div className="relative max-w-sm flex-1">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -146,8 +156,8 @@ export default function CheckInTab({ token }: Props) {
         {/* Not yet arrived */}
         <div className="rounded-lg border border-border bg-card shadow-sm">
           <div className="border-b border-border px-4 py-3">
-            <h3 className="font-semibold text-foreground">Not Yet Arrived</h3>
-            <p className="text-xs text-muted-foreground">{notArrived.length} remaining</p>
+            <h3 className="font-biondi text-base font-bold text-navy">Not Yet Arrived</h3>
+            <p className="font-mono text-eyebrow uppercase text-ink-soft">{notArrived.length} remaining</p>
           </div>
           <div className="max-h-[70vh] overflow-y-auto divide-y divide-border">
             {notArrived.length === 0 ? (
@@ -206,8 +216,8 @@ export default function CheckInTab({ token }: Props) {
         {/* Checked in */}
         <div className="rounded-lg border border-border bg-card shadow-sm">
           <div className="border-b border-border px-4 py-3">
-            <h3 className="font-semibold text-foreground">Checked In</h3>
-            <p className="text-xs text-muted-foreground">{checkedIn.length} arrivals</p>
+            <h3 className="font-biondi text-base font-bold text-navy">Checked In</h3>
+            <p className="font-mono text-eyebrow uppercase text-ink-soft">{checkedIn.length} arrivals</p>
           </div>
           <div className="max-h-[70vh] overflow-y-auto divide-y divide-border">
             {checkedIn.length === 0 ? (

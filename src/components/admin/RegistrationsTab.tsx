@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Download, Loader2, Search } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +10,7 @@ import {
   RegistrationStats,
   useAdminApi,
   attendeeLabel,
+  fetchAllRegistrations,
 } from "@/lib/admin-api";
 import RegistrationDetail from "@/components/admin/RegistrationDetail";
 
@@ -120,15 +122,12 @@ export default function RegistrationsTab({ token }: Props) {
   const exportCsv = async () => {
     setExporting(true);
     try {
-      const data = await api("/admin-list-registrations", {
-        query: {
-          type: typeFilter,
-          search: debouncedSearch,
-          page: 1,
-          pageSize: 10000,
-        },
+      // Pages through the whole result set. pageSize 10000 was silently clamped
+      // to 500 by the server, so any export past 500 rows was short.
+      const { registrations: rows } = await fetchAllRegistrations(api, {
+        type: typeFilter,
+        search: debouncedSearch,
       });
-      const rows: Registration[] = data.registrations ?? [];
       const header = [
         "First Name",
         "Last Name",
@@ -169,8 +168,9 @@ export default function RegistrationsTab({ token }: Props) {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-    } catch (err) {
+    } catch (err: any) {
       console.error("CSV export failed:", err);
+      toast.error(err?.message ?? "Export failed");
     } finally {
       setExporting(false);
     }
@@ -183,12 +183,12 @@ export default function RegistrationsTab({ token }: Props) {
         {STAT_CARDS.map((c) => (
           <div
             key={c.key}
-            className="rounded-lg border border-border bg-card p-4 shadow-sm"
+            className="rounded-lg border border-border border-t-2 border-t-navy bg-card p-4 shadow-sm"
           >
-            <div className="text-xs uppercase tracking-wider text-muted-foreground">
+            <div className="font-mono text-eyebrow font-medium uppercase text-ink-soft">
               {c.label}
             </div>
-            <div className="mt-1 text-2xl font-bold text-primary">
+            <div className="mt-1.5 font-biondi text-3xl font-bold tabular-nums text-navy">
               {stats[c.key]}
             </div>
           </div>

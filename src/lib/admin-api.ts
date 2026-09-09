@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import {
   ADMIN_TOKEN_STORAGE_KEY,
   SUPABASE_FUNCTIONS_URL,
@@ -47,6 +47,9 @@ export function storeToken(token: string) {
   }
 }
 
+/** Server caps pageSize at 500, so anything wanting "everything" must page. */
+export const MAX_PAGE_SIZE = 500;
+
 export interface AdminFetchInit extends Omit<RequestInit, "headers" | "body"> {
   headers?: Record<string, string>;
   body?: unknown;
@@ -87,6 +90,14 @@ export function useAdminApi(token: string) {
           data = text;
         }
       }
+      // The admin token lasts 8 hours. When it lapses every endpoint starts
+      // returning 401, and without this the UI just showed generic failures with
+      // no route back to the login screen. Clear the token and let the shell
+      // re-gate. Dispatched as an event so tabs do not each need a callback.
+      if (res.status === 401) {
+        clearStoredToken();
+        window.dispatchEvent(new CustomEvent("admin-unauthorized"));
+      }
       if (!res.ok) {
         const err = new Error(
           (data && typeof data === "object" && "error" in data)
@@ -100,16 +111,6 @@ export function useAdminApi(token: string) {
       return data;
     };
   }, [token]);
-}
-
-/** Hook that auto-validates the token; redirects to login by clearing. */
-export function useAdminToken(token: string, onExpired: () => void) {
-  useEffect(() => {
-    if (!isTokenValid(token)) {
-      clearStoredToken();
-      onExpired();
-    }
-  }, [token, onExpired]);
 }
 
 export type Registration = {
@@ -155,6 +156,37 @@ export type RegistrationStats = {
   emailSent: number;
 };
 
-export function _internal_useState() {
-  return useState;
+/**
+ * Fetch every registration, paging until the server stops returning full pages.
+ *
+ * admin-list-registrations clamps pageSize to 500. Callers that wanted the whole
+ * list were passing pageSize: 10000 and using the response as if it were
+ * complete, so above 500 registrants the check-in desk and the CSV export were
+ * both silently short — with no error and a wrong total in the header.
+ */
+export async function fetchAllRegistrations(
+  api: (path: string, init?: AdminFetchInit) => Promise<any>,
+  filters: { type?: string; search?: string } = {},
+): Promise<{ registrations: Registration[]; total: number }> {
+  const out: Registration[] = [];
+  let page = 1;
+  let total = 0;
+  // Bounded so a server that always returns a full page cannot spin forever.
+  for (let guard = 0; guard < 100; guard++) {
+    const data = await api("/admin-list-registrations", {
+      query: {
+        type: filters.type ?? "all",
+        search: filters.search,
+        page,
+        pageSize: MAX_PAGE_SIZE,
+      },
+    });
+    const batch: Registration[] = data.registrations ?? [];
+    total = data.total ?? total;
+    out.push(...batch);
+    if (batch.length < MAX_PAGE_SIZE) break;
+    if (total && out.length >= total) break;
+    page++;
+  }
+  return { registrations: out, total: total || out.length };
 }
