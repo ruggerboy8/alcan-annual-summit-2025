@@ -8,6 +8,7 @@ export const PRACTICES = [
   "Manor Kids",
   "Pflugerville",
   "South Austin",
+  "South Lyon",
   "Sprout Allen",
   "Sprout Frisco",
   "Sprout McKinney",
