@@ -98,6 +98,7 @@ export default function ComposeAndSendTab({ token }: Props) {
 
   const [dryRun, setDryRun] = useState<{ count: number; preview: { name: string; email: string }[] } | null>(null);
   const [dryRunLoading, setDryRunLoading] = useState(false);
+  const [sendProgress, setSendProgress] = useState<{ sent: number; total: number } | null>(null);
 
   const loadList = async () => {
     setListLoading(true);
@@ -363,22 +364,61 @@ export default function ComposeAndSendTab({ token }: Props) {
   const confirmSend = async () => {
     if (!campaignId) return;
     setSending(true);
+    setSendProgress({ sent: 0, total: dryRun?.count ?? 0 });
+
+    // The server sends in bounded batches so a large list cannot exceed the
+    // edge function's wall-clock limit, and returns `done` when nobody is left.
+    // Each recipient is claimed in the database before it is mailed, so if this
+    // loop is interrupted — a closed laptop, a dropped connection — resuming
+    // picks up where it stopped rather than mailing anyone twice.
+    let sent = 0;
+    let failed = 0;
+    let rounds = 0;
+    const allFailures: Array<{ email: string; error: string }> = [];
+
     try {
-      const data = await api("/admin-send-broadcast", {
-        method: "POST",
-        body: { campaignId, recipientFilter, dryRun: false },
-      });
-      toast.success(
-        `Email sent to ${data.sent} ${data.sent === 1 ? "person" : "people"}. ${data.failed} ${data.failed === 1 ? "failure" : "failures"}.`,
-      );
+      for (;;) {
+        rounds++;
+        if (rounds > 200) throw new Error("Send did not finish; please re-open and resume.");
+
+        const data = await api("/admin-send-broadcast", {
+          method: "POST",
+          body: { campaignId, recipientFilter, dryRun: false },
+        });
+
+        sent += data.sent ?? 0;
+        failed += data.failed ?? 0;
+        if (Array.isArray(data.failures)) allFailures.push(...data.failures);
+        setSendProgress({ sent, total: data.total ?? dryRun?.count ?? sent });
+
+        if (data.done) break;
+        // Nothing processed but not done would spin forever.
+        if ((data.processed ?? 0) === 0) {
+          throw new Error("Send stalled with recipients remaining. Re-open to resume.");
+        }
+      }
+
+      if (failed > 0) {
+        toast.warning(
+          `Sent to ${sent} ${sent === 1 ? "person" : "people"}. ${failed} ${failed === 1 ? "address" : "addresses"} failed.`,
+        );
+        console.warn("Broadcast failures:", allFailures);
+      } else {
+        toast.success(`Email sent to ${sent} ${sent === 1 ? "person" : "people"}.`);
+      }
+
       setSendModalOpen(false);
       loadList();
       // Reset editor — campaign is now sent and immutable
       startNew();
     } catch (err: any) {
-      toast.error(err.message ?? "Send failed");
+      toast.error(
+        `${err.message ?? "Send failed"}${sent ? ` (${sent} already sent — resuming will not duplicate them)` : ""}`,
+      );
+      loadList();
     } finally {
       setSending(false);
+      setSendProgress(null);
     }
   };
 
@@ -768,7 +808,9 @@ export default function ComposeAndSendTab({ token }: Props) {
               {sending ? (
                 <>
                   <Loader2 className="mr-1.5 h-4 w-4 animate-spin" />
-                  Sending…
+                  {sendProgress && sendProgress.total > 0
+                    ? `Sending… ${sendProgress.sent} of ${sendProgress.total}`
+                    : "Sending…"}
                 </>
               ) : (
                 <>Yes, send to {dryRun?.count ?? 0} {dryRun?.count === 1 ? "person" : "people"}</>
