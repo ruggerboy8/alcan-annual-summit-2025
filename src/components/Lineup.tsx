@@ -1,4 +1,5 @@
 import { Eyebrow, NavyPanel, Reveal } from '@/components/section';
+import Speakers from '@/components/Speakers';
 
 const HYPE_VIDEO_VIMEO_SRC =
   'https://player.vimeo.com/video/1154545041?h=abccca39e0&title=0&byline=0&portrait=0';
@@ -21,13 +22,13 @@ export default function Lineup() {
         <NavyPanel className="flex items-center justify-center px-6 py-14 sm:px-10 lg:justify-end lg:py-28">
           <Reveal className="w-full max-w-lg lg:pr-10">
             <Eyebrow tone="dark" className="mb-5">
-              Still to come
+              The Lineup
             </Eyebrow>
             <h2 className="font-biondi text-display-lg font-bold text-white">
               A Lineup Worth the Climb.
             </h2>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-white/80">
-              Speakers and the full two-day agenda are being finalized. Expect
+              The first speakers are confirmed, with more on the way. Expect
               workshops, keynotes, and the kind of connection that only happens
               when the whole network is in one room.
             </p>
@@ -49,11 +50,14 @@ export default function Lineup() {
               />
             </div>
             <p className="mt-5 text-base text-ink-soft">
-              Until then, here&rsquo;s a look at what we built last year.
+              A look at what we built last year.
             </p>
           </Reveal>
         </div>
       </div>
+
+      {/* Speaker flip cards, on the light field below the panel row. */}
+      <Speakers />
     </section>
   );
 }
