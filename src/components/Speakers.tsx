@@ -68,6 +68,12 @@ const SPEAKERS: Speaker[] = [
     photo: '/assets/tod-moore.jpg',
   },
   {
+    name: 'Genevieve Poppe',
+    title: 'Founder, Poppe Practice Management',
+    bio: 'A nationally recognized dental practice consultant with more than 25 years of experience, Genevieve has held nearly every role a practice has, from dental assistant to multi-location owner. As founder of Poppe Practice Management, she helps teams sharpen leadership, communication, and patient experience, and build systems that drive sustainable growth. Her sessions are interactive, practical, and immediately applicable, sending attendees home with strategies they can use the very next day.',
+    photo: '/assets/genevieve-poppe.jpg',
+  },
+  {
     name: 'Jenn Wooten',
     title: 'Founder, Viasomatic',
     bio: 'Jenn has spent more than twenty years in yoga, somatics, and trauma-informed education, and is the founder of Viasomatic, a science-backed method for restoring resilience through nervous-system-centered care. A certified yoga therapist and nervous system coach, she helps people recognize their patterns of stress and survival and use simple, body-based practices to restore regulation and well-being, at work and everywhere else.',
