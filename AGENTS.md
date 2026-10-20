@@ -1,0 +1,1 @@
+Keep shared section reveals triggered by any viewport intersection so sections taller than the screen remain visible on mobile.
