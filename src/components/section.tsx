@@ -47,7 +47,9 @@ export function Reveal({ children, delay = 0, className }: RevealProps) {
       initial="hidden"
       whileInView="visible"
       custom={delay}
-      viewport={{ once: true, amount: 0.25 }}
+      // Tall sections must not require a fraction of their total height to fit
+      // onscreen: the stacked speaker grid exceeds several mobile viewports.
+      viewport={{ once: true, amount: 'some' }}
     >
       {children}
     </motion.div>
