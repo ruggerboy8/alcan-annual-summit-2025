@@ -162,6 +162,7 @@ export type Database = {
           confirmation_email_id: string | null
           confirmation_email_sent_at: string | null
           created_at: string
+          dietary_restrictions: string | null
           email: string
           event_version: string
           first_name: string
@@ -181,6 +182,7 @@ export type Database = {
           confirmation_email_id?: string | null
           confirmation_email_sent_at?: string | null
           created_at?: string
+          dietary_restrictions?: string | null
           email: string
           event_version?: string
           first_name: string
@@ -200,6 +202,7 @@ export type Database = {
           confirmation_email_id?: string | null
           confirmation_email_sent_at?: string | null
           created_at?: string
+          dietary_restrictions?: string | null
           email?: string
           event_version?: string
           first_name?: string
