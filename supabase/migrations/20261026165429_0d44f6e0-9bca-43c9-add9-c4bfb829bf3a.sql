@@ -1,0 +1,1 @@
+DELETE FROM public.email_sends WHERE recipient_email LIKE 'diet-test-%@example.com'; DELETE FROM public.event_registrations WHERE email LIKE 'diet-test-%@example.com';
