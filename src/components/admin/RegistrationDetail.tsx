@@ -50,6 +50,7 @@ type EditFields = Partial<Pick<
   | "practice"
   | "organization"
   | "role"
+  | "dietary_restrictions"
 >>;
 
 function formatDate(iso: string | null): string {
@@ -93,6 +94,7 @@ export default function RegistrationDetail({
       practice: r.practice ?? "",
       organization: r.organization ?? "",
       role: r.role ?? "",
+      dietary_restrictions: r.dietary_restrictions ?? "",
     });
     setEditing(true);
   };
@@ -114,6 +116,7 @@ export default function RegistrationDetail({
         "practice",
         "organization",
         "role",
+        "dietary_restrictions",
       ];
       for (const k of keys) {
         if (fields[k] !== undefined) editFields[k] = fields[k] as any;
@@ -264,6 +267,18 @@ export default function RegistrationDetail({
             </Field>
 
             {r.promo_code && <Field label="Promo Code">{r.promo_code}</Field>}
+
+            <Field label="Dietary Restrictions">
+              {editing ? (
+                <Input
+                  value={fields.dietary_restrictions ?? ""}
+                  onChange={(e) => setField("dietary_restrictions", e.target.value)}
+                  placeholder="e.g. vegetarian, gluten-free, nut allergy"
+                />
+              ) : (
+                r.dietary_restrictions || "—"
+              )}
+            </Field>
 
 
 
