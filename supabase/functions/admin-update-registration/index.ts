@@ -14,6 +14,7 @@ const EDITABLE_FIELDS = [
   "practice",
   "organization",
   "role",
+  "dietary_restrictions",
 ] as const;
 
 function json(body: unknown, status = 200) {

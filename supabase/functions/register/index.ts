@@ -141,6 +141,9 @@ Deno.serve(async (req) => {
   const lastName = String(body.lastName ?? "").trim();
   const email = String(body.email ?? "").trim().toLowerCase();
   const phone = body.phone ? String(body.phone).trim() : null;
+  const dietaryRestrictions = body.dietaryRestrictions
+    ? String(body.dietaryRestrictions).trim().slice(0, 500)
+    : null;
 
   if (!firstName) return json({ error: "First name is required" }, 400);
   if (!lastName) return json({ error: "Last name is required" }, 400);
@@ -197,6 +200,7 @@ Deno.serve(async (req) => {
       practice,
       organization,
       role,
+      dietary_restrictions: dietaryRestrictions,
       promo_code: promoCode,
       registration_status: "registered",
       event_version: EVENT_VERSION,

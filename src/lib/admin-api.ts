@@ -123,6 +123,7 @@ export type Registration = {
   practice: string | null;
   organization: string | null;
   role: string | null;
+  dietary_restrictions: string | null;
   promo_code: string | null;
   registration_status: string;
   confirmation_email_sent_at: string | null;

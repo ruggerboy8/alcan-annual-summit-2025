@@ -42,6 +42,7 @@ const baseFields = {
   lastName: z.string().trim().min(1, "Last name is required").max(100),
   email: z.string().trim().email("Enter a valid email").max(255),
   phone: z.string().trim().max(40).optional().or(z.literal("")),
+  dietaryRestrictions: z.string().trim().max(500).optional().or(z.literal("")),
   promoCode: z.string().trim().max(60).optional().or(z.literal("")),
   honeypot: z.string().max(0).optional().or(z.literal("")),
 };
@@ -79,6 +80,7 @@ const defaultStaffValues: StaffValues = {
   phone: "",
   practice: "",
   role: "",
+  dietaryRestrictions: "",
   promoCode: "",
   honeypot: "",
 };
@@ -90,6 +92,7 @@ const defaultGuestValues: GuestValues = {
   phone: "",
   organization: "",
   role: "",
+  dietaryRestrictions: "",
   promoCode: "",
   honeypot: "",
 };
@@ -165,6 +168,7 @@ export default function RegistrationModal({
       lastName: v.lastName,
       email: v.email,
       phone: v.phone || undefined,
+      dietaryRestrictions: v.dietaryRestrictions || undefined,
       promoCode: v.promoCode || undefined,
       honeypot: v.honeypot ?? "",
       submittedAt: loadedAt,
@@ -230,6 +234,9 @@ export default function RegistrationModal({
     } else {
       rows.push({ label: "Organization", value: (values as GuestValues).organization ?? "" });
       rows.push({ label: "Role", value: (values as GuestValues).role ?? "" });
+    }
+    if (values.dietaryRestrictions) {
+      rows.push({ label: "Dietary Restrictions", value: values.dietaryRestrictions });
     }
     if (values.promoCode) {
       rows.push({ label: "Promo Code", value: values.promoCode });
@@ -416,6 +423,18 @@ export default function RegistrationModal({
                   </FieldWrap>
                 </>
               )}
+
+              <FieldWrap
+                label="Dietary Restrictions or Allergies"
+                hint="(optional)"
+                error={form.formState.errors.dietaryRestrictions?.message}
+              >
+                <Input
+                  autoComplete="off"
+                  placeholder="e.g. vegetarian, gluten-free, nut allergy"
+                  {...form.register("dietaryRestrictions")}
+                />
+              </FieldWrap>
 
               {attendeeType === "guest" && (
                 <FieldWrap
