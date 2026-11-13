@@ -9,6 +9,7 @@ export interface Recipient {
   first_name: string;
   last_name: string;
   email: string;
+  full_name?: string;
 }
 
 /** Log rows for a campaign are keyed by this. Also the claim key. */
@@ -19,6 +20,32 @@ export function campaignKey(campaignId: string): string {
 /** Normalised form used for claim comparisons and the database's lower() index. */
 export function normaliseEmail(email: string | null | undefined): string {
   return (email ?? "").trim().toLowerCase();
+}
+
+/** One broadcast per inbox, addressed to everyone in the selected audience. */
+export function groupRecipients(recipients: Recipient[]): Recipient[] {
+  const groups = new Map<string, Recipient[]>();
+  for (const recipient of recipients) {
+    const email = normaliseEmail(recipient.email);
+    if (!email) continue;
+    const group = groups.get(email) ?? [];
+    if (!group.some((r) => r.id === recipient.id)) group.push(recipient);
+    groups.set(email, group);
+  }
+  const joinNames = (names: string[]) => names.length <= 2
+    ? names.join(" and ")
+    : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+  return [...groups.entries()].map(([email, group]) => {
+    const first = group[0];
+    if (group.length === 1) return { ...first, email };
+    return {
+      id: first.id,
+      email,
+      first_name: joinNames(group.map((r) => r.first_name)),
+      last_name: "",
+      full_name: joinNames(group.map((r) => `${r.first_name} ${r.last_name}`.trim())),
+    };
+  });
 }
 
 /**

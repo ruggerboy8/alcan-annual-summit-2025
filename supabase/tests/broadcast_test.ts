@@ -9,6 +9,7 @@
 import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
 import {
   campaignKey,
+  groupRecipients,
   normaliseEmail,
   pendingRecipients,
   planBatch,
@@ -26,6 +27,23 @@ function mk(n: number, emailFn?: (i: number) => string): Recipient[] {
 
 Deno.test("campaignKey is stable and namespaced", () => {
   assertEquals(campaignKey("abc"), "campaign:abc");
+});
+
+Deno.test("shared sponsor inbox counts once and addresses Brenda and Tim", () => {
+  const grouped = groupRecipients([
+    { id: "brenda", first_name: "Brenda", last_name: "Hansen", email: "events@sprigusa.com" },
+    { id: "tim", first_name: "Tim", last_name: "Johnson", email: " EVENTS@SPRIGUSA.COM " },
+  ]);
+  assertEquals(grouped.length, 1);
+  assertEquals(grouped[0].email, "events@sprigusa.com");
+  assertEquals(grouped[0].first_name, "Brenda and Tim");
+  assertEquals(grouped[0].full_name, "Brenda Hansen and Tim Johnson");
+  assertEquals(pendingRecipients(grouped, ["events@sprigusa.com"]).length, 0);
+});
+
+Deno.test("distinct inboxes keep individual broadcast personalization", () => {
+  const recipients = mk(2);
+  assertEquals(groupRecipients(recipients), recipients);
 });
 
 Deno.test("normaliseEmail trims and lowercases", () => {
