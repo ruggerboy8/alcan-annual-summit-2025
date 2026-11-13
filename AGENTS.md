@@ -1,3 +1,4 @@
 Keep shared section reveals triggered by any viewport intersection so sections taller than the screen remain visible on mobile.
 Manual attendee creation uses the server-verified admin token and marks rows added_by_admin; a partial unique email/event index preserves public uniqueness while allowing organizer-added shared emails.
 Manual entry sends confirmation only through the existing resend endpoint after saving, so a failed email never loses the attendee or requires creating another row.
+Broadcast audiences are paged and grouped by normalized inbox after filtering; use combined names and unique-inbox counts while keeping individual confirmations and attendee operations keyed by registration ID.

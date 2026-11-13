@@ -18,6 +18,7 @@ import { corsHeaders, unauthorized, verifyAdminToken } from "../_shared/admin-au
 import { isValidEmail, renderTemplate, sendEmail } from "../_shared/email.ts";
 import {
   campaignKey,
+  groupRecipients,
   pendingRecipients,
   planBatch,
   type Recipient,
@@ -72,9 +73,15 @@ async function fetchRecipients(filter: Filter): Promise<Recipient[]> {
     .eq("registration_status", "registered");
   if (filter === "staff") query = query.eq("attendee_type", "staff");
   if (filter === "guests") query = query.eq("attendee_type", "guest");
-  const { data, error } = await query.limit(5000);
-  if (error) throw new Error(error.message);
-  return (data ?? []) as Recipient[];
+  const rows: Recipient[] = [];
+  for (let from = 0; ; from += 1000) {
+    const { data, error } = await query.order("id").range(from, from + 999);
+    if (error) throw new Error(error.message);
+    const batch = (data ?? []) as Recipient[];
+    rows.push(...batch);
+    if (batch.length < 1000) break;
+  }
+  return groupRecipients(rows);
 }
 
 /** Every address already claimed for this campaign, whatever its outcome. */
@@ -124,7 +131,7 @@ Deno.serve(async (req) => {
       return json({
         count: recipients.length,
         preview: recipients.slice(0, 5).map((r) => ({
-          name: `${r.first_name} ${r.last_name}`,
+          name: r.full_name ?? `${r.first_name} ${r.last_name}`.trim(),
           email: r.email,
         })),
       });
@@ -165,7 +172,7 @@ Deno.serve(async (req) => {
   const failures: Array<{ email: string; error: string }> = [];
 
   for (const r of batch) {
-    const recipientName = `${r.first_name} ${r.last_name}`;
+    const recipientName = r.full_name ?? `${r.first_name} ${r.last_name}`.trim();
 
     // Claim first. The partial unique index on
     // (template_key, lower(recipient_email)) WHERE send_type='broadcast'
