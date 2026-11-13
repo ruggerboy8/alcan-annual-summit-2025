@@ -183,6 +183,7 @@ Deno.serve(async (req) => {
     .select("id")
     .eq("email", email)
     .eq("event_version", EVENT_VERSION)
+    .limit(1)
     .maybeSingle();
 
   if (existing) {

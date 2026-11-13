@@ -156,6 +156,7 @@ export type Database = {
       }
       event_registrations: {
         Row: {
+          added_by_admin: boolean
           attendee_type: string
           checked_in_at: string | null
           checked_in_by: string | null
@@ -176,6 +177,7 @@ export type Database = {
           role: string | null
         }
         Insert: {
+          added_by_admin?: boolean
           attendee_type: string
           checked_in_at?: string | null
           checked_in_by?: string | null
@@ -196,6 +198,7 @@ export type Database = {
           role?: string | null
         }
         Update: {
+          added_by_admin?: boolean
           attendee_type?: string
           checked_in_at?: string | null
           checked_in_by?: string | null
