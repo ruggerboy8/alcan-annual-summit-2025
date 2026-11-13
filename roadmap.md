@@ -1,4 +1,4 @@
 # Attendee management
-- [ ] Add organizer-only manual entry with shared emails and optional confirmation.
-- [ ] Verify creation, editing, categories, and public duplicate protection.
-- [ ] Draft Lauren's instructions.
+- [x] Add organizer-only manual entry with shared emails and optional confirmation.
+- [x] Verify creation, editing, categories, and public duplicate protection.
+- [x] Draft Lauren's instructions in the completion message.
