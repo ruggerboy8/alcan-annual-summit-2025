@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Download, Loader2, Search } from "lucide-react";
+import { Download, Loader2, Search, UserPlus } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,6 +13,7 @@ import {
   fetchAllRegistrations,
 } from "@/lib/admin-api";
 import RegistrationDetail from "@/components/admin/RegistrationDetail";
+import AddAttendee from "@/components/admin/AddAttendee";
 
 interface Props {
   token: string;
@@ -68,6 +69,7 @@ export default function RegistrationsTab({ token }: Props) {
 
   const [selected, setSelected] = useState<Registration | null>(null);
   const [exporting, setExporting] = useState(false);
+  const [adding, setAdding] = useState(false);
 
   // Debounce search
   useEffect(() => {
@@ -208,7 +210,7 @@ export default function RegistrationsTab({ token }: Props) {
             className="pl-9"
           />
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <div className="inline-flex rounded-md border border-border bg-card p-0.5">
             {(["all", "staff", "guest"] as const).map((t) => (
               <button
@@ -232,6 +234,9 @@ export default function RegistrationsTab({ token }: Props) {
               <Download className="mr-1.5 h-4 w-4" />
             )}
             Export CSV
+          </Button>
+          <Button size="sm" onClick={() => setAdding(true)}>
+            <UserPlus className="mr-1.5 h-4 w-4" /> Add Attendee
           </Button>
         </div>
       </div>
@@ -365,6 +370,7 @@ export default function RegistrationsTab({ token }: Props) {
         </div>
       </div>
 
+      {adding && <AddAttendee token={token} open onClose={() => setAdding(false)} onAdded={() => { setPage(1); load(); }} />}
       <RegistrationDetail
         token={token}
         registration={selected}

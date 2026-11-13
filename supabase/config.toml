@@ -12,6 +12,9 @@ verify_jwt = false
 [functions.admin-update-registration]
 verify_jwt = false
 
+[functions.admin-add-registration]
+verify_jwt = false
+
 [functions.admin-email-template-get]
 verify_jwt = false
 
